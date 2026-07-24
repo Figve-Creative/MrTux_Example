@@ -128,6 +128,10 @@ header.site.scrolled {
 }
 .logo img { height: 40px; width: auto; }
 .logo-mark { display: flex; align-items: center; gap: 12px; }
+.logo-mark img { height: 34px; width: auto; display: block; }
+@media (max-width: 600px) {
+  .logo-mark img { height: 28px; }
+}
 nav.links {
   display: flex;
   gap: 40px;
