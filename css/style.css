@@ -3,18 +3,21 @@
    ============================================ */
 
 :root {
-  --black: #0b0b0c;
-  --charcoal: #1a1a1c;
-  --charcoal-light: #26262a;
-  --cream: #f4efe4;
+  /* Official Mr. Tux brand palette */
+  --black: #16150f;         /* Tuxedo Ink — neutral/text */
+  --charcoal: #221f17;
+  --charcoal-light: #363d2f; /* Legacy Green — signature surface */
+  --cream: #f3efe4;         /* Ivory Cream — neutral/surface */
   --cream-dim: #e6ddc9;
-  --gold: #c9a15e;
-  --gold-bright: #e0bb7a;
-  --wine: #4a1418;
-  --line: rgba(244, 239, 228, 0.14);
+  --gold: #b57840;          /* Cognac — primary accent */
+  --gold-bright: #cf9a63;
+  --wine: #6f1a2a;          /* Burgundy — accent */
+  --navy: #202d49;          /* Midnight Navy — accent */
+  --line: rgba(243, 239, 228, 0.14);
 
-  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
-  --font-body: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Fraunces', 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-body: 'Newsreader', 'Times New Roman', serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
 
   --max-width: 1240px;
 }
@@ -27,7 +30,7 @@ body {
   background: var(--black);
   color: var(--cream);
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -43,12 +46,12 @@ a { color: inherit; text-decoration: none; }
 }
 
 .eyebrow {
-  font-family: var(--font-body);
-  letter-spacing: 0.35em;
+  font-family: var(--font-mono);
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   font-size: 12px;
   color: var(--gold);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 h1, h2, h3, .display {
@@ -62,8 +65,9 @@ h1 { font-size: clamp(42px, 7vw, 92px); line-height: 1.02; }
 h2 { font-size: clamp(32px, 4.5vw, 56px); line-height: 1.08; }
 h3 { font-size: clamp(20px, 2.4vw, 28px); }
 
-p { color: rgba(244, 239, 228, 0.72); font-size: 16px; }
-p.lead { font-size: 19px; color: rgba(244, 239, 228, 0.85); }
+p { color: rgba(243, 239, 228, 0.72); font-size: 17px; }
+p.lead { font-size: 20px; color: rgba(243, 239, 228, 0.85); font-family: var(--font-body); }
+.quote-italic { font-style: italic; }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -71,11 +75,11 @@ p.lead { font-size: 19px; color: rgba(244, 239, 228, 0.85); }
   align-items: center;
   gap: 10px;
   padding: 16px 34px;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-size: 12px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 400;
   border: 1px solid var(--gold);
   color: var(--cream);
   background: transparent;
@@ -92,11 +96,11 @@ header.site {
   top: 0; left: 0; right: 0;
   z-index: 100;
   padding: 22px 0;
-  background: linear-gradient(to bottom, rgba(11,11,12,0.9), transparent);
+  background: linear-gradient(to bottom, rgba(22,21,15,0.92), transparent);
   transition: background 0.3s ease, padding 0.3s ease;
 }
 header.site.scrolled {
-  background: rgba(11,11,12,0.92);
+  background: rgba(22,21,15,0.94);
   backdrop-filter: blur(10px);
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
@@ -115,23 +119,26 @@ header.site.scrolled {
 .logo span { color: var(--gold); }
 .logo small {
   display: block;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-size: 9px;
-  letter-spacing: 0.35em;
-  color: rgba(244,239,228,0.5);
+  letter-spacing: 0.28em;
+  color: rgba(243,239,228,0.5);
   text-transform: uppercase;
   margin-top: 2px;
 }
+.logo img { height: 40px; width: auto; }
+.logo-mark { display: flex; align-items: center; gap: 12px; }
 nav.links {
   display: flex;
   gap: 40px;
   align-items: center;
 }
 nav.links a {
-  font-size: 12px;
-  letter-spacing: 0.16em;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(244,239,228,0.75);
+  color: rgba(243,239,228,0.75);
   position: relative;
   padding-bottom: 4px;
 }
@@ -162,9 +169,9 @@ nav.links a.active { color: var(--gold); }
   display: flex;
   align-items: center;
   position: relative;
-  background: linear-gradient(180deg, rgba(11,11,12,0.35), rgba(11,11,12,0.85)),
-    url('https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=1740&auto=format&fit=crop')
-    center/cover no-repeat;
+  background: linear-gradient(180deg, rgba(22,21,15,0.45), rgba(22,21,15,0.9)),
+    url('img/photo-bridal-party.jpg')
+    center 20%/cover no-repeat;
 }
 .hero .wrap { padding-top: 120px; }
 .hero-tag { margin-bottom: 22px; }
@@ -178,7 +185,7 @@ nav.links a.active { color: var(--gold); }
   font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(244,239,228,0.55);
+  color: rgba(243, 239, 228,0.55);
   display: flex; flex-direction: column; align-items: center; gap: 10px;
 }
 .scroll-cue::after {
@@ -250,9 +257,9 @@ section.tight { padding: 90px 0; }
   filter: grayscale(20%) contrast(1.05);
 }
 .split .quote {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-style: italic;
-  font-size: 22px;
+  font-size: 23px;
   color: var(--gold-bright);
   margin: 26px 0;
   line-height: 1.5;
@@ -283,7 +290,7 @@ section.tight { padding: 90px 0; }
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(244,239,228,0.55);
+  color: rgba(243, 239, 228,0.55);
   margin-top: 8px;
 }
 @media (max-width: 700px) {
@@ -306,7 +313,7 @@ section.tight { padding: 90px 0; }
 .style-card .cap {
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: 24px;
-  background: linear-gradient(to top, rgba(11,11,12,0.95), transparent);
+  background: linear-gradient(to top, rgba(22,21,15,0.95), transparent);
 }
 .style-card .cap .eyebrow { margin-bottom: 6px; }
 @media (max-width: 860px) {
@@ -352,8 +359,9 @@ section.tight { padding: 90px 0; }
 form.rsvp { display: flex; flex-direction: column; gap: 22px; }
 .field { display: flex; flex-direction: column; gap: 8px; }
 .field label {
-  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(244,239,228,0.55);
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(243, 239, 228,0.55);
 }
 .field input, .field select, .field textarea {
   background: var(--charcoal);
@@ -382,15 +390,16 @@ footer.site {
   margin-bottom: 50px;
 }
 .footer-grid h4 {
-  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 18px; font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 18px; font-weight: 400;
 }
-.footer-grid a, .footer-grid p { font-size: 14px; color: rgba(244,239,228,0.65); display: block; margin-bottom: 10px; }
+.footer-grid a, .footer-grid p { font-size: 14px; color: rgba(243, 239, 228,0.65); display: block; margin-bottom: 10px; }
 .footer-grid a:hover { color: var(--gold); }
 .footer-bottom {
   display: flex; justify-content: space-between; align-items: center;
   padding-top: 28px; border-top: 1px solid var(--line);
-  font-size: 12px; color: rgba(244,239,228,0.4);
+  font-size: 12px; color: rgba(243, 239, 228,0.4);
   flex-wrap: wrap; gap: 12px;
 }
 .socials { display: flex; gap: 16px; }

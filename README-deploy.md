@@ -1,39 +1,44 @@
 # Mr. Tux — Prototype Deploy Guide
 
-This is a plain static site (HTML/CSS/JS, no build step) — that means Vercel needs zero
-configuration. Four files matter: `index.html`, `collection.html`, `story.html`,
-`contact.html`, plus the `css/` and `js/` folders.
+This is a plain static site (HTML/CSS/JS, no build step) — Vercel needs zero
+configuration. Pages: `index.html`, `collection.html`, `story.html`, `contact.html`,
+plus `css/`, `js/`, and `img/` (real logo + photography pulled from the brand deck).
 
-## Fastest path: GitHub → Vercel (recommended, ~5 min)
+## You already have a repo (`MrTux_Example`) — push the update
 
-1. Create a new empty repo on GitHub (e.g. `mrtux-prototype`).
-2. On your computer, in the folder with these files, run:
-   ```
-   git init
-   git add .
-   git commit -m "Mr. Tux prototype"
-   git branch -M main
-   git remote add origin https://github.com/YOUR-USERNAME/mrtux-prototype.git
-   git push -u origin main
-   ```
-3. Go to vercel.com → **Add New → Project** → Import the `mrtux-prototype` repo.
-4. Framework preset: choose **Other** (or leave auto-detected — it's static, no build
-   command needed, no output directory needed).
-5. Click **Deploy**. You'll get a live `https://mrtux-prototype.vercel.app` link in
-   under a minute.
+The site has been rebuilt on the official brand system from the Figve Creative brand
+proposal (Legacy Green / Tuxedo Ink / Ivory Cream / Cognac / Burgundy / Navy palette,
+Fraunces + Newsreader + Space Mono type, the real "Mr. Tux" gentleman mark, and copy
+pulled from the brand story, positioning, and voice & tone sections). To push this
+version to the repo you already created:
 
-## Even faster: drag-and-drop (no GitHub needed, ~2 min)
+```
+cd "/Users/Cora/Library/Application Support/Claude/local-agent-mode-sessions/0af562c1-1721-4a98-bfe3-30b6fa6d1480/392efd79-b4cf-4b57-ab26-90af5f32587c/local_95e36353-e4ea-414b-9b0d-ad9d0fbfc4f0/outputs"
+git add .
+git commit -m "Rebuild on official brand system"
+git push
+```
 
-1. Go to vercel.com → **Add New → Project**.
-2. Look for the "deploy without git" / drag-and-drop option, and drag this whole
-   folder in.
-3. Vercel deploys it instantly and gives you a live URL.
+If `git push` asks for credentials, log in with GitHub. Vercel will pick up the change
+automatically within a minute or two if the project is already connected — no redeploy
+click needed. If it doesn't auto-update, go to the project on vercel.com and click
+**Redeploy**.
+
+## Starting fresh (if you ever need to)
+
+1. Create an empty GitHub repo.
+2. From this folder: `git init && git add . && git commit -m "Mr. Tux prototype"
+   && git branch -M main && git remote add origin <your-repo-url> && git push -u origin main`
+3. On vercel.com → **Add New → Project** → import the repo → framework preset
+   **Other** (static, no build command) → **Deploy**.
+
+Or skip git entirely: vercel.com → **Add New → Project** → drag this whole folder in.
 
 ## After the meeting
 
-- Swap the Unsplash placeholder photos for real shop photography — that's the single
-  biggest visual upgrade available.
-- Drop in the real logo (currently text-based "MR. TUX" wordmark).
-- If they like the direction, next step is wiring the contact form to actually send
-  (e.g. via Formspree, or a Vercel serverless function) and connecting real inventory
-  photos per style category.
+- Replace the cropped brand-deck photography with real shop/product photography once
+  it's shot — current images are placeholders pulled from the proposal deck.
+- Swap in higher-resolution logo files if the agency has vector/print-ready versions
+  (current logos were cropped from the PDF deck at deck resolution).
+- If they like the direction: wire the contact form to actually send (Formspree or a
+  Vercel serverless function), and build out the full collection/lookbook page.
