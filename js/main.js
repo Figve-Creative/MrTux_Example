@@ -5,12 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('nav.links');
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
-  });
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    });
+  }
 
-  if (toggle) {
+  if (toggle && links) {
     toggle.addEventListener('click', () => {
       links.classList.toggle('open');
       toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
