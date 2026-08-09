@@ -684,12 +684,32 @@ header.flow {
 .method-card input[type="radio"]:checked + label {
   border-color: var(--accent);
   border-width: 1.5px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
   background: var(--accent-tint);
   box-shadow: var(--shadow-md);
 }
+.method-card input[type="radio"]:checked + label:hover { transform: none; }
 .method-card input[type="radio"]:focus-visible + label {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+/* Selected card's fill-in fields, attached directly beneath it */
+.method-card .card-panel {
+  border: 1.5px solid var(--accent);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: var(--accent-tint);
+  padding: 24px 28px 28px;
+  margin-top: -1.5px;
+  box-shadow: var(--shadow-sm);
+  animation: panel-in 0.3s ease;
+}
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .method-card .card-panel { animation: none; }
 }
 .method-card .icon {
   font-family: var(--font-display);

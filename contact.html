@@ -93,6 +93,7 @@
         <label>Tell Us About Your Fitting</label>
         <fieldset class="method-cards" style="border:none;margin-top:2px;">
           <legend class="sr-only">Add your sizes, or coordinate a wedding party, optional</legend>
+
           <div class="method-card">
             <input type="radio" name="sizing-method" id="sizing-measure" value="measurements">
             <label for="sizing-measure">
@@ -102,7 +103,62 @@
                 <p>Chest, waist, inseam: the precise route.</p>
               </span>
             </label>
+            <div id="sizingMeasurements" class="card-panel" hidden>
+              <p class="fields-note" style="margin-bottom:16px;">All values in inches</p>
+              <div class="measure-grid">
+                <div class="measure-field">
+                  <label for="m-chest">Chest</label>
+                  <span class="hint">Measure around the fullest part</span>
+                  <input type="number" inputmode="decimal" id="m-chest" name="chest" min="20" max="70" placeholder="e.g. 40">
+                </div>
+                <div class="measure-field">
+                  <label for="m-waist">Waist</label>
+                  <span class="hint">At the natural waistline</span>
+                  <input type="number" inputmode="decimal" id="m-waist" name="waist" min="20" max="70" placeholder="e.g. 34">
+                </div>
+                <div class="measure-field">
+                  <label for="m-hips">Hips</label>
+                  <span class="hint">Around the widest point</span>
+                  <input type="number" inputmode="decimal" id="m-hips" name="hips" min="20" max="70" placeholder="e.g. 42">
+                </div>
+                <div class="measure-field">
+                  <label for="m-inseam">Inseam</label>
+                  <span class="hint">Inner leg, crotch to ankle</span>
+                  <input type="number" inputmode="decimal" id="m-inseam" name="inseam" min="20" max="45" placeholder="e.g. 32">
+                </div>
+                <div class="measure-field">
+                  <label for="m-neck">Neck</label>
+                  <span class="hint">Around the base of the neck</span>
+                  <input type="number" inputmode="decimal" id="m-neck" name="neck" min="10" max="24" placeholder="e.g. 16">
+                </div>
+                <div class="measure-field">
+                  <label for="m-sleeve">Sleeve Length</label>
+                  <span class="hint">Shoulder to wrist</span>
+                  <input type="number" inputmode="decimal" id="m-sleeve" name="sleeve" min="20" max="40" placeholder="e.g. 34">
+                </div>
+                <div class="measure-field">
+                  <label for="m-shoe">Shoe Size</label>
+                  <span class="hint">US sizing</span>
+                  <select id="m-shoe" name="shoe">
+                    <option value="">Select</option>
+                    <option value="8.0">8.0</option><option value="8.5">8.5</option><option value="9.0">9.0</option>
+                    <option value="9.5">9.5</option><option value="10.0">10.0</option><option value="10.5">10.5</option>
+                    <option value="11.0">11.0</option><option value="11.5">11.5</option><option value="12.0">12.0</option>
+                  </select>
+                </div>
+                <div class="measure-field">
+                  <label for="m-belt">Belt Size</label>
+                  <span class="hint">Waist size + 2 in.</span>
+                  <select id="m-belt" name="belt">
+                    <option value="">Select</option>
+                    <option value="32">32</option><option value="34">34</option><option value="36">36</option>
+                    <option value="38">38</option><option value="40">40</option><option value="42">42</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div class="method-card">
             <input type="radio" name="sizing-method" id="sizing-brand" value="brand">
             <label for="sizing-brand">
@@ -112,7 +168,64 @@
                 <p>Tell us what you wear at Tom Ford, Brioni, and other brands you already own.</p>
               </span>
             </label>
+            <div id="sizingBrand" class="card-panel" hidden>
+              <div class="brand-list">
+                <div class="brand-row">
+                  <h3>Tom Ford</h3>
+                  <div class="brand-fields">
+                    <div class="measure-field">
+                      <label for="bf-tomford-jacket">Jacket</label>
+                      <select id="bf-tomford-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
+                    </div>
+                    <div class="measure-field">
+                      <label for="bf-tomford-trouser">Trouser</label>
+                      <select id="bf-tomford-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
+                    </div>
+                    <div class="measure-field">
+                      <label for="bf-tomford-shirt">Shirt</label>
+                      <select id="bf-tomford-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
+                    </div>
+                  </div>
+                </div>
+                <div class="brand-row">
+                  <h3>Brioni</h3>
+                  <div class="brand-fields">
+                    <div class="measure-field">
+                      <label for="bf-brioni-jacket">Jacket</label>
+                      <select id="bf-brioni-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
+                    </div>
+                    <div class="measure-field">
+                      <label for="bf-brioni-trouser">Trouser</label>
+                      <select id="bf-brioni-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
+                    </div>
+                    <div class="measure-field">
+                      <label for="bf-brioni-shirt">Shirt</label>
+                      <select id="bf-brioni-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
+                    </div>
+                  </div>
+                </div>
+                <div class="brand-row">
+                  <h3>Hugo Boss</h3>
+                  <div class="brand-fields">
+                    <div class="measure-field">
+                      <label for="bf-hugoboss-jacket">Jacket</label>
+                      <select id="bf-hugoboss-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
+                    </div>
+                    <div class="measure-field">
+                      <label for="bf-hugoboss-trouser">Trouser</label>
+                      <select id="bf-hugoboss-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
+                    </div>
+                    <div class="measure-field">
+                      <label for="bf-hugoboss-shirt">Shirt</label>
+                      <select id="bf-hugoboss-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p style="margin-top:20px;font-size:13px;color:var(--text-softer);">Wear a different brand? Mention it in the notes above and we'll follow up before your fitting.</p>
+            </div>
           </div>
+
           <div class="method-card">
             <input type="radio" name="sizing-method" id="sizing-party" value="party">
             <label for="sizing-party">
@@ -122,152 +235,40 @@
                 <p>Coordinating a group? Share the party details now, no measurements needed yet.</p>
               </span>
             </label>
+            <div id="sizingParty" class="card-panel" hidden>
+              <div class="measure-grid">
+                <div class="measure-field">
+                  <label for="party-role">Your Role</label>
+                  <span class="hint">So we know who's coordinating</span>
+                  <select id="party-role">
+                    <option value="">Select</option>
+                    <option>Groom</option>
+                    <option>Best Man</option>
+                    <option>Wedding Planner</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="measure-field">
+                  <label for="party-size">Party Size</label>
+                  <span class="hint">Including yourself</span>
+                  <select id="party-size">
+                    <option value="">Select</option>
+                    <option>2</option><option>3</option><option>4</option><option>5</option>
+                    <option>6</option><option>7</option><option>8</option><option>9</option>
+                    <option>10</option><option>11+</option>
+                  </select>
+                </div>
+                <div class="measure-field span-2">
+                  <label for="party-members">Groomsmen Names &amp; Contact</label>
+                  <span class="hint">One per line, name then email or phone. We'll reach out to each person directly to collect their sizes.</span>
+                  <textarea id="party-members" rows="5" placeholder="e.g. Mike Alvarez, mike@email.com"></textarea>
+                </div>
+              </div>
+            </div>
           </div>
+
         </fieldset>
         <p style="margin-top:10px;font-size:13px;color:var(--text-softer);">Optional. Pick whichever applies, or skip this and our fit specialists will size you in store.</p>
-      </div>
-
-      <div id="sizingMeasurements" hidden>
-        <p class="fields-note" style="margin-bottom:16px;">All values in inches</p>
-        <div class="measure-grid">
-          <div class="measure-field">
-            <label for="m-chest">Chest</label>
-            <span class="hint">Measure around the fullest part</span>
-            <input type="number" inputmode="decimal" id="m-chest" name="chest" min="20" max="70" placeholder="e.g. 40">
-          </div>
-          <div class="measure-field">
-            <label for="m-waist">Waist</label>
-            <span class="hint">At the natural waistline</span>
-            <input type="number" inputmode="decimal" id="m-waist" name="waist" min="20" max="70" placeholder="e.g. 34">
-          </div>
-          <div class="measure-field">
-            <label for="m-hips">Hips</label>
-            <span class="hint">Around the widest point</span>
-            <input type="number" inputmode="decimal" id="m-hips" name="hips" min="20" max="70" placeholder="e.g. 42">
-          </div>
-          <div class="measure-field">
-            <label for="m-inseam">Inseam</label>
-            <span class="hint">Inner leg, crotch to ankle</span>
-            <input type="number" inputmode="decimal" id="m-inseam" name="inseam" min="20" max="45" placeholder="e.g. 32">
-          </div>
-          <div class="measure-field">
-            <label for="m-neck">Neck</label>
-            <span class="hint">Around the base of the neck</span>
-            <input type="number" inputmode="decimal" id="m-neck" name="neck" min="10" max="24" placeholder="e.g. 16">
-          </div>
-          <div class="measure-field">
-            <label for="m-sleeve">Sleeve Length</label>
-            <span class="hint">Shoulder to wrist</span>
-            <input type="number" inputmode="decimal" id="m-sleeve" name="sleeve" min="20" max="40" placeholder="e.g. 34">
-          </div>
-          <div class="measure-field">
-            <label for="m-shoe">Shoe Size</label>
-            <span class="hint">US sizing</span>
-            <select id="m-shoe" name="shoe">
-              <option value="">Select</option>
-              <option value="8.0">8.0</option><option value="8.5">8.5</option><option value="9.0">9.0</option>
-              <option value="9.5">9.5</option><option value="10.0">10.0</option><option value="10.5">10.5</option>
-              <option value="11.0">11.0</option><option value="11.5">11.5</option><option value="12.0">12.0</option>
-            </select>
-          </div>
-          <div class="measure-field">
-            <label for="m-belt">Belt Size</label>
-            <span class="hint">Waist size + 2 in.</span>
-            <select id="m-belt" name="belt">
-              <option value="">Select</option>
-              <option value="32">32</option><option value="34">34</option><option value="36">36</option>
-              <option value="38">38</option><option value="40">40</option><option value="42">42</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div id="sizingBrand" hidden>
-        <div class="brand-list">
-          <div class="brand-row">
-            <h3>Tom Ford</h3>
-            <div class="brand-fields">
-              <div class="measure-field">
-                <label for="bf-tomford-jacket">Jacket</label>
-                <select id="bf-tomford-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
-              </div>
-              <div class="measure-field">
-                <label for="bf-tomford-trouser">Trouser</label>
-                <select id="bf-tomford-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
-              </div>
-              <div class="measure-field">
-                <label for="bf-tomford-shirt">Shirt</label>
-                <select id="bf-tomford-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
-              </div>
-            </div>
-          </div>
-          <div class="brand-row">
-            <h3>Brioni</h3>
-            <div class="brand-fields">
-              <div class="measure-field">
-                <label for="bf-brioni-jacket">Jacket</label>
-                <select id="bf-brioni-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
-              </div>
-              <div class="measure-field">
-                <label for="bf-brioni-trouser">Trouser</label>
-                <select id="bf-brioni-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
-              </div>
-              <div class="measure-field">
-                <label for="bf-brioni-shirt">Shirt</label>
-                <select id="bf-brioni-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
-              </div>
-            </div>
-          </div>
-          <div class="brand-row">
-            <h3>Hugo Boss</h3>
-            <div class="brand-fields">
-              <div class="measure-field">
-                <label for="bf-hugoboss-jacket">Jacket</label>
-                <select id="bf-hugoboss-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
-              </div>
-              <div class="measure-field">
-                <label for="bf-hugoboss-trouser">Trouser</label>
-                <select id="bf-hugoboss-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
-              </div>
-              <div class="measure-field">
-                <label for="bf-hugoboss-shirt">Shirt</label>
-                <select id="bf-hugoboss-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <p style="margin-top:4px;font-size:13px;color:var(--text-softer);">Wear a different brand? Mention it in the notes above and we'll follow up before your fitting.</p>
-      </div>
-
-      <div id="sizingParty" hidden>
-        <div class="measure-grid">
-          <div class="measure-field">
-            <label for="party-role">Your Role</label>
-            <span class="hint">So we know who's coordinating</span>
-            <select id="party-role">
-              <option value="">Select</option>
-              <option>Groom</option>
-              <option>Best Man</option>
-              <option>Wedding Planner</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="measure-field">
-            <label for="party-size">Party Size</label>
-            <span class="hint">Including yourself</span>
-            <select id="party-size">
-              <option value="">Select</option>
-              <option>2</option><option>3</option><option>4</option><option>5</option>
-              <option>6</option><option>7</option><option>8</option><option>9</option>
-              <option>10</option><option>11+</option>
-            </select>
-          </div>
-          <div class="measure-field span-2">
-            <label for="party-members">Groomsmen Names &amp; Contact</label>
-            <span class="hint">One per line, name then email or phone. We'll reach out to each person directly to collect their sizes.</span>
-            <textarea id="party-members" rows="5" placeholder="e.g. Mike Alvarez, mike@email.com"></textarea>
-          </div>
-        </div>
       </div>
 
       <button type="submit" class="btn solid" style="width:fit-content;">Request Appointment</button>
