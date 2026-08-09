@@ -1,4 +1,4 @@
-// Mr. Tux — Pre-Visit Fitting Profile wizard
+// Mr. Tux: Pre-Visit Fitting Profile wizard
 // Vanilla JS, no dependencies. Progressive: works step-to-step even if a
 // user has JS-disabled fallback content removed (steps degrade to visible
 // stacked sections, still readable/fillable, just without single-step focus).
@@ -104,13 +104,14 @@
     const summary = document.getElementById('confirmSummary');
     if (!summary) return;
 
-    const name = val('c-name') || '—';
-    const email = val('c-email') || '—';
-    const occasion = val('c-occasion') || '—';
+    const name = val('c-name') || 'Not provided';
+    const email = val('c-email') || 'Not provided';
+    const occasion = val('c-occasion') || 'Not provided';
 
-    let sizingLine = 'Sizing: not provided — our fit specialists will size you on arrival';
+    let sizingLine = 'Sizing: not provided. Our fit specialists will size you on arrival.';
     if (val('m-chest')) {
-      sizingLine = `Measurements on file — Chest ${val('m-chest')}", Waist ${val('m-waist') || '—'}"`;
+      const waist = val('m-waist') ? `${val('m-waist')}"` : 'not provided';
+      sizingLine = `Measurements on file: Chest ${val('m-chest')}", Waist ${waist}`;
     } else if (val('bf-tomford-jacket') || val('bf-brioni-jacket') || val('bf-hugoboss-jacket') ||
                val('bf-ralphlauren-jacket') || val('bf-canali-jacket') || val('bf-zegna-jacket')) {
       sizingLine = 'Brand sizes on file';
@@ -140,7 +141,7 @@
       };
       window.localStorage.setItem('mrtux_fitting_profile', JSON.stringify(profile));
     } catch (err) {
-      // localStorage unavailable (private browsing, etc.) — non-fatal, form still works
+      // localStorage unavailable (private browsing, etc.), non-fatal, form still works
     }
   }
 

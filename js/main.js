@@ -1,4 +1,4 @@
-// Mr. Tux prototype — shared interactions
+// Mr. Tux prototype: shared interactions
 
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header.site');
@@ -44,5 +44,19 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.disabled = true;
       setTimeout(() => { btn.textContent = original; btn.disabled = false; form.reset(); }, 2600);
     });
+  }
+
+  // Inline "Know Your Sizes?" toggle on the Book a Fitting page: reveals
+  // measurement or brand-size fields in place, no page navigation required.
+  const sizingRadios = document.querySelectorAll('input[name="sizing-method"]');
+  const sizingMeasurements = document.getElementById('sizingMeasurements');
+  const sizingBrand = document.getElementById('sizingBrand');
+  if (sizingRadios.length) {
+    const updateSizingVisibility = () => {
+      const checked = document.querySelector('input[name="sizing-method"]:checked');
+      if (sizingMeasurements) sizingMeasurements.hidden = !(checked && checked.value === 'measurements');
+      if (sizingBrand) sizingBrand.hidden = !(checked && checked.value === 'brand');
+    };
+    sizingRadios.forEach((radio) => radio.addEventListener('change', updateSizingVisibility));
   }
 });
