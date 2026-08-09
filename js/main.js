@@ -46,16 +46,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Inline "Know Your Sizes?" toggle on the Book a Fitting page: reveals
-  // measurement or brand-size fields in place, no page navigation required.
+  // Inline "Tell Us About Your Fitting" toggle on the Book a Fitting page:
+  // reveals measurements, brand sizes, or wedding-party fields in place,
+  // no page navigation required.
   const sizingRadios = document.querySelectorAll('input[name="sizing-method"]');
-  const sizingMeasurements = document.getElementById('sizingMeasurements');
-  const sizingBrand = document.getElementById('sizingBrand');
+  const sizingPanels = {
+    measurements: document.getElementById('sizingMeasurements'),
+    brand: document.getElementById('sizingBrand'),
+    party: document.getElementById('sizingParty')
+  };
   if (sizingRadios.length) {
     const updateSizingVisibility = () => {
       const checked = document.querySelector('input[name="sizing-method"]:checked');
-      if (sizingMeasurements) sizingMeasurements.hidden = !(checked && checked.value === 'measurements');
-      if (sizingBrand) sizingBrand.hidden = !(checked && checked.value === 'brand');
+      const value = checked ? checked.value : '';
+      Object.keys(sizingPanels).forEach((key) => {
+        const panel = sizingPanels[key];
+        if (panel) panel.hidden = key !== value;
+      });
     };
     sizingRadios.forEach((radio) => radio.addEventListener('change', updateSizingVisibility));
   }

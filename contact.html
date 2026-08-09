@@ -20,7 +20,6 @@
     </a>
     <nav class="links">
       <a href="index.html">Home</a>
-      <a href="fitting.html">Your Sizes</a>
       <a href="collection.html">Collection</a>
       <a href="story.html">Our Story</a>
       <a href="contact.html" class="active">Book a Fitting</a>
@@ -91,9 +90,9 @@
       </div>
 
       <div class="field">
-        <label>Know Your Sizes?</label>
+        <label>Tell Us About Your Fitting</label>
         <fieldset class="method-cards" style="border:none;margin-top:2px;">
-          <legend class="sr-only">Add your sizes now, optional</legend>
+          <legend class="sr-only">Add your sizes, or coordinate a wedding party, optional</legend>
           <div class="method-card">
             <input type="radio" name="sizing-method" id="sizing-measure" value="measurements">
             <label for="sizing-measure">
@@ -114,8 +113,18 @@
               </span>
             </label>
           </div>
+          <div class="method-card">
+            <input type="radio" name="sizing-method" id="sizing-party" value="party">
+            <label for="sizing-party">
+              <span class="icon" aria-hidden="true">03</span>
+              <span>
+                <h3>Booking For Your Wedding Party</h3>
+                <p>Coordinating a group? Share the party details now, no measurements needed yet.</p>
+              </span>
+            </label>
+          </div>
         </fieldset>
-        <p style="margin-top:10px;font-size:13px;color:var(--text-softer);">Optional. Skip this and our fit specialists will size you in store.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--text-softer);">Optional. Pick whichever applies, or skip this and our fit specialists will size you in store.</p>
       </div>
 
       <div id="sizingMeasurements" hidden>
@@ -227,7 +236,38 @@
             </div>
           </div>
         </div>
-        <p style="margin-top:4px;font-size:13px;color:var(--text-softer);">Wear a different brand, or want the full list? <a href="fitting.html" style="color:var(--accent);border-bottom:1px solid var(--accent);">Open the full fitting profile</a>.</p>
+        <p style="margin-top:4px;font-size:13px;color:var(--text-softer);">Wear a different brand? Mention it in the notes above and we'll follow up before your fitting.</p>
+      </div>
+
+      <div id="sizingParty" hidden>
+        <div class="measure-grid">
+          <div class="measure-field">
+            <label for="party-role">Your Role</label>
+            <span class="hint">So we know who's coordinating</span>
+            <select id="party-role">
+              <option value="">Select</option>
+              <option>Groom</option>
+              <option>Best Man</option>
+              <option>Wedding Planner</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="measure-field">
+            <label for="party-size">Party Size</label>
+            <span class="hint">Including yourself</span>
+            <select id="party-size">
+              <option value="">Select</option>
+              <option>2</option><option>3</option><option>4</option><option>5</option>
+              <option>6</option><option>7</option><option>8</option><option>9</option>
+              <option>10</option><option>11+</option>
+            </select>
+          </div>
+          <div class="measure-field span-2">
+            <label for="party-members">Groomsmen Names &amp; Contact</label>
+            <span class="hint">One per line, name then email or phone. We'll reach out to each person directly to collect their sizes.</span>
+            <textarea id="party-members" rows="5" placeholder="e.g. Mike Alvarez, mike@email.com"></textarea>
+          </div>
+        </div>
       </div>
 
       <button type="submit" class="btn solid" style="width:fit-content;">Request Appointment</button>

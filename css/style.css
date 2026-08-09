@@ -726,7 +726,7 @@ header.flow {
   color: var(--text-soft);
   margin-bottom: 9px;
 }
-.measure-field input, .measure-field select {
+.measure-field input, .measure-field select, .measure-field textarea {
   width: 100%;
   background: var(--field-bg);
   border: 1.5px solid var(--line);
@@ -739,11 +739,12 @@ header.flow {
   box-shadow: var(--shadow-sm);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.measure-field input:focus-visible, .measure-field select:focus-visible {
+.measure-field textarea { resize: vertical; line-height: 1.5; }
+.measure-field input:focus-visible, .measure-field select:focus-visible, .measure-field textarea:focus-visible {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-tint);
 }
-.measure-field input::placeholder { color: var(--text-softer); opacity: 0.7; }
+.measure-field input::placeholder, .measure-field textarea::placeholder { color: var(--text-softer); opacity: 0.7; }
 .measure-grid .span-2 { grid-column: 1 / -1; }
 @media (max-width: 560px) {
   .measure-grid { grid-template-columns: 1fr; }
