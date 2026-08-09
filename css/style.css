@@ -49,7 +49,9 @@
   --text: var(--black);
   --text-soft: rgba(22,21,15,0.72);
   --text-softer: rgba(22,21,15,0.6);
-  --accent: var(--gold-deep);
+  --accent: var(--black);       /* black highlights on ivory, per brand direction */
+  --accent-tint: rgba(22,21,15,0.09);
+  --accent-hover: var(--charcoal);
   --line: rgba(22,21,15,0.14);
   --field-bg: #ffffff;
 }
@@ -64,6 +66,8 @@
   --text-soft: rgba(243,239,228,0.72);
   --text-softer: rgba(243,239,228,0.65);
   --accent: var(--gold-bright);
+  --accent-tint: rgba(224,187,122,0.12);
+  --accent-hover: var(--gold);
   --line: rgba(243,239,228,0.14);
   --field-bg: var(--charcoal);
 }
@@ -159,23 +163,23 @@ p.lead { font-size: 20px; color: var(--text-soft); font-family: var(--font-body)
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
-  border: 1.5px solid var(--gold);
+  border: 1.5px solid var(--accent);
   color: var(--text);
   background: transparent;
   transition: all 0.25s ease;
   cursor: pointer;
 }
-.btn:hover { background: var(--gold); color: var(--black); }
+.btn:hover { background: var(--accent); color: var(--bg); }
 .btn.solid {
-  background: var(--gold);
-  color: var(--black);
-  border-color: var(--gold);
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
   box-shadow: var(--shadow-sm);
 }
 .btn.solid:hover {
-  background: var(--gold-bright);
-  border-color: var(--gold-bright);
-  color: var(--black);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--bg);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
@@ -499,7 +503,7 @@ form.rsvp { display: flex; flex-direction: column; gap: 22px; }
 }
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none; border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(122,74,34,0.12);
+  box-shadow: 0 0 0 3px var(--accent-tint);
 }
 @media (max-width: 860px) {
   .contact-grid { grid-template-columns: 1fr; gap: 50px; }
@@ -587,7 +591,7 @@ header.flow {
 }
 .flow-progress-bar {
   height: 100%;
-  background: var(--gold);
+  background: var(--accent);
   border-radius: 2px;
   transition: width 0.4s ease;
   width: 0%;
@@ -624,8 +628,8 @@ header.flow {
 .wizard-eyebrow { display: block; margin-bottom: 18px; }
 .wizard h1 { font-size: clamp(34px, 5vw, 52px); margin-bottom: 18px; }
 .wizard h2 { font-size: clamp(28px, 4vw, 38px); margin-bottom: 10px; }
-.wizard .helper { color: var(--text-soft); font-size: 16px; margin-bottom: 40px; max-width: 480px; }
-.wizard .fields-note { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-softer); margin-bottom: 28px; }
+.wizard .helper { color: var(--text-soft); font-size: 17px; line-height: 1.6; margin-bottom: 40px; max-width: 480px; }
+.wizard .fields-note { font-family: var(--font-mono); font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); margin-bottom: 30px; }
 
 /* Intro step */
 .wizard-hero-photo {
@@ -680,7 +684,7 @@ header.flow {
 .method-card input[type="radio"]:checked + label {
   border-color: var(--accent);
   border-width: 1.5px;
-  background: rgba(122,74,34,0.05);
+  background: var(--accent-tint);
   box-shadow: var(--shadow-md);
 }
 .method-card input[type="radio"]:focus-visible + label {
@@ -694,49 +698,50 @@ header.flow {
   width: 40px;
   flex-shrink: 0;
 }
-.method-card h3 { font-size: 19px; margin-bottom: 4px; }
-.method-card p { font-size: 14px; color: var(--text-softer); }
+.method-card h3 { font-size: 20px; margin-bottom: 5px; }
+.method-card p { font-size: 15px; color: var(--text-soft); }
 
 /* Measurement + brand form grids */
 .measure-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 22px;
+  gap: 26px;
   margin-bottom: 36px;
 }
 .measure-field label {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text);
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 .measure-field .hint {
   display: block;
   font-family: var(--font-body);
-  font-size: 13px;
-  font-style: italic;
-  color: var(--text-softer);
-  margin-bottom: 8px;
+  font-size: 14.5px;
+  font-style: normal;
+  color: var(--text-soft);
+  margin-bottom: 9px;
 }
 .measure-field input, .measure-field select {
   width: 100%;
   background: var(--field-bg);
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--line);
   border-radius: var(--radius-sm);
   color: var(--text);
-  padding: 13px 14px;
+  padding: 14px 16px;
   font-family: var(--font-body);
-  font-size: 16px;
-  min-height: 44px;
+  font-size: 17px;
+  min-height: 50px;
   box-shadow: var(--shadow-sm);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .measure-field input:focus-visible, .measure-field select:focus-visible {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(122,74,34,0.12);
+  box-shadow: 0 0 0 3px var(--accent-tint);
 }
 .measure-field input::placeholder { color: var(--text-softer); opacity: 0.7; }
 .measure-grid .span-2 { grid-column: 1 / -1; }
@@ -744,21 +749,21 @@ header.flow {
   .measure-grid { grid-template-columns: 1fr; }
 }
 
-.brand-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
+.brand-list { display: flex; flex-direction: column; gap: 18px; margin-bottom: 36px; }
 .brand-row {
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--field-bg);
   box-shadow: var(--shadow-sm);
-  padding: 22px 24px;
+  padding: 24px 26px;
 }
-.brand-row h3 { font-size: 17px; margin-bottom: 14px; }
+.brand-row h3 { font-size: 18px; margin-bottom: 16px; }
 .brand-fields {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
 }
-.brand-fields .measure-field label { font-size: 10px; }
+.brand-fields .measure-field label { font-size: 12px; }
 @media (max-width: 560px) {
   .brand-fields { grid-template-columns: 1fr 1fr; }
 }
@@ -787,12 +792,12 @@ header.flow {
   box-shadow: var(--shadow-sm);
 }
 .confirm-summary {
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--line);
   border-radius: var(--radius-md);
-  padding: 24px 26px;
+  padding: 26px 28px;
   margin: 32px 0;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 2;
   color: var(--text-soft);
   background: var(--field-bg);
