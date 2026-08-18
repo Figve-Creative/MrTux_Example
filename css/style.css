@@ -74,6 +74,11 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* The [hidden] attribute must always win over any author display rule
+   (e.g. form.rsvp / .order-section use display:flex), otherwise elements
+   toggled via JS .hidden = true/false stay visible. */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; }
 
 /* ---------- Accessibility: focus & skip link ---------- */
