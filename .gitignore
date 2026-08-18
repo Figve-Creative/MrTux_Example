@@ -1,6 +1,7 @@
 .DS_Store
 
-# Internal reference material — not part of the live site
+# Internal reference material, not part of the live site
 video_frames/
 brand_v2_pages/
 brand_pdf_pages/slide-*.png
+trimmed-*.png
