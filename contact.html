@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book a Fitting | Mr. Tux</title>
+<title>Start Your Order | Mr. Tux</title>
 <link rel="icon" href="img/icon-dark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,500;1,600&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
       <a href="index.html">Home</a>
       <a href="collection.html">Collection</a>
       <a href="story.html">Our Story</a>
-      <a href="contact.html" class="active">Book a Fitting</a>
+      <a href="contact.html" class="active">Start Your Order</a>
     </nav>
     <button class="nav-toggle" aria-label="Menu">☰</button>
   </div>
@@ -31,7 +31,7 @@
 <section class="page-hero" id="main">
   <div class="wrap">
     <span class="eyebrow">Let's Get You Looking Sharp</span>
-    <h1>Book a fitting.</h1>
+    <h1>Start your order.</h1>
     <p class="lead" style="max-width:560px;margin-top:22px;">Come in, tell us about the day. We'll take care of the rest, and we'll remember you when you're back.</p>
   </div>
 </section>
@@ -57,222 +57,333 @@
       </div>
     </div>
 
-    <form class="rsvp reveal">
-      <div class="field">
-        <label for="name">Full Name</label>
-        <input id="name" type="text" required placeholder="Your name">
-      </div>
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" type="email" required placeholder="you@email.com">
-      </div>
-      <div class="field">
-        <label for="phone">Phone</label>
-        <input id="phone" type="tel" placeholder="(305) 000-0000">
-      </div>
-      <div class="field">
-        <label for="occasion">Occasion</label>
-        <select id="occasion">
-          <option>Wedding</option>
-          <option>Prom / Formal</option>
-          <option>Quinceañera</option>
-          <option>Special Event</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="date">Event Date</label>
-        <input id="date" type="date">
-      </div>
-      <div class="field">
-        <label for="notes">Tell Us About The Day</label>
-        <textarea id="notes" rows="4" placeholder="Party size, colors, anything we should know..."></textarea>
-      </div>
+    <form class="rsvp reveal" id="orderForm">
 
-      <div class="field">
-        <label>Tell Us About Your Fitting</label>
-        <fieldset class="method-cards" style="border:none;margin-top:2px;">
-          <legend class="sr-only">Add your sizes, or coordinate a wedding party, optional</legend>
+      <fieldset style="border:none;padding:0;margin:0;">
+        <legend class="section-label">Who is this order for?</legend>
+        <div class="order-type-grid">
+          <div class="order-type-card">
+            <input type="radio" name="order-type" id="order-myself" value="myself">
+            <label for="order-myself">
+              <h3>For Myself</h3>
+              <p>Your own fitting, sizes and all.</p>
+            </label>
+          </div>
+          <div class="order-type-card">
+            <input type="radio" name="order-type" id="order-wedding" value="wedding">
+            <label for="order-wedding">
+              <h3>For a Wedding Party</h3>
+              <p>Coordinating the group, groom to groomsmen.</p>
+            </label>
+          </div>
+        </div>
+      </fieldset>
 
-          <div class="method-card">
-            <input type="radio" name="sizing-method" id="sizing-measure" value="measurements">
-            <label for="sizing-measure">
-              <span class="icon" aria-hidden="true">01</span>
-              <span>
+      <!-- FOR MYSELF -->
+      <div id="orderMyself" class="order-section" hidden>
+        <span class="section-label">Core Details</span>
+
+        <div class="field">
+          <label for="my-name">Full Name</label>
+          <input id="my-name" type="text" required placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="my-email">Email</label>
+          <input id="my-email" type="email" required placeholder="you@email.com" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="my-phone">Phone</label>
+          <input id="my-phone" type="tel" placeholder="(305) 000-0000" autocomplete="tel">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="my-height">Height</label>
+            <input id="my-height" type="text" required placeholder="e.g. 5'10&quot;">
+          </div>
+          <div class="field">
+            <label for="my-weight">Weight</label>
+            <input id="my-weight" type="number" inputmode="numeric" required placeholder="e.g. 175 lbs">
+          </div>
+        </div>
+        <div class="field">
+          <label for="my-occasion">Occasion</label>
+          <select id="my-occasion">
+            <option>Wedding</option>
+            <option>Prom / Formal</option>
+            <option>Quinceañera</option>
+            <option>Special Event</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="my-date">Event Date</label>
+          <input id="my-date" type="date">
+        </div>
+        <div class="field">
+          <label for="my-notes">Tell Us About The Day</label>
+          <textarea id="my-notes" rows="4" placeholder="Colors, anything we should know..."></textarea>
+        </div>
+
+        <div class="field">
+          <span class="section-label">How should we get your sizes?</span>
+          <fieldset class="method-cards" style="border:none;margin-top:2px;">
+            <legend class="sr-only">Choose a sizing method, optional</legend>
+
+            <div class="method-card">
+              <input type="radio" name="sizing-method" id="sizing-measure" value="measurements">
+              <label for="sizing-measure">
                 <h3>Enter Measurements</h3>
                 <p>Chest, waist, inseam: the precise route.</p>
-              </span>
-            </label>
-            <div id="sizingMeasurements" class="card-panel" hidden>
-              <p class="fields-note" style="margin-bottom:16px;">All values in inches</p>
-              <div class="measure-grid">
-                <div class="measure-field">
-                  <label for="m-chest">Chest</label>
-                  <span class="hint">Measure around the fullest part</span>
-                  <input type="number" inputmode="decimal" id="m-chest" name="chest" min="20" max="70" placeholder="e.g. 40">
-                </div>
-                <div class="measure-field">
-                  <label for="m-waist">Waist</label>
-                  <span class="hint">At the natural waistline</span>
-                  <input type="number" inputmode="decimal" id="m-waist" name="waist" min="20" max="70" placeholder="e.g. 34">
-                </div>
-                <div class="measure-field">
-                  <label for="m-hips">Hips</label>
-                  <span class="hint">Around the widest point</span>
-                  <input type="number" inputmode="decimal" id="m-hips" name="hips" min="20" max="70" placeholder="e.g. 42">
-                </div>
-                <div class="measure-field">
-                  <label for="m-inseam">Inseam</label>
-                  <span class="hint">Inner leg, crotch to ankle</span>
-                  <input type="number" inputmode="decimal" id="m-inseam" name="inseam" min="20" max="45" placeholder="e.g. 32">
-                </div>
-                <div class="measure-field">
-                  <label for="m-neck">Neck</label>
-                  <span class="hint">Around the base of the neck</span>
-                  <input type="number" inputmode="decimal" id="m-neck" name="neck" min="10" max="24" placeholder="e.g. 16">
-                </div>
-                <div class="measure-field">
-                  <label for="m-sleeve">Sleeve Length</label>
-                  <span class="hint">Shoulder to wrist</span>
-                  <input type="number" inputmode="decimal" id="m-sleeve" name="sleeve" min="20" max="40" placeholder="e.g. 34">
-                </div>
-                <div class="measure-field">
-                  <label for="m-shoe">Shoe Size</label>
-                  <span class="hint">US sizing</span>
-                  <select id="m-shoe" name="shoe">
-                    <option value="">Select</option>
-                    <option value="8.0">8.0</option><option value="8.5">8.5</option><option value="9.0">9.0</option>
-                    <option value="9.5">9.5</option><option value="10.0">10.0</option><option value="10.5">10.5</option>
-                    <option value="11.0">11.0</option><option value="11.5">11.5</option><option value="12.0">12.0</option>
-                  </select>
-                </div>
-                <div class="measure-field">
-                  <label for="m-belt">Belt Size</label>
-                  <span class="hint">Waist size + 2 in.</span>
-                  <select id="m-belt" name="belt">
-                    <option value="">Select</option>
-                    <option value="32">32</option><option value="34">34</option><option value="36">36</option>
-                    <option value="38">38</option><option value="40">40</option><option value="42">42</option>
-                  </select>
+              </label>
+              <div id="sizingMeasurements" class="card-panel" hidden>
+                <p class="fields-note">All values in inches</p>
+                <div class="measure-grid">
+                  <div class="measure-field">
+                    <label for="m-chest">Chest</label>
+                    <span class="hint">Measure around the fullest part</span>
+                    <input type="number" inputmode="decimal" id="m-chest" name="chest" min="20" max="70" placeholder="e.g. 40">
+                  </div>
+                  <div class="measure-field">
+                    <label for="m-waist">Waist</label>
+                    <span class="hint">At the natural waistline</span>
+                    <input type="number" inputmode="decimal" id="m-waist" name="waist" min="20" max="70" placeholder="e.g. 34">
+                  </div>
+                  <div class="measure-field">
+                    <label for="m-hips">Hips</label>
+                    <span class="hint">Around the widest point</span>
+                    <input type="number" inputmode="decimal" id="m-hips" name="hips" min="20" max="70" placeholder="e.g. 42">
+                  </div>
+                  <div class="measure-field">
+                    <label for="m-inseam">Inseam</label>
+                    <span class="hint">Inner leg, crotch to ankle</span>
+                    <input type="number" inputmode="decimal" id="m-inseam" name="inseam" min="20" max="45" placeholder="e.g. 32">
+                  </div>
+                  <div class="measure-field">
+                    <label for="m-neck">Neck</label>
+                    <span class="hint">Around the base of the neck</span>
+                    <input type="number" inputmode="decimal" id="m-neck" name="neck" min="10" max="24" placeholder="e.g. 16">
+                  </div>
+                  <div class="measure-field">
+                    <label for="m-sleeve">Sleeve Length</label>
+                    <span class="hint">Shoulder to wrist</span>
+                    <input type="number" inputmode="decimal" id="m-sleeve" name="sleeve" min="20" max="40" placeholder="e.g. 34">
+                  </div>
+                  <div class="measure-field">
+                    <label for="m-shoe">Shoe Size</label>
+                    <span class="hint">US sizing</span>
+                    <select id="m-shoe" name="shoe">
+                      <option value="">Select</option>
+                      <option value="8.0">8.0</option><option value="8.5">8.5</option><option value="9.0">9.0</option>
+                      <option value="9.5">9.5</option><option value="10.0">10.0</option><option value="10.5">10.5</option>
+                      <option value="11.0">11.0</option><option value="11.5">11.5</option><option value="12.0">12.0</option>
+                    </select>
+                  </div>
+                  <div class="measure-field">
+                    <label for="m-belt">Belt Size</label>
+                    <span class="hint">Waist size + 2 in.</span>
+                    <select id="m-belt" name="belt">
+                      <option value="">Select</option>
+                      <option value="32">32</option><option value="34">34</option><option value="36">36</option>
+                      <option value="38">38</option><option value="40">40</option><option value="42">42</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="method-card">
-            <input type="radio" name="sizing-method" id="sizing-brand" value="brand">
-            <label for="sizing-brand">
-              <span class="icon" aria-hidden="true">02</span>
-              <span>
+            <div class="method-card">
+              <input type="radio" name="sizing-method" id="sizing-brand" value="brand">
+              <label for="sizing-brand">
                 <h3>Use Brand Sizes</h3>
                 <p>Tell us what you wear at Tom Ford, Brioni, and other brands you already own.</p>
-              </span>
-            </label>
-            <div id="sizingBrand" class="card-panel" hidden>
-              <div class="brand-list">
-                <div class="brand-row">
-                  <h3>Tom Ford</h3>
-                  <div class="brand-fields">
-                    <div class="measure-field">
-                      <label for="bf-tomford-jacket">Jacket</label>
-                      <select id="bf-tomford-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
+              </label>
+              <div id="sizingBrand" class="card-panel" hidden>
+                <div class="brand-list">
+                  <div class="brand-row">
+                    <h3>Tom Ford</h3>
+                    <div class="brand-fields">
+                      <div class="measure-field">
+                        <label for="bf-tomford-jacket">Jacket</label>
+                        <select id="bf-tomford-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
+                      </div>
+                      <div class="measure-field">
+                        <label for="bf-tomford-trouser">Trouser</label>
+                        <select id="bf-tomford-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
+                      </div>
+                      <div class="measure-field">
+                        <label for="bf-tomford-shirt">Shirt</label>
+                        <select id="bf-tomford-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
+                      </div>
                     </div>
-                    <div class="measure-field">
-                      <label for="bf-tomford-trouser">Trouser</label>
-                      <select id="bf-tomford-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
+                  </div>
+                  <div class="brand-row">
+                    <h3>Brioni</h3>
+                    <div class="brand-fields">
+                      <div class="measure-field">
+                        <label for="bf-brioni-jacket">Jacket</label>
+                        <select id="bf-brioni-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
+                      </div>
+                      <div class="measure-field">
+                        <label for="bf-brioni-trouser">Trouser</label>
+                        <select id="bf-brioni-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
+                      </div>
+                      <div class="measure-field">
+                        <label for="bf-brioni-shirt">Shirt</label>
+                        <select id="bf-brioni-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
+                      </div>
                     </div>
-                    <div class="measure-field">
-                      <label for="bf-tomford-shirt">Shirt</label>
-                      <select id="bf-tomford-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
+                  </div>
+                  <div class="brand-row">
+                    <h3>Hugo Boss</h3>
+                    <div class="brand-fields">
+                      <div class="measure-field">
+                        <label for="bf-hugoboss-jacket">Jacket</label>
+                        <select id="bf-hugoboss-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
+                      </div>
+                      <div class="measure-field">
+                        <label for="bf-hugoboss-trouser">Trouser</label>
+                        <select id="bf-hugoboss-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
+                      </div>
+                      <div class="measure-field">
+                        <label for="bf-hugoboss-shirt">Shirt</label>
+                        <select id="bf-hugoboss-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="brand-row">
-                  <h3>Brioni</h3>
-                  <div class="brand-fields">
-                    <div class="measure-field">
-                      <label for="bf-brioni-jacket">Jacket</label>
-                      <select id="bf-brioni-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
-                    </div>
-                    <div class="measure-field">
-                      <label for="bf-brioni-trouser">Trouser</label>
-                      <select id="bf-brioni-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
-                    </div>
-                    <div class="measure-field">
-                      <label for="bf-brioni-shirt">Shirt</label>
-                      <select id="bf-brioni-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
-                    </div>
-                  </div>
-                </div>
-                <div class="brand-row">
-                  <h3>Hugo Boss</h3>
-                  <div class="brand-fields">
-                    <div class="measure-field">
-                      <label for="bf-hugoboss-jacket">Jacket</label>
-                      <select id="bf-hugoboss-jacket"><option value="">Select</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option></select>
-                    </div>
-                    <div class="measure-field">
-                      <label for="bf-hugoboss-trouser">Trouser</label>
-                      <select id="bf-hugoboss-trouser"><option value="">Select</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option></select>
-                    </div>
-                    <div class="measure-field">
-                      <label for="bf-hugoboss-shirt">Shirt</label>
-                      <select id="bf-hugoboss-shirt"><option value="">Select</option><option>15.0</option><option>15.5</option><option>16.0</option><option>16.5</option><option>17.0</option></select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p style="margin-top:20px;font-size:13px;color:var(--text-softer);">Wear a different brand? Mention it in the notes above and we'll follow up before your fitting.</p>
-            </div>
-          </div>
-
-          <div class="method-card">
-            <input type="radio" name="sizing-method" id="sizing-party" value="party">
-            <label for="sizing-party">
-              <span class="icon" aria-hidden="true">03</span>
-              <span>
-                <h3>Booking For Your Wedding Party</h3>
-                <p>Coordinating a group? Share the party details now, no measurements needed yet.</p>
-              </span>
-            </label>
-            <div id="sizingParty" class="card-panel" hidden>
-              <div class="measure-grid">
-                <div class="measure-field">
-                  <label for="party-role">Your Role</label>
-                  <span class="hint">So we know who's coordinating</span>
-                  <select id="party-role">
-                    <option value="">Select</option>
-                    <option>Groom</option>
-                    <option>Best Man</option>
-                    <option>Wedding Planner</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div class="measure-field">
-                  <label for="party-size">Party Size</label>
-                  <span class="hint">Including yourself</span>
-                  <select id="party-size">
-                    <option value="">Select</option>
-                    <option>2</option><option>3</option><option>4</option><option>5</option>
-                    <option>6</option><option>7</option><option>8</option><option>9</option>
-                    <option>10</option><option>11+</option>
-                  </select>
-                </div>
-                <div class="measure-field span-2">
-                  <label for="party-members">Groomsmen Names &amp; Contact</label>
-                  <span class="hint">One per line, name then email or phone. We'll reach out to each person directly to collect their sizes.</span>
-                  <textarea id="party-members" rows="5" placeholder="e.g. Mike Alvarez, mike@email.com"></textarea>
-                </div>
+                <p style="margin-top:20px;font-size:13.5px;font-style:italic;color:var(--text-softer);">Wear a different brand? Mention it in the notes above and we'll follow up before your fitting.</p>
               </div>
             </div>
-          </div>
 
-        </fieldset>
-        <p style="margin-top:10px;font-size:13px;color:var(--text-softer);">Optional. Pick whichever applies, or skip this and our fit specialists will size you in store.</p>
+          </fieldset>
+          <p class="hint" style="margin-top:10px;">Optional. Skip this and our fit specialists will size you in store.</p>
+        </div>
+
+        <div class="order-summary">
+          <div class="order-summary-row"><span>Deposit to confirm your order</span><strong>$100</strong></div>
+          <p class="order-summary-note">Charged today to hold your fitting date. The remaining balance is due at pickup.</p>
+        </div>
+        <label class="checkbox-field">
+          <input type="checkbox" id="my-terms" required>
+          <span>I agree to the <a href="#">Terms and Conditions</a>.</span>
+        </label>
       </div>
 
-      <button type="submit" class="btn solid" style="width:fit-content;">Request Appointment</button>
+      <!-- FOR A WEDDING PARTY -->
+      <div id="orderWedding" class="order-section" hidden>
+        <span class="section-label">Coordinator Details</span>
+
+        <div class="field">
+          <label for="wed-name">Full Name</label>
+          <input id="wed-name" type="text" required placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="wed-email">Email</label>
+          <input id="wed-email" type="email" required placeholder="you@email.com" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="wed-phone">Phone</label>
+          <input id="wed-phone" type="tel" placeholder="(305) 000-0000" autocomplete="tel">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="wed-role">Your Role</label>
+            <select id="wed-role">
+              <option value="">Select</option>
+              <option>Groom</option>
+              <option>Best Man</option>
+              <option>Wedding Planner</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="wed-date">Wedding Date</label>
+            <input id="wed-date" type="date">
+          </div>
+        </div>
+
+        <span class="section-label" style="margin-top:6px;">The Wedding Party</span>
+        <div class="field">
+          <label for="wed-party-size">Party Size</label>
+          <select id="wed-party-size">
+            <option value="">Select, including yourself</option>
+            <option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option>
+            <option>10</option><option>11+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="wed-party-members">Groomsmen Names &amp; Contact</label>
+          <textarea id="wed-party-members" rows="5" placeholder="One per line, name then email or phone, e.g. Mike Alvarez, mike@email.com"></textarea>
+        </div>
+        <div class="field">
+          <label for="wed-notes">Tell Us About The Wedding</label>
+          <textarea id="wed-notes" rows="4" placeholder="Colors, anything we should know..."></textarea>
+        </div>
+
+        <div class="order-summary">
+          <div class="order-summary-row"><span>Wedding party admin fee</span><strong>$50</strong></div>
+          <p class="order-summary-note">Refunded in full once photos from the wedding are shared with Mr. Tux for use in our marketing and social media.</p>
+        </div>
+        <label class="checkbox-field">
+          <input type="checkbox" id="wed-terms" required>
+          <span>I agree to the <a href="#">Terms and Conditions</a>.</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn solid" id="orderSubmit" style="width:fit-content;" disabled>Continue</button>
     </form>
+
+    <!-- Mock payment step: placeholder UI only, no real processing.
+         Swap this out once a payment gateway (e.g. Stripe) is connected. -->
+    <div id="paymentMock" class="reveal" hidden>
+      <div class="payment-card">
+        <span class="section-label">Payment</span>
+        <h2 style="font-size:clamp(24px,3vw,30px);margin-bottom:22px;">Complete your payment</h2>
+
+        <div class="order-summary" style="margin-bottom:28px;">
+          <div class="order-summary-row"><span id="paymentDescription">Deposit to confirm your order</span><strong id="paymentAmount">$100</strong></div>
+        </div>
+
+        <div class="field" style="margin-bottom:20px;">
+          <label for="pay-name">Name On Card</label>
+          <input id="pay-name" type="text" placeholder="Full name">
+        </div>
+        <div class="field" style="margin-bottom:20px;">
+          <label for="pay-card">Card Number</label>
+          <input id="pay-card" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242">
+        </div>
+        <div class="field-row" style="margin-bottom:20px;">
+          <div class="field">
+            <label for="pay-expiry">Expiry</label>
+            <input id="pay-expiry" type="text" placeholder="MM / YY">
+          </div>
+          <div class="field">
+            <label for="pay-cvc">CVC</label>
+            <input id="pay-cvc" type="text" inputmode="numeric" placeholder="123">
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:28px;">
+          <label for="pay-zip">Billing ZIP</label>
+          <input id="pay-zip" type="text" placeholder="33186">
+        </div>
+
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <button type="button" class="btn solid" id="payButton" style="width:fit-content;">Pay $100</button>
+          <button type="button" class="link-back" id="paymentBack">&larr; Back to order</button>
+        </div>
+
+        <p class="payment-disclaimer">This is a placeholder checkout built for the prototype. No card details are collected or processed. Once a payment gateway is connected, this screen will handle real transactions.</p>
+      </div>
+    </div>
+
+    <!-- Confirmation, shown after the mock payment is "completed" -->
+    <div id="orderConfirmation" class="reveal" hidden>
+      <div class="confirm-mark" aria-hidden="true">&#10003;</div>
+      <span class="section-label">You're All Set</span>
+      <h2 style="margin-bottom:14px;">Payment received.</h2>
+      <p style="max-width:420px;">We'll be in touch to confirm your fitting. Bring nothing but yourself, we'll have everything ready.</p>
+    </div>
   </div>
 </section>
 
@@ -289,7 +400,7 @@
         <h4>Explore</h4>
         <a href="collection.html">Collection</a>
         <a href="story.html">Our Story</a>
-        <a href="contact.html">Book a Fitting</a>
+        <a href="contact.html">Start Your Order</a>
       </div>
       <div>
         <h4>Occasions</h4>
