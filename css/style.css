@@ -514,6 +514,13 @@ form.rsvp { display: flex; flex-direction: column; gap: 24px; }
 }
 @media (max-width: 860px) {
   .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+  /* On mobile, lead with "Who is this order for?" (and whichever step
+     follows it) instead of burying it below the store info. */
+  .contact-grid form.rsvp,
+  .contact-grid #paymentMock,
+  .contact-grid #orderConfirmation {
+    order: -1;
+  }
 }
 
 /* ---------- Footer ---------- */
