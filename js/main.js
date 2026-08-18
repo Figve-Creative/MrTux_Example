@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const value = checked ? checked.value : '';
     Object.keys(orderPanels).forEach((key) => {
       const panel = orderPanels[key];
-      if (panel) panel.hidden = key !== value;
+      if (!panel) return;
+      panel.hidden = key !== value;
     });
     if (orderSubmit) {
       if (value && submitLabels[value]) {
@@ -65,7 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   if (orderRadios.length) {
-    orderRadios.forEach((radio) => radio.addEventListener('change', updateOrderTypeVisibility));
+    orderRadios.forEach((radio) => radio.addEventListener('change', () => {
+      updateOrderTypeVisibility();
+      // Scroll the newly revealed fields into view so it's obvious
+      // something appeared, rather than leaving it below the fold.
+      const visiblePanel = Object.values(orderPanels).find((p) => p && !p.hidden);
+      if (visiblePanel) {
+        visiblePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }));
   }
 
   // Within "For Myself," a second inline toggle reveals measurement or

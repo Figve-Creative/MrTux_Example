@@ -614,6 +614,10 @@ footer.site {
   margin-top: 8px;
   padding-top: 36px;
   border-top: 1px solid var(--line);
+  animation: panel-in 0.4s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .order-section { animation: none; }
 }
 
 .field-row {
