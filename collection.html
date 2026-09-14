@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Collection | Mr. Tux</title>
+<meta name="description" content="Browse Mr. Tux's in-house formalwear collection: wedding tuxedos, prom and quinceañera styling, coordinated wedding party looks, and black-tie suits in Miami, FL.">
 <link rel="icon" href="img/icon-dark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,500;1,600&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -22,7 +23,16 @@
       <a href="index.html">Home</a>
       <a href="collection.html" class="active">Collection</a>
       <a href="story.html">Our Story</a>
-      <a href="contact.html">Start Your Order</a>
+      <a class="nav-locator" href="https://www.google.com/maps/search/?api=1&amp;query=12004+SW+88th+St+Miami+FL+33186" target="_blank" rel="noopener" aria-label="Find us on Google Maps">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 10c0 6-8.5 12-8.5 12s-8.5-6-8.5-12a8.5 8.5 0 0 1 17 0Z"></path><circle cx="12" cy="10" r="2.8"></circle></svg>
+      </a>
+      <div class="nav-order">
+        <button class="nav-order-trigger" type="button" aria-haspopup="true" aria-expanded="false">Start Your Order <span class="caret">&#9662;</span></button>
+        <div class="nav-order-menu">
+          <a href="contact.html?order=myself">Book Your Appointment</a>
+          <a href="contact.html?order=wedding">Suit Up Your Wedding Party</a>
+        </div>
+      </div>
     </nav>
     <button class="nav-toggle" aria-label="Menu">☰</button>
   </div>
@@ -40,28 +50,38 @@
   <div class="wrap">
     <div class="collection-grid">
       <div class="style-card reveal">
-        <span class="badge">Heritage</span>
-        <img src="img/photo-wedding-confetti.jpg" alt="Wedding tuxedo style">
+        <div class="frame">
+          <span class="badge">Heritage</span>
+          <img src="img/photo-wedding-confetti.jpg" alt="Wedding tuxedo style">
+        </div>
         <div class="cap"><span class="eyebrow">Wedding</span><h3>The Classic Groom</h3></div>
       </div>
       <div class="style-card reveal">
-        <span class="badge">Heritage</span>
-        <img src="img/photo-boutonniere.jpg" alt="Prom styling, boutonnière pinning">
+        <div class="frame">
+          <span class="badge">Heritage</span>
+          <img src="img/photo-boutonniere.jpg" alt="Prom styling, boutonnière pinning">
+        </div>
         <div class="cap"><span class="eyebrow">Prom &amp; Quince</span><h3>A First Fitting</h3></div>
       </div>
       <div class="style-card reveal">
-        <span class="badge">Heritage</span>
-        <img src="img/photo-bridal-party.jpg" alt="Coordinated wedding party">
+        <div class="frame">
+          <span class="badge">Heritage</span>
+          <img src="img/photo-bridal-party.jpg" alt="Coordinated wedding party">
+        </div>
         <div class="cap"><span class="eyebrow">Wedding Party</span><h3>Coordinated Crew</h3></div>
       </div>
       <div class="style-card reveal">
-        <span class="badge">Heritage</span>
-        <img src="img/photo-suit-detail-bw.jpg" alt="Suit jacket detail">
+        <div class="frame">
+          <span class="badge">Heritage</span>
+          <img src="img/photo-suit-detail-bw.jpg" alt="Suit jacket detail">
+        </div>
         <div class="cap"><span class="eyebrow">Suits</span><h3>Detail-Obsessed</h3></div>
       </div>
       <div class="style-card reveal">
-        <span class="badge">Heritage</span>
-        <img src="img/photo-jacket-mannequin.jpg" alt="Tuxedo jacket, ready for fitting">
+        <div class="frame">
+          <span class="badge">Heritage</span>
+          <img src="img/photo-jacket-mannequin.jpg" alt="Tuxedo jacket, ready for fitting">
+        </div>
         <div class="cap"><span class="eyebrow">Black Tie</span><h3>Ready On Arrival</h3></div>
       </div>
       <div class="style-card reveal" style="display:flex;align-items:center;justify-content:center;background:var(--field-bg);border:1.5px dashed var(--line);box-shadow:none;aspect-ratio:3/4;">

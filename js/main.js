@@ -23,6 +23,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
   }
 
+  // Start Your Order nav dropdown (Book Your Appointment / Suit Up Your
+  // Wedding Party). Click/tap-based so it works the same on desktop and
+  // mobile, rather than relying on hover.
+  document.querySelectorAll('.nav-order').forEach((navOrder) => {
+    const trigger = navOrder.querySelector('.nav-order-trigger');
+    if (!trigger) return;
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navOrder.classList.contains('open');
+      document.querySelectorAll('.nav-order.open').forEach((el) => {
+        if (el !== navOrder) {
+          el.classList.remove('open');
+          const t = el.querySelector('.nav-order-trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        }
+      });
+      navOrder.classList.toggle('open', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-order.open').forEach((el) => {
+      el.classList.remove('open');
+      const t = el.querySelector('.nav-order-trigger');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-order.open').forEach((el) => el.classList.remove('open'));
+    }
+  });
+
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -75,6 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
         visiblePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }));
+
+    // Coming from the "Start Your Order" nav dropdown (?order=myself or
+    // ?order=wedding) pre-selects the matching path so visitors land
+    // straight on their fields instead of choosing again.
+    const preselect = new URLSearchParams(window.location.search).get('order');
+    if (preselect && orderPanels[preselect]) {
+      const radio = document.querySelector(`input[name="order-type"][value="${preselect}"]`);
+      if (radio) {
+        radio.checked = true;
+        updateOrderTypeVisibility();
+      }
+    }
   }
 
   // Within "For Myself," a second inline toggle reveals measurement or

@@ -23,13 +23,25 @@
       <a href="index.html" class="active">Home</a>
       <a href="collection.html">Collection</a>
       <a href="story.html">Our Story</a>
-      <a href="contact.html">Start Your Order</a>
+      <a class="nav-locator" href="https://www.google.com/maps/search/?api=1&amp;query=12004+SW+88th+St+Miami+FL+33186" target="_blank" rel="noopener" aria-label="Find us on Google Maps">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 10c0 6-8.5 12-8.5 12s-8.5-6-8.5-12a8.5 8.5 0 0 1 17 0Z"></path><circle cx="12" cy="10" r="2.8"></circle></svg>
+      </a>
+      <div class="nav-order">
+        <button class="nav-order-trigger" type="button" aria-haspopup="true" aria-expanded="false">Start Your Order <span class="caret">&#9662;</span></button>
+        <div class="nav-order-menu">
+          <a href="contact.html?order=myself">Book Your Appointment</a>
+          <a href="contact.html?order=wedding">Suit Up Your Wedding Party</a>
+        </div>
+      </div>
     </nav>
     <button class="nav-toggle" aria-label="Menu">☰</button>
   </div>
 </header>
 
 <section class="hero" id="main">
+  <div class="hero-bg">
+    <img src="img/photo-bridal-party.jpg" alt="" aria-hidden="true">
+  </div>
   <div class="wrap">
     <span class="eyebrow hero-tag">South Florida's Longest-Standing Formalwear House &middot; Est. 1977</span>
     <h1>Dressed to be<br>remembered.</h1>
@@ -65,24 +77,11 @@
         <p>Peak lapels, satin details, and the finishing touches that belong in the room.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="alt-bg tight">
-  <div class="wrap" style="display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center;">
-    <div class="reveal">
-      <span class="eyebrow">Skip The Wait</span>
-      <h2>Walk in already fitted.</h2>
-      <p class="lead" style="margin-top:18px;">Send us your sizes ahead of time (measurements, or the brands you already wear) and we'll have your fit ready before you arrive.</p>
-      <a href="contact.html" class="btn solid" style="margin-top:28px;">Start Your Order</a>
-    </div>
-    <div class="reveal" style="border:1px solid var(--line);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:36px;background:var(--field-bg);">
-      <span class="eyebrow">Two Ways To Tell Us</span>
-      <h3 style="margin-top:14px;">Enter Measurements</h3>
-      <p style="margin-top:6px;">Chest, waist, inseam: the precise route.</p>
-      <div class="divider"></div>
-      <h3>Use Brand Sizes</h3>
-      <p style="margin-top:6px;">Tell us what you wear at Tom Ford, Brioni, and other brands you already own.</p>
+    <div class="occasion-strip reveal" style="justify-content:center;margin-top:36px;">
+      <span class="occasion-chip">Corporate Events</span>
+      <span class="occasion-chip">Vow Renewals</span>
+      <span class="occasion-chip">Quinceañeras</span>
+      <span class="occasion-chip">Anniversaries</span>
     </div>
   </div>
 </section>
@@ -116,11 +115,11 @@
     <div class="pillars reveal" style="grid-template-columns:1fr 1fr;">
       <div class="pillar">
         <h3 style="color:rgba(22,21,15,0.6);font-size:20px;">"Pick a size off the rack."</h3>
-        <p>Return it and forget it. One-time transaction. A logo on a receipt. Priced by the item.</p>
+        <p>A one-time transaction, returned and forgotten.</p>
       </div>
       <div class="pillar">
         <h3 style="font-size:20px;">"This one was made to fit you."</h3>
-        <p>A follow-up, and a welcome back. The start of a relationship. A name they remember. Valued by the experience.</p>
+        <p>The start of a relationship. A name they remember.</p>
       </div>
     </div>
   </div>

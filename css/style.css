@@ -60,7 +60,7 @@
    full-bleed photograph, where a scrim is needed for legibility. That's
    imagery, not a background color choice — everything else on the site
    (header, footer, section breaks, cards) stays ivory. */
-.hero, .style-card .cap {
+.hero {
   --bg: var(--black);
   --text: var(--cream);
   --text-soft: rgba(243,239,228,0.72);
@@ -252,6 +252,66 @@ nav.links a:hover { color: var(--accent); }
 nav.links a.active { color: var(--accent); }
 .nav-toggle { display: none; background: none; border: none; color: var(--text); font-size: 26px; cursor: pointer; }
 
+/* Locator: quick link out to Google Maps directions */
+.nav-locator {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-softer);
+  padding: 10px 2px;
+  min-height: 24px;
+}
+.nav-locator:hover { color: var(--accent); }
+.nav-locator svg { width: 16px; height: 16px; display: block; }
+
+/* Start Your Order: nav dropdown with two paths */
+.nav-order { position: relative; }
+.nav-order-trigger {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-softer);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 24px;
+}
+.nav-order-trigger:hover, .nav-order.open .nav-order-trigger { color: var(--accent); }
+.nav-order-trigger .caret { font-size: 8px; transition: transform 0.2s ease; }
+.nav-order.open .nav-order-trigger .caret { transform: rotate(180deg); }
+.nav-order-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 260px;
+  background: var(--field-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 8px;
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+.nav-order.open .nav-order-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-order-menu a {
+  display: block;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+.nav-order-menu a:hover { background: var(--accent-tint); color: var(--accent); }
+
 @media (max-width: 860px) {
   nav.links {
     position: fixed;
@@ -265,9 +325,25 @@ nav.links a.active { color: var(--accent); }
     gap: 32px;
     transition: right 0.4s ease;
     border-left: 1px solid var(--line);
+    overflow-y: auto;
+    padding: 40px 0;
   }
   nav.links.open { right: 0; }
   .nav-toggle { display: block; }
+  .nav-order-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin-top: 12px;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+  }
+  .nav-order.open .nav-order-menu { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+  .nav-order-trigger { margin: 0 auto; }
 }
 
 /* ---------- Hero ---------- */
@@ -276,10 +352,30 @@ nav.links a.active { color: var(--accent); }
   display: flex;
   align-items: center;
   position: relative;
-  background: linear-gradient(180deg, rgba(22,21,15,0.45), rgba(22,21,15,0.9)),
-    url('img/photo-bridal-party.jpg')
-    center 20%/cover no-repeat;
+  overflow: hidden;
 }
+/* Slow-panning background stands in for motion/video until real footage
+   from the owners is ready to drop in as a <video> source. */
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  animation: hero-pan 24s ease-in-out infinite alternate;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(22,21,15,0.45), rgba(22,21,15,0.9));
+}
+@keyframes hero-pan {
+  from { transform: scale(1.08) translate(0, 0); }
+  to { transform: scale(1.18) translate(-2%, -1.2%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg img { animation: none; }
+}
+.hero > .wrap, .hero .scroll-cue { position: relative; z-index: 1; }
 .hero .wrap { padding-top: 120px; }
 .hero-tag { margin-bottom: 22px; }
 .hero h1 { max-width: 900px; }
@@ -314,6 +410,36 @@ section.tight { padding: 90px 0; }
   margin: 20px 0;
 }
 .alt-bg { background: var(--cream-dim); }
+
+/* Tighter, faster-scrolling rhythm on mobile: the whole point of the
+   Black Tux-style mobile benchmark is getting to the end goal quickly. */
+@media (max-width: 700px) {
+  section { padding: 70px 0; }
+  section.tight { padding: 54px 0; }
+  .section-head { margin-bottom: 38px; }
+  .hero .wrap { padding-top: 100px; }
+  .cta-band, .page-hero { padding-top: 70px; padding-bottom: 70px; }
+  .page-hero { padding-top: 150px; }
+}
+
+/* ---------- Occasion strip (events we support) ---------- */
+.occasion-strip { display: flex; flex-wrap: wrap; gap: 12px; }
+.occasion-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--field-bg);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.occasion-chip:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
 /* ---------- Pillars / grid cards ---------- */
 .pillars {
@@ -414,28 +540,35 @@ section.tight { padding: 90px 0; }
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
+/* Isolated style on a cream mat, catalog-style rather than a dark photo
+   overlay: each style sits on its own cream "frame" with the caption
+   printed below rather than laid over the image. */
 .style-card {
   position: relative;
-  overflow: hidden;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+  background: var(--field-bg);
+  border: 1px solid var(--line);
+  overflow: hidden;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 .style-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.style-card .frame {
+  position: relative;
+  padding: 18px 18px 0;
+  background: var(--cream);
+}
 .style-card img {
   width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  border-radius: calc(var(--radius-md) - 6px);
   transition: transform 0.6s ease;
 }
-.style-card:hover img { transform: scale(1.06); }
-.style-card .cap {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 24px;
-  background: linear-gradient(to top, rgba(22,21,15,0.95), transparent);
-}
-.style-card .cap .eyebrow { margin-bottom: 6px; color: var(--gold-bright); }
+.style-card:hover img { transform: scale(1.03); }
+.style-card .cap { padding: 18px 22px 24px; }
+.style-card .cap .eyebrow { margin-bottom: 6px; }
 .badge {
   position: absolute;
-  top: 16px; left: 16px;
+  top: 14px; left: 14px;
   z-index: 2;
   background: rgba(22,21,15,0.82);
   color: #f3efe4;
