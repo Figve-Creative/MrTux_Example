@@ -20,8 +20,8 @@
   --black: #16150f;         /* Tuxedo Ink */
   --charcoal: #221f17;
   --charcoal-light: #363d2f; /* Legacy Green — signature surface */
-  --cream: #f3efe4;         /* Ivory Cream — page background */
-  --cream-dim: #e6ddc9;
+  --cream: #faf8f2;         /* Ivory Cream — page background (lightened, fresher) */
+  --cream-dim: #f1ece1;     /* alt section background, subtler contrast */
   --gold: #b57840;          /* Cognac — raw brand accent (non-text/UI use) */
   --gold-bright: #e0bb7a;   /* accent for text on DARK surfaces (ink/green) */
   --gold-deep: #7a4a22;     /* accent for text on LIGHT/ivory surfaces */
