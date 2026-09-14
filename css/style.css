@@ -30,7 +30,7 @@
 
   --font-display: 'NewYork', 'Playfair Display', 'Times New Roman', serif;
   --font-body: 'Newsreader', 'Times New Roman', serif;
-  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --font-mono: 'Montserrat', Arial, sans-serif; /* used for nav, labels, buttons, eyebrows */
 
   --max-width: 1240px;
 
