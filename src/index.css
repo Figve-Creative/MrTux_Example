@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* NewYork by nevsky.type — licensed via Creative Market (Desktop +
+   Webfont license). Self-hosted, single Regular weight. Used for all
+   display/headline type; Montserrat (loaded above) handles supporting
+   text (nav, body copy, labels, buttons). */
+@font-face {
+  font-family: 'NewYork';
+  src: url('/fonts/NewYork.woff2') format('woff2'),
+       url('/fonts/NewYork.woff') format('woff'),
+       url('/fonts/NewYork.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Cream paper */
+    --background: 42 38% 93%;
+    --foreground: 30 12% 11%;
+
+    --card: 42 46% 96%;
+    --card-foreground: 30 12% 11%;
+
+    --popover: 42 46% 96%;
+    --popover-foreground: 30 12% 11%;
+
+    /* Ink is the primary action color */
+    --primary: 30 14% 13%;
+    --primary-foreground: 42 46% 96%;
+
+    --secondary: 40 24% 88%;
+    --secondary-foreground: 30 12% 11%;
+
+    --muted: 40 22% 88%;
+    --muted-foreground: 32 8% 38%;
+
+    /* Oxblood highlight */
+    --accent: 348 42% 26%;
+    --accent-foreground: 42 46% 96%;
+
+    --destructive: 0 62% 38%;
+    --destructive-foreground: 42 46% 96%;
+
+    --border: 34 16% 80%;
+    --input: 34 16% 76%;
+    --ring: 348 42% 26%;
+
+    --radius: 0.125rem;
+
+    --sidebar-background: 42 38% 93%;
+    --sidebar-foreground: 30 12% 11%;
+    --sidebar-primary: 30 14% 13%;
+    --sidebar-primary-foreground: 42 46% 96%;
+    --sidebar-accent: 40 24% 88%;
+    --sidebar-accent-foreground: 30 12% 11%;
+    --sidebar-border: 34 16% 80%;
+    --sidebar-ring: 348 42% 26%;
+
+    --cream: 42 38% 93%;
+    --ink: 30 14% 13%;
+    --highlight: 348 42% 26%;
+    --surface: 42 46% 96%;
+    --muted-text: 32 8% 38%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-normal;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    @apply font-body text-[11px] uppercase tracking-[0.24em] text-muted-foreground;
+  }
+
+  .rule {
+    @apply h-px w-full bg-border;
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-current after:transition-all hover:after:w-full;
+  }
+}
