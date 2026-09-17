@@ -108,7 +108,7 @@ const WeddingParties = () => {
               Send to the Shop
             </Button>
             <Link to="/appointment" className="text-[11px] uppercase tracking-[0.2em] link-underline">
-              Or book an appointment
+              Or start a visit instead
             </Link>
           </div>
           {sent && (

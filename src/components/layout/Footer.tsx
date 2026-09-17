@@ -8,7 +8,7 @@ const columns = [
       { to: "/collection", label: "Collection" },
       { to: "/start-your-order", label: "Start Your Order" },
       { to: "/wedding-parties", label: "Wedding Parties" },
-      { to: "/appointment", label: "Book an Appointment" },
+      { to: "/appointment", label: "Start a Visit" },
     ],
   },
   {

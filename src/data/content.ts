@@ -49,11 +49,11 @@ export const faqs = [
   },
   {
     q: "Do you offer alterations?",
-    a: "In-store adjustments are available by appointment for local customers.",
+    a: "In-store adjustments are available locally, just start a visit.",
   },
   {
     q: "What if my event date moves?",
-    a: "Write to us or book an appointment and we will move the rental window at no charge, subject to availability.",
+    a: "Write to us or start a visit and we'll move the rental window at no charge, subject to availability.",
   },
 ];
 
@@ -88,7 +88,7 @@ export const blogPosts = [
     body: [
       "Pick the look first, then the date, then the count. Everything else follows from those three facts.",
       "Send each man the same instructions: measure over a dress shirt, submit sizes, confirm the delivery address. We ship every order to arrive together.",
-      "Book an appointment two months out if you can. Twenty minutes in person removes most of the questions that would otherwise live in the group chat.",
+      "Start a visit two months out if you can. Twenty minutes in person removes most of the questions that would otherwise live in the group chat.",
     ],
   },
 ];

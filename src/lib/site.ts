@@ -2,7 +2,7 @@ export const SITE = {
   name: "Mr. Tux",
   tagline: "Dressed to be remembered",
   description:
-    "Tuxedo and formal menswear rental in Miami. Two sizes delivered, prepaid returns, appointments welcome.",
+    "Tuxedo and formal menswear rental in Miami. Two sizes delivered, prepaid returns, visits welcome.",
   calendlyUrl: "https://calendly.com/mrtuxstyles-sales",
   address: {
     line1: "12004 SW 88th St",

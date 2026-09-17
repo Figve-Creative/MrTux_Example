@@ -40,7 +40,7 @@ const OurStory = () => (
           to="/appointment"
           className="inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
         >
-          Book an Appointment
+          Start a Visit
         </Link>
         <Link
           to="/collection"

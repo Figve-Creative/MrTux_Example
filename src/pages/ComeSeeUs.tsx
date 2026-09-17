@@ -6,7 +6,7 @@ const ComeSeeUs = () => (
   <>
     <Seo
       title="Come See Us — Mr. Tux, Miami FL"
-      description={`Visit Mr. Tux at ${SITE.address.full}. Hours, directions and appointments.`}
+      description={`Visit Mr. Tux at ${SITE.address.full}. Hours, directions, and how to start a visit.`}
     />
 
     <div className="mx-auto max-w-6xl px-5 lg:px-8 py-14 sm:py-20">
@@ -45,7 +45,7 @@ const ComeSeeUs = () => (
               to="/appointment"
               className="inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
             >
-              Book an Appointment
+              Start a Visit
             </Link>
           </div>
         </div>

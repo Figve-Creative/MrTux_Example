@@ -11,7 +11,7 @@ const Home = () => (
   <>
     <Seo
       title="Mr. Tux — Tuxedo Rental in Miami | Dressed to be remembered"
-      description="Tuxedo and formal menswear rental in Miami. Two sizes delivered, prepaid returns, no deposit. Book an appointment or start your order."
+      description="Tuxedo and formal menswear rental in Miami. Two sizes delivered, prepaid returns, no deposit. Start your order, or come in for a visit."
     />
 
     {/* Hero */}
@@ -57,7 +57,7 @@ const Home = () => (
       <div className="mx-auto max-w-6xl px-5 lg:px-8 py-12 grid gap-8 md:grid-cols-2">
         <div className="md:border-r md:border-border md:pr-10">
           <p className="eyebrow">In person</p>
-          <h2 className="mt-3 font-display text-2xl sm:text-3xl">Book your appointment</h2>
+          <h2 className="mt-3 font-display text-2xl sm:text-3xl">Come in and get fitted</h2>
           <p className="mt-3 text-sm text-muted-foreground">
             Twenty minutes with a fitter, a mirror and the full collection in your hands.
           </p>
@@ -65,7 +65,7 @@ const Home = () => (
             to="/appointment"
             className="mt-5 inline-flex h-12 items-center justify-center bg-highlight px-8 text-xs uppercase tracking-[0.18em] text-accent-foreground hover:bg-highlight/90"
           >
-            Book Now
+            Start a Visit
           </Link>
         </div>
         <div>
@@ -216,7 +216,7 @@ const Home = () => (
               to="/appointment"
               className="inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
             >
-              Book an Appointment
+              Start a Visit
             </Link>
           </div>
         </div>
