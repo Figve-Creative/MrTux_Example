@@ -22,13 +22,13 @@ const StartOrder = () => {
   return (
     <>
       <Seo
-        title="Start Your Order — Create Your Event | Mr. Tux"
-        description="Create your event, save your sizes and choose your look. Two sizes delivered, prepaid returns, no deposit."
+        title="Start Your Order — Mr. Tux Miami"
+        description="Tell us your occasion, save your sizes, and choose your look. Two sizes delivered, prepaid returns, no deposit."
       />
 
       <div className="mx-auto max-w-3xl px-5 lg:px-8 py-14 sm:py-20">
-        <p className="eyebrow">Step one</p>
-        <h1 className="mt-3 font-display text-4xl sm:text-5xl">Create your event</h1>
+        <p className="eyebrow">01</p>
+        <h1 className="mt-3 font-display text-4xl sm:text-5xl">Start your order</h1>
         <p className="mt-4 text-sm text-muted-foreground">
           Tell us the occasion and the date. No deposit is taken — you pay for the rental when you place the order.
         </p>
@@ -104,13 +104,13 @@ const StartOrder = () => {
               setSavedEvent(true);
             }}
           >
-            Save Event
+            Save Occasion
           </Button>
           {savedEvent && <span className="text-xs text-muted-foreground">Saved to your account.</span>}
         </div>
 
         <div className="mt-16 border-t border-border pt-12">
-          <p className="eyebrow">Step two</p>
+          <p className="eyebrow">02</p>
           <h2 className="mt-3 font-display text-3xl sm:text-4xl">Your sizes</h2>
           <p className="mt-4 text-sm text-muted-foreground">
             Give us measurements or the brand sizes you already wear. Every order ships in your size and one size up.
@@ -121,7 +121,7 @@ const StartOrder = () => {
         </div>
 
         <div className="mt-16 border-t border-border pt-12">
-          <p className="eyebrow">Step three</p>
+          <p className="eyebrow">03</p>
           <h2 className="mt-3 font-display text-3xl sm:text-4xl">Choose your look</h2>
           <p className="mt-4 text-sm text-muted-foreground">
             {bag.length > 0
