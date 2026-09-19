@@ -14,7 +14,7 @@ export interface Accessory {
 export interface Look {
   id: string;
   name: string;
-  collection: "Heritage" | "Modern" | "Black Tie Optional" | "White Tie";
+  collection: string;
   price: number;
   rentalDays: number;
   image: string;
@@ -22,46 +22,70 @@ export interface Look {
   items: string[];
 }
 
+// NOTE: these six looks are pulled from the real Mr. Tux inventory sheet (one per color
+// family). Photos are still the placeholder stock shots below — swap look.image for the
+// matching Drive photo once it's in src/assets. Pricing/rental days are carried over
+// placeholders and should be replaced with real numbers.
 export const looks: Look[] = [
   {
-    id: "midnight-peak",
-    name: "The Midnight Peak",
-    collection: "Heritage",
+    id: "ginovia-black-beckett",
+    name: "GiNovia Becket",
+    collection: "Black",
     price: 189,
     rentalDays: 4,
     image: lookMidnight,
-    description: "Peak lapel tuxedo in super 130s wool. Satin-faced lapels, single button closure. The definitive black tie.",
-    items: ["Peak Lapel Jacket", "Flat-Front Trousers", "Wing Collar Shirt", "Silk Bowtie"],
+    description: "Style 848C. Black two-button notch tuxedo with a framed lapel in tropical wool. Side vented, besom pockets.",
+    items: ["Notch Lapel Jacket", "Flat-Front Trousers", "Dress Shirt", "Bowtie"],
   },
   {
-    id: "ivory-dinner",
-    name: "The Ivory Dinner",
-    collection: "Modern",
-    price: 219,
+    id: "david-major-platinum",
+    name: "David Major Platinum",
+    collection: "Grey",
+    price: 189,
     rentalDays: 4,
     image: lookIvory,
-    description: "Ivory shawl collar dinner jacket paired with black trousers. For the man who commands the room.",
-    items: ["Ivory Dinner Jacket", "Black Trousers", "Spread Collar Shirt", "Black Silk Bowtie"],
+    description: "Style 807C. Platinum grey two-button notch suit, side vented with flap pockets.",
+    items: ["Notch Lapel Jacket", "Flat-Front Trousers", "Dress Shirt", "Tie"],
   },
   {
-    id: "navy-velvet",
-    name: "The Navy Velvet",
-    collection: "Black Tie Optional",
-    price: 249,
+    id: "ike-behar-blake",
+    name: "Ike Behar Blake",
+    collection: "Blue",
+    price: 189,
     rentalDays: 4,
     image: lookNavy,
-    description: "Italian velvet jacket in midnight navy. Peak lapels, single vent. Understated rebellion.",
-    items: ["Velvet Peak Lapel Jacket", "Charcoal Trousers", "French Cuff Shirt", "Silk Knit Tie"],
+    description: "Style 1015C. Navy tuxedo with a one-button black satin peak lapel in super 120 wool. Side vented, besom pockets.",
+    items: ["Peak Lapel Jacket", "Flat-Front Trousers", "Dress Shirt", "Bowtie"],
   },
   {
-    id: "white-tie-classic",
-    name: "The White Tie Classic",
-    collection: "White Tie",
-    price: 299,
+    id: "couture-dominic",
+    name: "Couture Dominic",
+    collection: "Tan & Beige",
+    price: 189,
     rentalDays: 4,
     image: lookWhiteTie,
-    description: "Full dress tailcoat with white marcella waistcoat. The highest dress code, executed flawlessly.",
-    items: ["Tailcoat", "High-Waist Trousers", "Wing Collar Shirt", "White Marcella Waistcoat", "White Bowtie"],
+    description: "Style 4547C. Light tan two-button notch lapel suit in stretch poly wool. Side vented, flap pockets.",
+    items: ["Notch Lapel Jacket", "Flat-Front Trousers", "Dress Shirt", "Tie"],
+  },
+  {
+    id: "ike-behar-white-waverly",
+    name: "Ike Behar Waverly",
+    collection: "White",
+    price: 189,
+    rentalDays: 4,
+    image: lookMidnight,
+    description: "Style WGATSBY. White self shawl lapel dinner jacket with black self piping. One button, center vented.",
+    items: ["Shawl Lapel Dinner Jacket", "Black Trousers", "Dress Shirt", "Black Bowtie"],
+  },
+  {
+    id: "ike-behar-burgundy-marbella",
+    name: "Ike Behar Marbella",
+    collection: "Others",
+    price: 189,
+    rentalDays: 4,
+    image: lookIvory,
+    description: "Style MB201. Burgundy tuxedo with a black peak lapel in super 120's wool. One button, side vented, besom pockets.",
+    items: ["Peak Lapel Jacket", "Flat-Front Trousers", "Dress Shirt", "Bowtie"],
   },
 ];
 
