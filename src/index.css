@@ -22,26 +22,26 @@
   :root {
     /* Cream paper */
     --background: 42 38% 93%;
-    --foreground: 30 12% 11%;
+    --foreground: 150 28% 15%;
 
     --card: 42 46% 96%;
-    --card-foreground: 30 12% 11%;
+    --card-foreground: 150 28% 15%;
 
     --popover: 42 46% 96%;
-    --popover-foreground: 30 12% 11%;
+    --popover-foreground: 150 28% 15%;
 
-    /* Ink is the primary action color */
-    --primary: 30 14% 13%;
+    /* Deep hunter green is the primary action color (was near-black ink) */
+    --primary: 150 28% 15%;
     --primary-foreground: 42 46% 96%;
 
     --secondary: 40 24% 88%;
-    --secondary-foreground: 30 12% 11%;
+    --secondary-foreground: 150 28% 15%;
 
     --muted: 40 22% 88%;
     --muted-foreground: 32 8% 38%;
 
-    /* Oxblood highlight */
-    --accent: 348 42% 26%;
+    /* Lighter forest green highlight — tonal with primary, replaces oxblood */
+    --accent: 150 24% 28%;
     --accent-foreground: 42 46% 96%;
 
     --destructive: 0 62% 38%;
@@ -49,22 +49,22 @@
 
     --border: 34 16% 80%;
     --input: 34 16% 76%;
-    --ring: 348 42% 26%;
+    --ring: 150 24% 28%;
 
     --radius: 0.125rem;
 
     --sidebar-background: 42 38% 93%;
     --sidebar-foreground: 30 12% 11%;
-    --sidebar-primary: 30 14% 13%;
+    --sidebar-primary: 150 28% 15%;
     --sidebar-primary-foreground: 42 46% 96%;
     --sidebar-accent: 40 24% 88%;
     --sidebar-accent-foreground: 30 12% 11%;
     --sidebar-border: 34 16% 80%;
-    --sidebar-ring: 348 42% 26%;
+    --sidebar-ring: 150 24% 28%;
 
     --cream: 42 38% 93%;
-    --ink: 30 14% 13%;
-    --highlight: 348 42% 26%;
+    --ink: 150 28% 15%;
+    --highlight: 150 24% 28%;
     --surface: 42 46% 96%;
     --muted-text: 32 8% 38%;
   }
