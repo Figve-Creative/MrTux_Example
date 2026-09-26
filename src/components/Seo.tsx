@@ -13,9 +13,15 @@ const setMeta = (attr: "name" | "property", key: string, content: string) => {
 interface SeoProps {
   title: string;
   description: string;
+  /** Optional page-specific structured data (e.g. FAQPage). Rendered as JSON-LD.
+   *  Note: since this runs client-side, it's visible to Google/Bing (which render JS)
+   *  but not to crawlers that only fetch raw HTML — see docs/STATUS.md. */
+  jsonLd?: Record<string, unknown>;
 }
 
-const Seo = ({ title, description }: SeoProps) => {
+const JSON_LD_ID = "page-json-ld";
+
+const Seo = ({ title, description, jsonLd }: SeoProps) => {
   useEffect(() => {
     document.title = title;
     setMeta("name", "description", description);
@@ -31,7 +37,21 @@ const Seo = ({ title, description }: SeoProps) => {
       document.head.appendChild(canonical);
     }
     canonical.href = window.location.origin + window.location.pathname;
-  }, [title, description]);
+
+    const existing = document.getElementById(JSON_LD_ID);
+    if (existing) existing.remove();
+    if (jsonLd) {
+      const script = document.createElement("script");
+      script.id = JSON_LD_ID;
+      script.type = "application/ld+json";
+      script.textContent = JSON.stringify(jsonLd);
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      document.getElementById(JSON_LD_ID)?.remove();
+    };
+  }, [title, description, jsonLd]);
 
   return null;
 };

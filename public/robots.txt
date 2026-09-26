@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
-Sitemap: /sitemap.xml
+# AI/answer-engine crawlers are allowed by the wildcard rule above
+# (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.) — no explicit
+# block needed unless you decide you don't want this content used for
+# AI training/citation, in which case add specific Disallow blocks here.
+
+Sitemap: https://www.mrtux.com/sitemap.xml

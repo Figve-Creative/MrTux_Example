@@ -1,6 +1,6 @@
 # Mr. Tux — project status
 
-Last updated 2026-09-19. This replaces the old root-level `roadmap.md`, which described an
+Last updated 2026-09-23. This replaces the old root-level `roadmap.md`, which described an
 earlier design direction (Playfair Display / Jost, gold accents) that's since been replaced.
 
 ## Live
@@ -15,8 +15,10 @@ earlier design direction (Playfair Display / Jost, gold accents) that's since be
   details
 - Cross-links between the three entry flows (Start Your Order / Start a Visit / Wedding
   Parties) so a visitor who picks the "wrong" one can redirect without restarting
-- SEO: per-page titles/descriptions, og/twitter tags, robots.txt, sitemap.xml
-- Bag/sizes/account state persisted in the browser (no backend yet — see below)
+- SEO: per-page titles/descriptions, og/twitter tags, robots.txt, sitemap.xml, JSON-LD
+  (ClothingStore + FAQPage)
+- Supabase integration is **coded and ready**, but not yet connected to a live project — see
+  "Backend" below for exactly what's left
 
 ## Known placeholders (need real input before launch)
 
@@ -26,10 +28,22 @@ earlier design direction (Playfair Display / Jost, gold accents) that's since be
   rates.
 - **Contact info** — phone number and social links (Instagram/Facebook/TikTok) in
   `src/lib/site.ts` are still generic placeholders. Address is correct.
-- **Backend** — no cloud backend connected yet. Accounts, sizes, bag, and appointment intake
-  are browser-only (localStorage), so nothing submitted survives a cleared cache or a new
-  device. Next backend will be **Supabase** (confirmed — not Lovable Cloud, which was only
-  used for the original design pass).
+- **Backend** — Supabase integration is written but needs a real project connected before it
+  does anything:
+  - `supabase/migrations/0001_init.sql` — run once in the Supabase SQL Editor. Creates
+    `profiles` (auto-created per signup, `is_staff` flag for team access), `size_profiles`,
+    and `orders`, all with row-level security (customers see only their own rows; staff see
+    everything; guests can still submit orders without an account).
+  - `src/lib/supabase.ts` / `src/context/AuthContext.tsx` — passwordless (magic-link) sign-in,
+    wired into `Account.tsx`.
+  - `src/context/AppContext.tsx` — syncs size profile + order history to Supabase for signed-in
+    users; guests keep working exactly as before on localStorage only.
+  - **To activate:** create a Supabase project, run the migration above, copy `.env.example`
+    to `.env.local`, fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (the public anon
+    key — never the service role secret key), then `npm install` to pull in
+    `@supabase/supabase-js`. Until those env vars are set, the site runs exactly as it does
+    today (browser-only), with a console warning in dev mode as the only sign something's
+    pending.
 - **Analytics** — no Google Analytics / measurement ID wired in yet.
 - **Legal review** — Terms & Privacy pages haven't had a legal pass.
 

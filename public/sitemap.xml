@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- REPLACE https://www.mrtux.com with the real production domain before launch. -->
 <urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">
-  <url><loc>/</loc><priority>1.0</priority></url>
-  <url><loc>/collection</loc><priority>0.9</priority></url>
-  <url><loc>/collection/midnight-peak</loc><priority>0.7</priority></url>
-  <url><loc>/collection/ivory-dinner</loc><priority>0.7</priority></url>
-  <url><loc>/collection/navy-velvet</loc><priority>0.7</priority></url>
-  <url><loc>/collection/white-tie-classic</loc><priority>0.7</priority></url>
-  <url><loc>/start-your-order</loc><priority>0.9</priority></url>
-  <url><loc>/appointment</loc><priority>0.9</priority></url>
-  <url><loc>/wedding-parties</loc><priority>0.8</priority></url>
-  <url><loc>/our-story</loc><priority>0.6</priority></url>
-  <url><loc>/come-see-us</loc><priority>0.7</priority></url>
-  <url><loc>/faqs</loc><priority>0.6</priority></url>
-  <url><loc>/journal</loc><priority>0.5</priority></url>
-  <url><loc>/journal/black-tie-decoded</loc><priority>0.4</priority></url>
-  <url><loc>/journal/measure-yourself-properly</loc><priority>0.4</priority></url>
-  <url><loc>/journal/dressing-a-wedding-party</loc><priority>0.4</priority></url>
-  <url><loc>/terms</loc><priority>0.2</priority></url>
-  <url><loc>/privacy</loc><priority>0.2</priority></url>
+  <url><loc>https://www.mrtux.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://www.mrtux.com/collection</loc><priority>0.9</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ginovia-black-beckett</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/david-major-platinum</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ike-behar-blake</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-dominic</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ike-behar-white-waverly</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ike-behar-burgundy-marbella</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/start-your-order</loc><priority>0.9</priority></url>
+  <url><loc>https://www.mrtux.com/appointment</loc><priority>0.9</priority></url>
+  <url><loc>https://www.mrtux.com/wedding-parties</loc><priority>0.8</priority></url>
+  <url><loc>https://www.mrtux.com/our-story</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/come-see-us</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/faqs</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/journal</loc><priority>0.5</priority></url>
+  <url><loc>https://www.mrtux.com/journal/black-tie-decoded</loc><priority>0.4</priority></url>
+  <url><loc>https://www.mrtux.com/journal/measure-yourself-properly</loc><priority>0.4</priority></url>
+  <url><loc>https://www.mrtux.com/journal/dressing-a-wedding-party</loc><priority>0.4</priority></url>
+  <url><loc>https://www.mrtux.com/terms</loc><priority>0.2</priority></url>
+  <url><loc>https://www.mrtux.com/privacy</loc><priority>0.2</priority></url>
 </urlset>

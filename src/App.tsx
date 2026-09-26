@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppProvider } from "@/context/AppContext";
+import { AuthProvider } from "@/context/AuthContext";
 import Layout from "@/components/layout/Layout";
 import Home from "./pages/Home";
 import Collection from "./pages/Collection";
@@ -30,32 +31,34 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <AppProvider>
-        <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/collection" element={<Collection />} />
-              <Route path="/collection/:id" element={<LookDetail />} />
-              <Route path="/start-your-order" element={<StartOrder />} />
-              <Route path="/appointment" element={<Appointment />} />
-              <Route path="/our-story" element={<OurStory />} />
-              <Route path="/come-see-us" element={<ComeSeeUs />} />
-              <Route path="/wedding-parties" element={<WeddingParties />} />
-              <Route path="/bag" element={<Bag />} />
-              <Route path="/order/:reference" element={<OrderConfirmation />} />
-              <Route path="/account" element={<Account />} />
-              <Route path="/faqs" element={<Faqs />} />
-              <Route path="/journal" element={<Journal />} />
-              <Route path="/journal/:slug" element={<JournalPost />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/privacy" element={<Privacy />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
-        </BrowserRouter>
-      </AppProvider>
+      <AuthProvider>
+        <AppProvider>
+          <BrowserRouter>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/collection" element={<Collection />} />
+                <Route path="/collection/:id" element={<LookDetail />} />
+                <Route path="/start-your-order" element={<StartOrder />} />
+                <Route path="/appointment" element={<Appointment />} />
+                <Route path="/our-story" element={<OurStory />} />
+                <Route path="/come-see-us" element={<ComeSeeUs />} />
+                <Route path="/wedding-parties" element={<WeddingParties />} />
+                <Route path="/bag" element={<Bag />} />
+                <Route path="/order/:reference" element={<OrderConfirmation />} />
+                <Route path="/account" element={<Account />} />
+                <Route path="/faqs" element={<Faqs />} />
+                <Route path="/journal" element={<Journal />} />
+                <Route path="/journal/:slug" element={<JournalPost />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/privacy" element={<Privacy />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          </BrowserRouter>
+        </AppProvider>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

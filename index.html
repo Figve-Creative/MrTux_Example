@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Preconnect + non-blocking load for Montserrat (moved out of index.css, where an
+         @import was blocking CSS parsing on every page load). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+    />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/NewYork.woff2" crossorigin />
     <title>Mr. Tux — Tuxedo Rental in Miami | Dressed to be remembered</title>
     <meta
       name="description"
@@ -15,8 +25,55 @@
       content="Tuxedo and formal menswear rental in Miami. Two sizes delivered, prepaid returns, no deposit."
     />
     <meta property="og:type" content="website" />
+    <!-- TODO: drop a real 1200x630 image at public/og-image.jpg — this path won't
+         resolve to anything until that file exists. -->
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/og-image.jpg" />
+
+    <!-- Static fallback canonical for crawlers that don't execute JS (Seo.tsx overrides
+         this per-route for everything that does). -->
+    <link rel="canonical" href="https://www.mrtux.com/" />
+
+    <!-- Structured data: same on every route since it describes the business itself,
+         not a specific page. This is real, static HTML (not injected by JS), so it's
+         visible to crawlers that don't execute JavaScript — including most AI/answer-engine
+         bots (GPTBot, ClaudeBot, PerplexityBot, etc.), which matters for GEO. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ClothingStore",
+        "name": "Mr. Tux",
+        "description": "Tuxedo and formal menswear rental in Miami. Two sizes delivered, prepaid returns, no deposit.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "12004 SW 88th St",
+          "addressLocality": "Miami",
+          "addressRegion": "FL",
+          "postalCode": "33186",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "10:00",
+            "closes": "19:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "17:00"
+          }
+        ],
+        "priceRange": "$$"
+      }
+    </script>
   </head>
 
   <body>

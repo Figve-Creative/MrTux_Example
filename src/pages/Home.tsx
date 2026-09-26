@@ -23,6 +23,7 @@ const Home = () => (
           className="h-full w-full object-cover object-[center_20%]"
           width={1440}
           height={1808}
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-background/25" />
         <div className="absolute inset-x-0 bottom-0 pb-10 sm:pb-14">

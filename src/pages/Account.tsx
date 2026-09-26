@@ -1,8 +1,89 @@
+import { useState, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import Seo from "@/components/Seo";
 import SizeProfileForm from "@/components/SizeProfileForm";
 import { useApp } from "@/context/AppContext";
+import { useAuth } from "@/context/AuthContext";
+import { isSupabaseConfigured } from "@/lib/supabase";
 import { countdown, formatDate } from "@/lib/dates";
+
+const AccountAuth = () => {
+  const { user, loading, signInWithEmail, signOut } = useAuth();
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [error, setError] = useState("");
+
+  // Hide entirely until the site actually has a Supabase project wired up —
+  // everything below this still works as a guest either way.
+  if (!isSupabaseConfigured || loading) return null;
+
+  if (user) {
+    return (
+      <div className="flex flex-wrap items-center justify-between gap-4 border border-border bg-surface p-5 text-sm">
+        <p>
+          Signed in as <span className="text-foreground">{user.email}</span>
+        </p>
+        <button
+          onClick={() => signOut()}
+          className="shrink-0 text-[11px] uppercase tracking-[0.2em] link-underline"
+        >
+          Sign out
+        </button>
+      </div>
+    );
+  }
+
+  if (status === "sent") {
+    return (
+      <div className="border border-border bg-surface p-5 text-sm">
+        <p>Check {email} for a sign-in link.</p>
+        <p className="mt-2 text-muted-foreground">
+          Signing in syncs your sizes and rental history across devices — everything below still
+          works without it.
+        </p>
+      </div>
+    );
+  }
+
+  const submit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    const result = await signInWithEmail(email);
+    if (result) {
+      setError(result);
+      setStatus("error");
+    } else {
+      setStatus("sent");
+    }
+  };
+
+  return (
+    <form onSubmit={submit} className="border border-border bg-surface p-5">
+      <p className="text-sm">Sign in to save your sizes and rentals across devices.</p>
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@email.com"
+          className="h-11 flex-1 border border-border bg-background px-4 text-sm"
+        />
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="h-11 shrink-0 bg-ink px-6 text-xs uppercase tracking-[0.18em] text-primary-foreground disabled:opacity-60"
+        >
+          {status === "sending" ? "Sending…" : "Email me a link"}
+        </button>
+      </div>
+      {status === "error" && <p className="mt-3 text-sm text-destructive">{error}</p>}
+      <p className="mt-3 text-xs text-muted-foreground">
+        No password needed — everything below still works as a guest.
+      </p>
+    </form>
+  );
+};
 
 const Account = () => {
   const { sizeProfile, orders, event } = useApp();
@@ -16,6 +97,10 @@ const Account = () => {
       <div className="mx-auto max-w-3xl px-5 lg:px-8 py-14 sm:py-20">
         <p className="eyebrow">Your account</p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl">Sizes, events, rentals</h1>
+
+        <div className="mt-10">
+          <AccountAuth />
+        </div>
 
         <section className="mt-14 border-t border-border pt-10">
           <h2 className="font-display text-2xl">Your event</h2>

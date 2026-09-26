@@ -2,11 +2,25 @@ import { Link } from "react-router-dom";
 import Seo from "@/components/Seo";
 import { faqs } from "@/data/content";
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.a,
+    },
+  })),
+};
+
 const Faqs = () => (
   <>
     <Seo
       title="FAQs — Rentals, Sizes & Returns | Mr. Tux"
       description="How the two-size rental works, delivery windows, prepaid returns, wedding parties and alterations."
+      jsonLd={faqJsonLd}
     />
 
     <div className="mx-auto max-w-3xl px-5 lg:px-8 py-14 sm:py-20">
