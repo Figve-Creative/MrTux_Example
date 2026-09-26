@@ -28,13 +28,11 @@ const LookDetail = () => {
   const toggle = (acc: Accessory) =>
     setSelected((prev) => (prev.find((a) => a.id === acc.id) ? prev.filter((a) => a.id !== acc.id) : [...prev, acc]));
 
-  const addOns = selected.reduce((s, a) => s + a.price, 0);
-
   return (
     <>
       <Seo
         title={`${look.name} — ${look.collection} | Mr. Tux`}
-        description={`${look.description} $${look.price} for a ${look.rentalDays}-day rental, delivered in two sizes.`}
+        description={`${look.description} A ${look.rentalDays}-day rental, delivered in two sizes. Prices vary — ask us for a quote.`}
       />
 
       <div className="mx-auto max-w-6xl px-5 lg:px-8 py-10 sm:py-14">
@@ -55,8 +53,10 @@ const LookDetail = () => {
             <p className="eyebrow">{look.collection}</p>
             <h1 className="mt-3 font-display text-4xl sm:text-5xl">{look.name}</h1>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{look.description}</p>
-            <p className="mt-6 font-display text-2xl">${look.price}</p>
-            <p className="text-sm text-muted-foreground">{look.rentalDays}-day rental · no deposit</p>
+            <p className="mt-6 font-display text-2xl">Prices vary</p>
+            <p className="text-sm text-muted-foreground">
+              {look.rentalDays}-day rental · no deposit · final pricing confirmed with our team
+            </p>
 
             <div className="mt-8 border-t border-border pt-6">
               <p className="eyebrow">What arrives</p>
@@ -119,7 +119,6 @@ const LookDetail = () => {
                           {on && <Check size={14} className="mt-0.5 shrink-0 text-highlight" />}
                         </div>
                         <p className="mt-1 text-xs text-muted-foreground">{acc.description}</p>
-                        <p className="mt-2 text-xs">+${acc.price}</p>
                       </button>
                     );
                   })}
@@ -136,7 +135,7 @@ const LookDetail = () => {
                   navigate("/bag");
                 }}
               >
-                Add to Bag · ${look.price + addOns}
+                Add to Bag
               </Button>
             </div>
           </div>

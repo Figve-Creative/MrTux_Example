@@ -113,7 +113,7 @@ const Home = () => (
             <p className="mt-4 eyebrow">{look.collection}</p>
             <h3 className="mt-1.5 font-display text-xl">{look.name}</h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              ${look.price} · {look.rentalDays}-day rental
+              {look.rentalDays}-day rental · Prices vary
             </p>
           </Link>
         ))}

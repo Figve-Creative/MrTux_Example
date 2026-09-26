@@ -33,7 +33,7 @@ export const faqs = [
   },
   {
     q: "Is there a deposit?",
-    a: "No deposit. You pay the rental price for the look and any accessories you add.",
+    a: "No deposit. Pricing varies by look and accessories, and we confirm your total before your order is accepted.",
   },
   {
     q: "When does my rental arrive?",

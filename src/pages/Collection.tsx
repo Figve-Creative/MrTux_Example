@@ -32,8 +32,8 @@ const Collection = () => (
             <p className="mt-4 eyebrow">{look.collection}</p>
             <h2 className="mt-1.5 font-display text-2xl">{look.name}</h2>
             <p className="mt-2 text-sm text-muted-foreground">{look.description}</p>
-            <p className="mt-3 text-sm">
-              ${look.price} · {look.rentalDays}-day rental
+            <p className="mt-3 text-sm text-muted-foreground">
+              {look.rentalDays}-day rental · Prices vary
             </p>
           </Link>
         ))}

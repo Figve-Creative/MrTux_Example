@@ -85,21 +85,17 @@ const OrderConfirmation = () => {
           <p className="eyebrow">Your order</p>
           <ul className="mt-4 space-y-3">
             {order.items.map((item) => (
-              <li key={item.id} className="flex justify-between text-sm">
-                <span>
-                  {item.look.name}
-                  {item.accessories.length > 0 && (
-                    <span className="text-muted-foreground"> · {item.accessories.map((a) => a.name).join(", ")}</span>
-                  )}
-                </span>
-                <span>${item.look.price + item.accessories.reduce((s, a) => s + a.price, 0)}</span>
+              <li key={item.id} className="text-sm">
+                {item.look.name}
+                {item.accessories.length > 0 && (
+                  <span className="text-muted-foreground"> · {item.accessories.map((a) => a.name).join(", ")}</span>
+                )}
               </li>
             ))}
           </ul>
-          <div className="mt-5 flex items-baseline justify-between border-t border-border pt-4">
-            <span className="eyebrow">Total paid</span>
-            <span className="font-display text-2xl">${order.total}</span>
-          </div>
+          <p className="mt-5 border-t border-border pt-4 text-sm text-muted-foreground">
+            Prices vary by look and accessories. Our team will confirm your final total shortly.
+          </p>
         </div>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">

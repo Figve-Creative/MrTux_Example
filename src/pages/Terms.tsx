@@ -31,7 +31,7 @@ const sections = [
   },
   {
     title: "8. Pricing",
-    body: "Prices shown are per rental, in US dollars, and exclude applicable tax. We may correct pricing errors before an order is accepted.",
+    body: "Pricing varies by garment and accessories and is confirmed by our team before your order is accepted, in US dollars and exclusive of applicable tax. Nothing is charged without that confirmation.",
   },
   {
     title: "9. Arbitration and dispute resolution",

@@ -74,14 +74,11 @@ const Bag = () => {
                         <X size={16} />
                       </button>
                     </div>
-                    <p className="mt-2 text-sm">${item.look.price}</p>
-
                     {item.accessories.length > 0 && (
                       <ul className="mt-3 space-y-1.5">
                         {item.accessories.map((a) => (
-                          <li key={a.id} className="flex justify-between text-xs text-muted-foreground">
-                            <span>{a.name}</span>
-                            <span>+${a.price}</span>
+                          <li key={a.id} className="text-xs text-muted-foreground">
+                            {a.name}
                           </li>
                         ))}
                       </ul>
@@ -100,6 +97,9 @@ const Bag = () => {
                 Arrives {dates.deliveryFrom} – {dates.deliveryTo}
                 {!event?.eventDate && " (estimated — add your event date to confirm)"}
               </p>
+              <p className="mt-2 text-muted-foreground">
+                Prices vary by look and accessories — we confirm your total before anything ships.
+              </p>
             </div>
 
             {!event && (
@@ -108,12 +108,7 @@ const Bag = () => {
               </Link>
             )}
 
-            <div className="mt-10 flex items-baseline justify-between border-t border-border pt-6">
-              <span className="eyebrow">Total</span>
-              <span className="font-display text-3xl">${total}</span>
-            </div>
-
-            <Button variant="ink" size="lg" className="mt-6 h-14 w-full" onClick={placeOrder}>
+            <Button variant="ink" size="lg" className="mt-10 h-14 w-full" onClick={placeOrder}>
               Place Order
             </Button>
           </>
