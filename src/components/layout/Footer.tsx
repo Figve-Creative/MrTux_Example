@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logoImg from "@/assets/mr-tux-logo-horizontal-white.png";
 import { SITE } from "@/lib/site";
 
 const columns = [
@@ -34,8 +35,10 @@ const Footer = () => (
     <div className="mx-auto max-w-6xl px-5 lg:px-8 py-14">
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="font-display text-2xl">{SITE.name}</p>
-          <p className="mt-3 text-sm text-cream/70 max-w-xs">
+          <Link to="/" aria-label={SITE.name}>
+            <img src={logoImg} alt={SITE.name} className="h-8 w-auto" />
+          </Link>
+          <p className="mt-4 text-sm text-cream/70 max-w-xs">
             Tuxedo and formal menswear rental. Two sizes delivered. Return label included.
           </p>
           <p className="mt-4 text-sm text-cream/90">{SITE.address.full}</p>
