@@ -17,8 +17,10 @@ earlier design direction (Playfair Display / Jost, gold accents) that's since be
   Parties) so a visitor who picks the "wrong" one can redirect without restarting
 - SEO: per-page titles/descriptions, og/twitter tags, robots.txt, sitemap.xml, JSON-LD
   (ClothingStore + FAQPage)
-- Supabase integration is **coded and ready**, but not yet connected to a live project — see
-  "Backend" below for exactly what's left
+- Supabase backend is **live** — accounts, size-profile sync, and order intake are connected
+- Start Your Order is a 4-step accordion (occasion & contact → book a visit via Calendly →
+  sizes → choose a look). Name, email, phone, height and weight are required before the
+  Calendly step unlocks.
 
 ## Known placeholders (need real input before launch)
 
@@ -28,22 +30,12 @@ earlier design direction (Playfair Display / Jost, gold accents) that's since be
   rates.
 - **Contact info** — phone number and social links (Instagram/Facebook/TikTok) in
   `src/lib/site.ts` are still generic placeholders. Address is correct.
-- **Backend** — Supabase integration is written but needs a real project connected before it
-  does anything:
-  - `supabase/migrations/0001_init.sql` — run once in the Supabase SQL Editor. Creates
-    `profiles` (auto-created per signup, `is_staff` flag for team access), `size_profiles`,
-    and `orders`, all with row-level security (customers see only their own rows; staff see
-    everything; guests can still submit orders without an account).
-  - `src/lib/supabase.ts` / `src/context/AuthContext.tsx` — passwordless (magic-link) sign-in,
-    wired into `Account.tsx`.
-  - `src/context/AppContext.tsx` — syncs size profile + order history to Supabase for signed-in
-    users; guests keep working exactly as before on localStorage only.
-  - **To activate:** create a Supabase project, run the migration above, copy `.env.example`
-    to `.env.local`, fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (the public anon
-    key — never the service role secret key), then `npm install` to pull in
-    `@supabase/supabase-js`. Until those env vars are set, the site runs exactly as it does
-    today (browser-only), with a console warning in dev mode as the only sign something's
-    pending.
+- **Backend** — Supabase project is connected (URL + anon key set in `.env.local` locally and
+  in Vercel's project env vars). `supabase/migrations/0001_init.sql` created `profiles`
+  (auto-created per signup, `is_staff` flag for team access), `size_profiles`, and `orders`,
+  all with row-level security. Passwordless (magic-link) sign-in lives on the Account page;
+  guests still work exactly as before on localStorage, with orders synced to Supabase either
+  way (guest orders carry `guest_name`/`guest_email` for staff follow-up).
 - **Analytics** — no Google Analytics / measurement ID wired in yet.
 - **Legal review** — Terms & Privacy pages haven't had a legal pass.
 

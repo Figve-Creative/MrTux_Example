@@ -17,6 +17,8 @@ export interface EventDetails {
   name: string;
   email: string;
   phone: string;
+  height: string;
+  weight: string;
   notes: string;
 }
 
