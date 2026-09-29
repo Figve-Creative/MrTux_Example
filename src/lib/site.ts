@@ -4,6 +4,10 @@ export const SITE = {
   description:
     "Tuxedo and formal menswear rental in Miami. Order online, then pick up your perfect fit in-store.",
   calendlyUrl: "https://calendly.com/mrtuxstyles-sales",
+  // Optional: a separate Calendly event type for wedding-party consults (longer
+  // slot, its own Invitee Questions in its own order). Falls back to the line
+  // above until you create one and swap this in. See docs/STATUS.md.
+  calendlyUrlWedding: "https://calendly.com/mrtuxstyles-sales",
   address: {
     line1: "12004 SW 88th St",
     city: "Miami",

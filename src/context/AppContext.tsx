@@ -20,6 +20,9 @@ export interface EventDetails {
   height: string;
   weight: string;
   partySize: string;
+  /** Wedding-party intake only — how formal the wedding is. Unused on the
+   *  "for myself" path. */
+  formality: string;
   notes: string;
 }
 

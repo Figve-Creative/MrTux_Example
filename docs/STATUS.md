@@ -34,9 +34,29 @@ but every user-facing label now calls this the "pickup window." See the note in
   (ClothingStore + FAQPage)
 - Supabase backend is **live** — accounts, size-profile sync, and order intake are connected
 - Start Your Order is the single funnel every CTA on the site leads to (For Myself / For a
-  Wedding Party fork up top, then a 4-step accordion: occasion & contact + T&Cs checkbox →
-  sizes → choose a look → book a visit via Calendly, last). `/appointment` and
-  `/wedding-parties` now just redirect here for old links/bookmarks.
+  Wedding Party fork up top). The two paths now have different lengths, because a wedding
+  inquiry needs much less up front than a solo rental:
+  - **For myself** — 4 steps: occasion & contact + T&Cs checkbox → sizes → choose a look →
+    book a visit via Calendly.
+  - **For a wedding party** — 2 steps: one short intake (wedding date, party size, formality,
+    contact info, optional comments, T&Cs checkbox) → straight to booking a consult via
+    Calendly. Sizes and look selection for the whole party happen with staff in person, not
+    through the web form.
+  `/appointment` and `/wedding-parties` still just redirect here for old links/bookmarks.
+- **Calendly prefill** — both paths pass the visitor's name and email to Calendly automatically
+  (Calendly's native fields). Everything else they typed (phone, occasion/wedding date, height/
+  weight or party size/formality, comments) is passed too, as `a1`, `a2`, `a3`... query params —
+  but those only show up on the booking/calendar invite once you add matching "Invitee
+  Questions" in your Calendly event type, **in this exact order**:
+  - For a solo booking (`SITE.calendlyUrl`): Phone, Occasion, Height, Weight, Notes.
+  - For a wedding consult (`SITE.calendlyUrlWedding`): Phone, Wedding date, Party size,
+    Formality, Notes.
+  Calendly → Event Types → open the event → Edit → "Invitee Questions" → add one question per
+  item above, in that order (the wording of the question doesn't matter, only the order).
+  `SITE.calendlyUrlWedding` in `src/lib/site.ts` currently points at the same link as
+  `SITE.calendlyUrl` — create a second Calendly event type for wedding consults (longer time
+  slot makes sense) and swap its link in once you have it, so the two question sets don't
+  collide on one event type.
 
 ## Known placeholders (need real input before launch)
 
