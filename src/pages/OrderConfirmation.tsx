@@ -5,9 +5,9 @@ import { useApp } from "@/context/AppContext";
 import { countdown, formatDate } from "@/lib/dates";
 
 const returnSteps = [
-  "Place both sizes in the bag provided.",
-  "Seal the bag and attach nothing — the prepaid label is already on it.",
-  "Drop it at any UPS or FedEx location before the return date.",
+  "Bring it back to the shop in the bag provided, or",
+  "Seal the bag with the prepaid label already inside and drop it at any UPS or FedEx location.",
+  "Either way, make sure it's back with us by your return date.",
 ];
 
 const OrderConfirmation = () => {
@@ -36,7 +36,7 @@ const OrderConfirmation = () => {
     <>
       <Seo
         title={`Order ${order.reference} Confirmed — Mr. Tux`}
-        description="Your rental is confirmed. Delivery window, return instructions and the prepaid return label are inside."
+        description="Your rental is confirmed. Pickup window and return instructions are inside."
       />
 
       <div className="mx-auto max-w-3xl px-5 lg:px-8 py-14 sm:py-20">
@@ -48,11 +48,13 @@ const OrderConfirmation = () => {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2">
           <div className="border border-border bg-surface p-5">
-            <p className="eyebrow">Delivery window</p>
+            <p className="eyebrow">Pickup window</p>
             <p className="mt-2 font-display text-2xl">
               {order.deliveryFrom} – {order.deliveryTo}
             </p>
-            <p className="mt-2 text-sm text-muted-foreground">Your size and one size up, in the same box.</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Come by the shop and we'll fit you to your exact size.
+            </p>
           </div>
           <div className="border border-border bg-surface p-5">
             <p className="eyebrow">Return by</p>
@@ -62,10 +64,10 @@ const OrderConfirmation = () => {
         </div>
 
         <div className="mt-6 border border-ink p-5">
-          <p className="eyebrow">Included</p>
-          <p className="mt-2 font-display text-2xl">Prepaid return label</p>
+          <p className="eyebrow">Returning it</p>
+          <p className="mt-2 font-display text-2xl">Drop off or mail back</p>
           <p className="mt-2 text-sm text-muted-foreground">
-            No printing, no post office queue, no deposit held on your card.
+            No deposit held on your card either way — whichever's easier for you.
           </p>
         </div>
 

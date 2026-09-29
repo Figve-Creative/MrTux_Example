@@ -3,15 +3,15 @@ import Seo from "@/components/Seo";
 const sections = [
   {
     title: "What we collect",
-    body: "Your name, email, phone number, event details, measurements or brand sizes, shoe and belt size, delivery address, and order history. Payment details are handled by our payment processor and are never stored by us.",
+    body: "Your name, email, phone number, event details, measurements or brand sizes, shoe and belt size, and order history. Payment details are handled by our payment processor and are never stored by us.",
   },
   {
     title: "Why we collect it",
-    body: "To select and ship the right garments, to arrange appointments, to process returns, and to answer you when you write to us.",
+    body: "To select the right garments, to arrange your pickup and fitting, to process returns, and to answer you when you write to us.",
   },
   {
     title: "Who can see it",
-    body: "Our staff, and the shipping and scheduling services required to fulfil your order. We do not sell or rent your information to anyone.",
+    body: "Our staff, and the scheduling and return-shipping services required to fulfil your order. We do not sell or rent your information to anyone.",
   },
   {
     title: "How long we keep it",

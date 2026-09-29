@@ -142,7 +142,11 @@ const SizeProfileForm = ({ onSaved }: { onSaved?: () => void }) => {
         <Button variant="ink" size="lg" className="h-12 px-8" onClick={save}>
           Save My Sizes
         </Button>
-        {saved && <span className="text-xs text-muted-foreground">Saved. Both your size and one size up will ship.</span>}
+        {saved && (
+          <span className="text-xs text-muted-foreground">
+            Saved. We'll use this as your starting point and fit you exactly when you pick up in-store.
+          </span>
+        )}
       </div>
     </div>
   );

@@ -13,8 +13,8 @@ export const storyChapters = [
     body: "Mr. Tux began in a Miami shop with a tape measure, a steamer and a simple belief: a man should never be the least considered person in the room. Three generations later the shop is still here, and the belief has not moved.",
   },
   {
-    title: "Two sizes, always",
-    body: "Fit is the whole argument. Every rental leaves with your size and one size up, so the choice is made in your own mirror rather than in a fitting room ten minutes before the ceremony.",
+    title: "Fitted in person",
+    body: "Fit is the whole argument. Start your order online, then come in and we fit you to your exact size ourselves — no guessing, no ten-minute panic in a fitting room before the ceremony.",
   },
   {
     title: "Cloth first",
@@ -28,20 +28,20 @@ export const storyChapters = [
 
 export const faqs = [
   {
-    q: "How does the two-size rental work?",
-    a: "Every order ships with your primary size and one size up. Wear the one that fits, send the other back in the same box with the prepaid label.",
+    q: "How does sizing work?",
+    a: "Give us your estimated size or measurements when you start your order. We fit you to your exact size in person when you come in to pick up.",
   },
   {
     q: "Is there a deposit?",
     a: "No deposit. Pricing varies by look and accessories, and we confirm your total before your order is accepted.",
   },
   {
-    q: "When does my rental arrive?",
-    a: "Orders arrive two to three days before your event date and are yours for a four-day window.",
+    q: "When can I pick up my rental?",
+    a: "Your look is ready for pickup two to three days before your event date, and yours for a four-day window from pickup.",
   },
   {
     q: "How do I return it?",
-    a: "Place both sizes in the bag provided, seal it, and drop it at any UPS or FedEx location. The prepaid label is already in the box.",
+    a: "Bring it back to the shop, or mail it back with the prepaid label already in the bag — whichever's easier for you.",
   },
   {
     q: "Can you dress a whole wedding party?",
@@ -77,7 +77,7 @@ export const blogPosts = [
     body: [
       "Chest, waist, hips, inseam, neck, sleeve and shoulder. Keep the tape level and snug, not tight, and stand as you actually stand.",
       "Neck: measure where the collar sits and add a finger's width. Sleeve: from the centre back of the neck, across the shoulder, to the wrist bone with the arm slightly bent.",
-      "Because every order ships in two sizes, small errors are forgiven. Measure once, honestly, and let the second size do the rest.",
+      "These numbers are your starting point, not the final word — small errors are forgiven, because we fit you to your exact size in person when you pick up.",
     ],
   },
   {
@@ -87,7 +87,7 @@ export const blogPosts = [
     excerpt: "A calm order of operations for the groom who has eight men to dress in four cities.",
     body: [
       "Pick the look first, then the date, then the count. Everything else follows from those three facts.",
-      "Send each man the same instructions: measure over a dress shirt, submit sizes, confirm the delivery address. We ship every order to arrive together.",
+      "Send each man the same instructions: measure over a dress shirt, submit sizes, and pick a pickup time. We coordinate the whole party to come in together.",
       "Start a visit two months out if you can. Twenty minutes in person removes most of the questions that would otherwise live in the group chat.",
     ],
   },

@@ -30,7 +30,7 @@ const Bag = () => {
 
   return (
     <>
-      <Seo title="Your Bag — Mr. Tux" description="Review your looks, accessories and delivery window. No deposit required." />
+      <Seo title="Your Bag — Mr. Tux" description="Review your looks, accessories and pickup window. No deposit required." />
 
       <div className="mx-auto max-w-3xl px-5 lg:px-8 py-14 sm:py-20">
         <p className="eyebrow">Your bag</p>
@@ -89,16 +89,16 @@ const Bag = () => {
             </div>
 
             <div className="mt-8 border border-border bg-surface p-5 text-sm">
-              <p>Two sizes ship every time — your fit and one size up.</p>
+              <p>We'll fit you to your exact size when you pick up in-store.</p>
               <p className="mt-2 text-muted-foreground">
-                No deposit. A prepaid return label is included in the box.
+                No deposit. Return it to the shop or mail it back with a prepaid label — your choice.
               </p>
               <p className="mt-2 text-muted-foreground">
-                Arrives {dates.deliveryFrom} – {dates.deliveryTo}
+                Ready for pickup {dates.deliveryFrom} – {dates.deliveryTo}
                 {!event?.eventDate && " (estimated — add your event date to confirm)"}
               </p>
               <p className="mt-2 text-muted-foreground">
-                Prices vary by look and accessories — we confirm your total before anything ships.
+                Prices vary by look and accessories — we confirm your total before your order is finalized.
               </p>
             </div>
 

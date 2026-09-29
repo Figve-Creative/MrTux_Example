@@ -3,11 +3,11 @@ import Seo from "@/components/Seo";
 const sections = [
   {
     title: "1. Rental agreement",
-    body: "Renting from Mr. Tux is an agreement to return every garment shipped to you, in the bag provided, by the return date shown on your order. No deposit is taken. Garments returned late, damaged beyond normal wear, or not returned at all may be charged at replacement cost.",
+    body: "Renting from Mr. Tux is an agreement to return every garment picked up from us, in the bag provided, by the return date shown on your order — either in person at the shop or mailed back with the prepaid label. No deposit is taken. Garments returned late, damaged beyond normal wear, or not returned at all may be charged at replacement cost.",
   },
   {
-    title: "2. Two sizes",
-    body: "Orders ship in your stated size and one size up. Both garments are our property and both must be returned together.",
+    title: "2. Fit and pickup",
+    body: "Sizes given online are a starting point. We fit you to your exact size in person when you come in to pick up your order.",
   },
   {
     title: "3. Fit and sizing information",

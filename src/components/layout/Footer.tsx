@@ -38,7 +38,7 @@ const Footer = () => (
             <img src={logoImg} alt={SITE.name} className="h-8 w-auto" />
           </Link>
           <p className="mt-4 text-sm text-cream/70 max-w-xs">
-            Tuxedo and formal menswear rental. Two sizes delivered. Return label included.
+            Tuxedo and formal menswear rental. Order online, then pick up your perfect fit in-store.
           </p>
           <p className="mt-4 text-sm text-cream/90">{SITE.address.full}</p>
         </div>

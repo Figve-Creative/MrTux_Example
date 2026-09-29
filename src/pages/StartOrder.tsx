@@ -139,7 +139,7 @@ const StartOrder = () => {
     <>
       <Seo
         title="Start Your Order — Mr. Tux Miami"
-        description="Tell us your occasion, save your sizes, choose your look, and book a fitting. Two sizes delivered, prepaid returns, no deposit."
+        description="Tell us your occasion, save your sizes, choose your look, and book your pickup. Fitted in-store, no deposit."
       />
 
       <div className="mx-auto max-w-3xl px-5 lg:px-8 py-14 sm:py-20">
@@ -306,7 +306,8 @@ const StartOrder = () => {
 
           {form.eventDate && (
             <p className="mt-6 border border-border bg-surface p-4 text-sm">
-              Your rental would arrive {dates.deliveryFrom} – {dates.deliveryTo} and is due back by {dates.returnBy}.
+              Your look would be ready for pickup {dates.deliveryFrom} – {dates.deliveryTo} and is due back by{" "}
+              {dates.returnBy}.
             </p>
           )}
 
@@ -341,7 +342,7 @@ const StartOrder = () => {
         <Step
           index={2}
           title="Your sizes"
-          description="Give us measurements or the brand sizes you already wear. Every order ships in your size and one size up."
+          description="Give us measurements or the brand sizes you already wear as a starting point — we'll fit you to your exact size when you pick up in-store."
           isOpen={openStep === 2}
           isComplete={maxUnlocked > 2}
           isLocked={maxUnlocked < 2}
@@ -389,7 +390,7 @@ const StartOrder = () => {
         <Step
           index={4}
           title="Book your visit"
-          description="Twenty minutes with a fitter and the full collection. Already have a time, or ordering delivery-only? You can skip this."
+          description="Twenty minutes with a fitter and the full collection. Already have a time booked? You can skip this."
           isOpen={openStep === 4}
           isComplete={maxUnlocked > 4}
           isLocked={maxUnlocked < 4}

@@ -6,14 +6,14 @@ const Collection = () => (
   <>
     <Seo
       title="The Collection — Tuxedos & Dinner Jackets | Mr. Tux"
-      description="Browse the Mr. Tux collection: heritage black tie, ivory dinner jackets, navy velvet and full white tie. Four-day rentals, two sizes delivered."
+      description="Browse the Mr. Tux collection: heritage black tie, ivory dinner jackets, navy velvet and full white tie. Four-day rentals, fitted in-store at pickup."
     />
 
     <div className="mx-auto max-w-6xl px-5 lg:px-8 py-14 sm:py-20">
       <p className="eyebrow">The collection</p>
       <h1 className="mt-3 font-display text-4xl sm:text-5xl">Every look, complete</h1>
       <p className="mt-4 max-w-xl text-sm text-muted-foreground">
-        Each look ships as a full outfit in two sizes — your fit and one size up — with a prepaid return label in the box.
+        Each look is a full outfit, fitted to your exact size when you pick it up in-store.
       </p>
 
       <div className="mt-12 grid gap-x-8 gap-y-14 sm:grid-cols-2">

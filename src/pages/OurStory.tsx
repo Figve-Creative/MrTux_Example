@@ -7,7 +7,7 @@ const OurStory = () => (
   <>
     <Seo
       title="Our Story — Mr. Tux"
-      description="Three generations of formalwear in Miami. Two sizes, real cloth, and a fit decided in your own mirror."
+      description="Three generations of formalwear in Miami. Real cloth, and a fit decided in person, not a guess."
     />
 
     <div className="mx-auto max-w-3xl px-5 lg:px-8 py-14 sm:py-20">

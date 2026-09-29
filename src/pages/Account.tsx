@@ -151,7 +151,7 @@ const Account = () => {
                   </div>
                   <p className="mt-2 text-sm">{o.items.map((i) => i.look.name).join(", ")}</p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Arrives {o.deliveryFrom} – {o.deliveryTo} · due back {formatDate(new Date(o.returnBy))}
+                    Ready for pickup {o.deliveryFrom} – {o.deliveryTo} · due back {formatDate(new Date(o.returnBy))}
                   </p>
                   <Link to={`/order/${o.reference}`} className="mt-3 inline-block text-[11px] uppercase tracking-[0.2em] link-underline">
                     View order

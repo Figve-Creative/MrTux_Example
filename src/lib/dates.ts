@@ -3,6 +3,10 @@ const fmt = (d: Date) =>
 
 export const formatDate = fmt;
 
+// NOTE: field names say "delivery" (kept as-is so the Supabase orders table's
+// delivery_from/delivery_to columns don't need a migration), but nothing ships —
+// every UI label calls this a "pickup window" now. Customers come to the shop,
+// get fitted to their exact size, and pick up their order. See docs/STATUS.md.
 export const rentalWindow = (eventDate?: string, rentalDays = 4) => {
   const base = eventDate ? new Date(`${eventDate}T12:00:00`) : new Date(Date.now() + 14 * 864e5);
   const from = new Date(base.getTime() - 3 * 864e5);

@@ -19,7 +19,7 @@ const Faqs = () => (
   <>
     <Seo
       title="FAQs — Rentals, Sizes & Returns | Mr. Tux"
-      description="How the two-size rental works, delivery windows, prepaid returns, wedding parties and alterations."
+      description="How sizing and pickup work, returns, wedding parties and alterations."
       jsonLd={faqJsonLd}
     />
 

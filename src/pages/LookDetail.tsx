@@ -32,7 +32,7 @@ const LookDetail = () => {
     <>
       <Seo
         title={`${look.name} — ${look.collection} | Mr. Tux`}
-        description={`${look.description} A ${look.rentalDays}-day rental, delivered in two sizes. Prices vary — ask us for a quote.`}
+        description={`${look.description} A ${look.rentalDays}-day rental, fitted in-store at pickup. Prices vary — ask us for a quote.`}
       />
 
       <div className="mx-auto max-w-6xl px-5 lg:px-8 py-10 sm:py-14">
@@ -59,7 +59,7 @@ const LookDetail = () => {
             </p>
 
             <div className="mt-8 border-t border-border pt-6">
-              <p className="eyebrow">What arrives</p>
+              <p className="eyebrow">What's included</p>
               <ul className="mt-4 space-y-2">
                 {look.items.map((item) => (
                   <li key={item} className="flex items-start gap-2.5 text-sm">
@@ -72,8 +72,7 @@ const LookDetail = () => {
 
             <div className="mt-8 border border-border bg-surface p-5">
               <p className="text-sm">
-                Two sizes ship every time — your fit and one size up. Keep the one that fits, return the other in the
-                same box.
+                Give us your estimated size now — we'll fit you to your exact size in person when you pick up.
               </p>
               <Link
                 to="/start-your-order"

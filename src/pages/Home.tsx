@@ -11,7 +11,7 @@ const Home = () => (
   <>
     <Seo
       title="Mr. Tux — Tuxedo Rental in Miami | Dressed to be remembered"
-      description="Tuxedo and formal menswear rental in Miami. Two sizes delivered, prepaid returns, no deposit. Start your order, or come in for a visit."
+      description="Tuxedo and formal menswear rental in Miami. Start your order online, then pick up your perfect fit in-store. No deposit."
     />
 
     {/* Hero */}
@@ -32,7 +32,7 @@ const Home = () => (
               Dressed to be remembered
             </h1>
             <p className="mt-4 max-w-sm text-sm text-foreground/80 sm:text-base">
-              Tuxedos and formal menswear, delivered in two sizes so the fit is never a question.
+              Tuxedos and formal menswear — start your order online, then come in for your perfect fit.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -73,7 +73,7 @@ const Home = () => (
           <p className="eyebrow">Groups</p>
           <h2 className="mt-3 font-display text-2xl sm:text-3xl">Suit up your wedding party</h2>
           <p className="mt-3 text-sm text-muted-foreground">
-            One look, every man, wherever they live. We ship the party to arrive together.
+            One look, every man, wherever they live. We coordinate the whole party to pick up together.
           </p>
           <Link
             to="/start-your-order?for=wedding"
@@ -178,7 +178,7 @@ const Home = () => (
         <p className="eyebrow">Wedding parties</p>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl">Eight men, one silhouette</h2>
         <p className="mt-4 max-w-lg text-sm text-muted-foreground">
-          Send us the date and the count. We handle sizes, shipping and returns for every man in the party.
+          Send us the date and the count. We handle sizes, fittings and returns for every man in the party.
         </p>
         <Link
           to="/start-your-order?for=wedding"
