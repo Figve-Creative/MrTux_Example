@@ -37,10 +37,10 @@ const OurStory = () => (
 
       <div className="mt-14 flex flex-col gap-3 sm:flex-row">
         <Link
-          to="/appointment"
+          to="/start-your-order"
           className="inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
         >
-          Start a Visit
+          Start Your Order
         </Link>
         <Link
           to="/collection"

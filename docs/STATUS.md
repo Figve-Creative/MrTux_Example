@@ -18,9 +18,10 @@ earlier design direction (Playfair Display / Jost, gold accents) that's since be
 - SEO: per-page titles/descriptions, og/twitter tags, robots.txt, sitemap.xml, JSON-LD
   (ClothingStore + FAQPage)
 - Supabase backend is **live** — accounts, size-profile sync, and order intake are connected
-- Start Your Order is a 4-step accordion (occasion & contact → book a visit via Calendly →
-  sizes → choose a look). Name, email, phone, height and weight are required before the
-  Calendly step unlocks.
+- Start Your Order is the single funnel every CTA on the site leads to (For Myself / For a
+  Wedding Party fork up top, then a 4-step accordion: occasion & contact + T&Cs checkbox →
+  sizes → choose a look → book a visit via Calendly, last). `/appointment` and
+  `/wedding-parties` now just redirect here for old links/bookmarks.
 
 ## Known placeholders (need real input before launch)
 

@@ -19,6 +19,7 @@ export interface EventDetails {
   phone: string;
   height: string;
   weight: string;
+  partySize: string;
   notes: string;
 }
 

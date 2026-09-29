@@ -1,5 +1,5 @@
 import { useEffect, useState, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Check, Lock } from "lucide-react";
 import Seo from "@/components/Seo";
 import SizeProfileForm from "@/components/SizeProfileForm";
@@ -66,11 +66,14 @@ const Step = ({ index, title, description, isOpen, isComplete, isLocked, onHeade
 );
 
 const StartOrder = () => {
-  const [path, setPath] = useState<"myself" | null>(null);
+  const [searchParams] = useSearchParams();
+  const [path, setPath] = useState<"myself" | "wedding" | null>(() =>
+    searchParams.get("for") === "wedding" ? "wedding" : null,
+  );
   const { event, setEvent, bag } = useApp();
   // Spread over defaults (rather than `event ?? {...}`) so an event saved
-  // before the height/weight fields existed doesn't leave them `undefined`
-  // and crash the required-field checks below.
+  // before a field existed doesn't leave it `undefined` and crash the
+  // required-field checks below.
   const [form, setForm] = useState(() => ({
     eventType: EVENT_TYPES[0],
     eventDate: "",
@@ -79,20 +82,24 @@ const StartOrder = () => {
     phone: "",
     height: "",
     weight: "",
+    partySize: "",
     notes: "",
     ...event,
   }));
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [openStep, setOpenStep] = useState(1);
   const [maxUnlocked, setMaxUnlocked] = useState(1);
   const [showValidation, setShowValidation] = useState(false);
   const dates = rentalWindow(form.eventDate);
+  const TOTAL_STEPS = 4;
 
   const requiredFilled =
     form.name.trim() !== "" &&
     EMAIL_RE.test(form.email) &&
     form.phone.trim() !== "" &&
     form.height.trim() !== "" &&
-    form.weight.trim() !== "";
+    form.weight.trim() !== "" &&
+    agreedToTerms;
 
   const goToStep = (n: number) => {
     if (n <= maxUnlocked) setOpenStep(n);
@@ -117,10 +124,10 @@ const StartOrder = () => {
   // booking — use it to auto-advance, but the "I've booked" / "skip" actions
   // below still work as a fallback if this doesn't fire for any reason.
   useEffect(() => {
-    if (openStep !== 2) return;
+    if (openStep !== TOTAL_STEPS) return;
     const onMessage = (e: MessageEvent) => {
       if (typeof e.data === "object" && e.data?.event === "calendly.event_scheduled") {
-        completeStep(2);
+        completeStep(TOTAL_STEPS);
       }
     };
     window.addEventListener("message", onMessage);
@@ -132,14 +139,14 @@ const StartOrder = () => {
     <>
       <Seo
         title="Start Your Order — Mr. Tux Miami"
-        description="Tell us your occasion, book a fitting, save your sizes, and choose your look. Two sizes delivered, prepaid returns, no deposit."
+        description="Tell us your occasion, save your sizes, choose your look, and book a fitting. Two sizes delivered, prepaid returns, no deposit."
       />
 
       <div className="mx-auto max-w-3xl px-5 lg:px-8 py-14 sm:py-20">
         <p className="eyebrow">Start your order</p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl">Who is this for?</h1>
         <p className="mt-4 text-sm text-muted-foreground">
-          No deposit is taken — you pay for the rental when you place the order.
+          No deposit is taken — you pay for the rental when your order is confirmed.
         </p>
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
@@ -157,18 +164,24 @@ const StartOrder = () => {
             </p>
           </button>
 
-          <Link to="/wedding-parties" className="block border border-border p-6 text-left transition-colors hover:border-ink">
+          <button
+            type="button"
+            onClick={() => setPath("wedding")}
+            className={`border p-6 text-left transition-colors ${
+              path === "wedding" ? "border-ink bg-surface" : "border-border hover:border-ink"
+            }`}
+          >
             <p className="eyebrow">Groomsmen</p>
             <h2 className="mt-2 font-display text-2xl">For a wedding party</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               One look, every man, wherever they live. We collect sizes from the whole party.
             </p>
-          </Link>
+          </button>
         </div>
 
-        {path !== "myself" && (
+        {!path && (
           <p className="mt-8 text-xs text-muted-foreground">
-            Already booked a visit or started an order?{" "}
+            Already started an order?{" "}
             <Link to="/account" className="link-underline text-foreground">
               Check your account
             </Link>
@@ -176,7 +189,7 @@ const StartOrder = () => {
           </p>
         )}
 
-        {path === "myself" && (
+        {path && (
         <>
         <div className="mt-14 flex items-center justify-between border-t border-border pt-6">
           <p className="eyebrow">Four quick steps</p>
@@ -249,6 +262,17 @@ const StartOrder = () => {
                 className={`${fieldClass} mt-2 ${showValidation && !form.phone.trim() ? "border-destructive" : ""}`}
               />
             </label>
+            {path === "wedding" && (
+              <label className="block">
+                <span className="eyebrow">How many men in the party?</span>
+                <input
+                  inputMode="numeric"
+                  value={form.partySize}
+                  onChange={(e) => setForm({ ...form, partySize: e.target.value })}
+                  className={`${fieldClass} mt-2`}
+                />
+              </label>
+            )}
             <label className="block">
               <span className="eyebrow">Height *</span>
               <input
@@ -286,62 +310,54 @@ const StartOrder = () => {
             </p>
           )}
 
+          <label className="mt-6 flex items-start gap-2.5 text-sm">
+            <input
+              type="checkbox"
+              checked={agreedToTerms}
+              onChange={(e) => setAgreedToTerms(e.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0 accent-ink"
+            />
+            <span className={showValidation && !agreedToTerms ? "text-destructive" : ""}>
+              I agree to the{" "}
+              <Link to="/terms" target="_blank" rel="noreferrer" className="link-underline text-foreground">
+                Terms & Conditions
+              </Link>{" "}
+              *
+            </span>
+          </label>
+
           {showValidation && !requiredFilled && (
             <p className="mt-4 text-sm text-destructive">
-              Name, email, phone, height and weight are required before we can book your fitting.
+              Name, email, phone, height, weight and agreeing to the Terms & Conditions are required to continue.
             </p>
           )}
 
           <Button variant="ink" size="lg" className="mt-6 h-12 px-8" onClick={continueFromContact}>
-            Continue to Booking
+            Continue to Sizes
           </Button>
         </Step>
 
-        {/* Step 2 — Book your visit */}
+        {/* Step 2 — Your sizes */}
         <Step
           index={2}
-          title="Book your visit"
-          description="Twenty minutes with a fitter and the full collection. Already have a time, or ordering delivery-only? You can skip this."
+          title="Your sizes"
+          description="Give us measurements or the brand sizes you already wear. Every order ships in your size and one size up."
           isOpen={openStep === 2}
           isComplete={maxUnlocked > 2}
           isLocked={maxUnlocked < 2}
           onHeaderClick={() => goToStep(2)}
         >
-          <CalendlyEmbed prefill={{ name: form.name, email: form.email }} />
-          <div className="mt-6 flex flex-wrap items-center gap-5">
-            <Button variant="ink" size="lg" className="h-12 px-8" onClick={() => completeStep(2)}>
-              I've Booked My Time
-            </Button>
-            <button
-              onClick={() => completeStep(2)}
-              className="text-[11px] uppercase tracking-[0.2em] link-underline text-muted-foreground"
-            >
-              Skip for now
-            </button>
-          </div>
+          <SizeProfileForm onSaved={() => completeStep(2)} />
         </Step>
 
-        {/* Step 3 — Your sizes */}
+        {/* Step 3 — Choose your look */}
         <Step
           index={3}
-          title="Your sizes"
-          description="Give us measurements or the brand sizes you already wear. Every order ships in your size and one size up."
+          title="Choose your look"
           isOpen={openStep === 3}
           isComplete={maxUnlocked > 3}
           isLocked={maxUnlocked < 3}
           onHeaderClick={() => goToStep(3)}
-        >
-          <SizeProfileForm onSaved={() => completeStep(3)} />
-        </Step>
-
-        {/* Step 4 — Choose your look */}
-        <Step
-          index={4}
-          title="Choose your look"
-          isOpen={openStep === 4}
-          isComplete={false}
-          isLocked={maxUnlocked < 4}
-          onHeaderClick={() => goToStep(4)}
         >
           <p className="text-sm text-muted-foreground">
             {bag.length > 0
@@ -364,7 +380,51 @@ const StartOrder = () => {
               </Link>
             )}
           </div>
+          <Button variant="ink" size="lg" className="mt-6 h-12 px-8" onClick={() => completeStep(3)}>
+            Continue to Booking
+          </Button>
         </Step>
+
+        {/* Step 4 — Book your visit */}
+        <Step
+          index={4}
+          title="Book your visit"
+          description="Twenty minutes with a fitter and the full collection. Already have a time, or ordering delivery-only? You can skip this."
+          isOpen={openStep === 4}
+          isComplete={maxUnlocked > 4}
+          isLocked={maxUnlocked < 4}
+          onHeaderClick={() => goToStep(4)}
+        >
+          <CalendlyEmbed prefill={{ name: form.name, email: form.email }} />
+          <div className="mt-6 flex flex-wrap items-center gap-5">
+            <Button variant="ink" size="lg" className="h-12 px-8" onClick={() => completeStep(4)}>
+              I've Booked My Time
+            </Button>
+            <button
+              onClick={() => completeStep(4)}
+              className="text-[11px] uppercase tracking-[0.2em] link-underline text-muted-foreground"
+            >
+              Skip for now
+            </button>
+          </div>
+        </Step>
+
+        {maxUnlocked > TOTAL_STEPS && (
+          <div className="mt-10 border-t border-ink pt-8">
+            <p className="eyebrow">All set</p>
+            <h2 className="mt-3 font-display text-3xl">You're on the books.</h2>
+            <p className="mt-3 text-sm text-muted-foreground">
+              We have your sizes, your look and your details. Our team will follow up to confirm pricing and next
+              steps.
+            </p>
+            <Link
+              to="/account"
+              className="mt-6 inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
+            >
+              My Account
+            </Link>
+          </div>
+        )}
         </>
         )}
       </div>

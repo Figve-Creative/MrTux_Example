@@ -7,7 +7,7 @@ import { SITE } from "@/lib/site";
 
 const nav = [
   { to: "/collection", label: "Collection" },
-  { to: "/wedding-parties", label: "Wedding Parties" },
+  { to: "/start-your-order?for=wedding", label: "Wedding Parties" },
   { to: "/our-story", label: "Our Story" },
 ];
 
@@ -82,7 +82,7 @@ const Header = () => {
       {open && (
         <div id="mobile-nav" className="lg:hidden border-t border-border bg-background">
           <nav className="mx-auto max-w-6xl px-5 py-4 flex flex-col gap-4">
-            {[{ to: "/", label: "Home" }, ...nav, { to: "/come-see-us", label: "Come See Us" }, { to: "/appointment", label: "Start a Visit" }].map((item) => (
+            {[{ to: "/", label: "Home" }, ...nav, { to: "/come-see-us", label: "Come See Us" }].map((item) => (
               <Link
                 key={item.to}
                 to={item.to}

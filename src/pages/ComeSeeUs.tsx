@@ -42,10 +42,10 @@ const ComeSeeUs = () => (
               Get Directions
             </a>
             <Link
-              to="/appointment"
+              to="/start-your-order"
               className="inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
             >
-              Start a Visit
+              Start Your Order
             </Link>
           </div>
         </div>

@@ -8,8 +8,7 @@ const columns = [
     links: [
       { to: "/collection", label: "Collection" },
       { to: "/start-your-order", label: "Start Your Order" },
-      { to: "/wedding-parties", label: "Wedding Parties" },
-      { to: "/appointment", label: "Start a Visit" },
+      { to: "/start-your-order?for=wedding", label: "Wedding Parties" },
     ],
   },
   {

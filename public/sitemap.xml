@@ -9,9 +9,7 @@
   <url><loc>https://www.mrtux.com/collection/couture-dominic</loc><priority>0.7</priority></url>
   <url><loc>https://www.mrtux.com/collection/ike-behar-white-waverly</loc><priority>0.7</priority></url>
   <url><loc>https://www.mrtux.com/collection/ike-behar-burgundy-marbella</loc><priority>0.7</priority></url>
-  <url><loc>https://www.mrtux.com/start-your-order</loc><priority>0.9</priority></url>
-  <url><loc>https://www.mrtux.com/appointment</loc><priority>0.9</priority></url>
-  <url><loc>https://www.mrtux.com/wedding-parties</loc><priority>0.8</priority></url>
+  <url><loc>https://www.mrtux.com/start-your-order</loc><priority>1.0</priority></url>
   <url><loc>https://www.mrtux.com/our-story</loc><priority>0.6</priority></url>
   <url><loc>https://www.mrtux.com/come-see-us</loc><priority>0.7</priority></url>
   <url><loc>https://www.mrtux.com/faqs</loc><priority>0.6</priority></url>

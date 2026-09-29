@@ -39,10 +39,10 @@ const Faqs = () => (
       <div className="mt-14">
         <p className="text-sm text-muted-foreground">Still unsure?</p>
         <Link
-          to="/appointment"
+          to="/start-your-order"
           className="mt-4 inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
         >
-          Start a Visit
+          Start Your Order
         </Link>
       </div>
     </div>

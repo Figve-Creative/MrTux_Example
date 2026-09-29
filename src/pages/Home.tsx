@@ -63,10 +63,10 @@ const Home = () => (
             Twenty minutes with a fitter, a mirror and the full collection in your hands.
           </p>
           <Link
-            to="/appointment"
+            to="/start-your-order"
             className="mt-5 inline-flex h-12 items-center justify-center bg-highlight px-8 text-xs uppercase tracking-[0.18em] text-accent-foreground hover:bg-highlight/90"
           >
-            Start a Visit
+            Start Your Order
           </Link>
         </div>
         <div>
@@ -76,10 +76,10 @@ const Home = () => (
             One look, every man, wherever they live. We ship the party to arrive together.
           </p>
           <Link
-            to="/wedding-parties"
+            to="/start-your-order?for=wedding"
             className="mt-5 inline-flex h-12 items-center justify-center border border-ink px-8 text-xs uppercase tracking-[0.18em] text-ink hover:bg-ink hover:text-primary-foreground"
           >
-            Start a Party
+            Start Your Order
           </Link>
         </div>
       </div>
@@ -181,10 +181,10 @@ const Home = () => (
           Send us the date and the count. We handle sizes, shipping and returns for every man in the party.
         </p>
         <Link
-          to="/wedding-parties"
+          to="/start-your-order?for=wedding"
           className="mt-6 inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
         >
-          Suit Up Your Party
+          Start Your Order
         </Link>
       </div>
     </section>
@@ -214,10 +214,10 @@ const Home = () => (
               Get Directions
             </a>
             <Link
-              to="/appointment"
+              to="/start-your-order"
               className="inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
             >
-              Start a Visit
+              Start Your Order
             </Link>
           </div>
         </div>
