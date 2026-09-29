@@ -7,6 +7,13 @@ import heroImg from "@/assets/hero-cream.jpg";
 import storyImg from "@/assets/story-atelier.jpg";
 import weddingImg from "@/assets/wedding-party.jpg";
 
+// The collection now runs to dozens of styles, but this homepage teaser only has
+// room for four — one from a spread of color families. See it all at /collection.
+const FEATURED_LOOK_IDS = ["ginovia-black-beckett", "ike-behar-blake", "couture-dominic", "ike-behar-burgundy-marbella"];
+const featuredLooks = FEATURED_LOOK_IDS.map((id) => looks.find((l) => l.id === id)).filter(
+  (l): l is (typeof looks)[number] => Boolean(l),
+);
+
 const Home = () => (
   <>
     <Seo
@@ -98,7 +105,7 @@ const Home = () => (
       </div>
 
       <div className="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-        {looks.map((look) => (
+        {featuredLooks.map((look) => (
           <Link key={look.id} to={`/collection/${look.id}`} className="group">
             <div className="overflow-hidden bg-surface">
               <img

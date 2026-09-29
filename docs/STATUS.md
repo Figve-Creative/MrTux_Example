@@ -23,9 +23,10 @@ but every user-facing label now calls this the "pickup window." See the note in
   Our Story, Come See Us, Bag, Order Confirmation, Account, FAQs, Blog, Terms, Privacy
 - Design system: cream background, ink/oxblood accents, NewYork display font (licensed),
   Montserrat body text
-- Collection page: six looks, one per color family (Black/Grey/Blue/Tan & Beige/White/
-  Others), pulled from the real Mr. Tux inventory sheet — real names, style numbers, fabric
-  details
+- Collection page: full catalog, all 62 styles from the real Mr. Tux inventory sheet
+  (Black/Grey/Blue/Tan & Beige/White/Others) — real names, style numbers, fabric details.
+  The homepage teaser ("Four ways to be correct") still only shows 4 curated looks
+  (`FEATURED_LOOK_IDS` in `src/pages/Home.tsx`); the full list lives at `/collection`.
 - Every CTA site-wide (nav, footer, homepage, FAQs, Our Story, Come See Us) points at
   `/start-your-order`. `/appointment` and `/wedding-parties` are now just redirects there, kept
   only so old bookmarks/links don't 404.
@@ -39,10 +40,12 @@ but every user-facing label now calls this the "pickup window." See the note in
 
 ## Known placeholders (need real input before launch)
 
-- **Collection photos** — the six real-inventory looks still show old stock photography.
-  Waiting on real photos pulled from the Drive photo library.
-- **Pricing** — every look shows a placeholder $189 / 4-day rental. Needs real per-style
-  rates.
+- **Collection photos** — all 62 looks still show one of 4 old placeholder stock photos,
+  cycled in rotation (`LOOK_IMAGES` in `src/data/looks.ts`), so the grid repeats the same
+  handful of images many times over. Waiting on real photos pulled from the Drive photo
+  library, or uploaded directly, to replace them one by one.
+- **Pricing** — every look carries a placeholder $189 / 4-day rental internally (not shown
+  to customers — see "Prices vary" copy). Needs real per-style rates for staff records.
 - **Contact info** — phone number and social links (Instagram/Facebook/TikTok) in
   `src/lib/site.ts` are still generic placeholders. Address is correct.
 - **Backend** — Supabase project is connected (URL + anon key set in `.env.local` locally and
@@ -56,6 +59,9 @@ but every user-facing label now calls this the "pickup window." See the note in
 
 ## Open decisions
 
+- Whether `/collection` needs a color-family filter or sort now that it lists all 62 styles
+  instead of 6 — currently one long 2-column scroll, grouped in the order they appear in
+  `src/data/looks.ts` (Black, Grey, Blue, Tan & Beige, White, Others).
 - Wedding-party pricing rules (volume discount? flat group rate?)
 - Exact pickup/return timing: `rentalWindow()` in `src/lib/dates.ts` currently computes "ready
   2–3 days before the event, due back `rentalDays` (4) after pickup opens" — this was the old

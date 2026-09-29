@@ -6,7 +6,7 @@ const Collection = () => (
   <>
     <Seo
       title="The Collection — Tuxedos & Dinner Jackets | Mr. Tux"
-      description="Browse the Mr. Tux collection: heritage black tie, ivory dinner jackets, navy velvet and full white tie. Four-day rentals, fitted in-store at pickup."
+      description="Browse the Mr. Tux collection: black, grey, blue, tan, white and more — one look per color family. Four-day rentals, fitted in-store at pickup."
     />
 
     <div className="mx-auto max-w-6xl px-5 lg:px-8 py-14 sm:py-20">

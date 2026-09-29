@@ -3,12 +3,69 @@
 <urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">
   <url><loc>https://www.mrtux.com/</loc><priority>1.0</priority></url>
   <url><loc>https://www.mrtux.com/collection</loc><priority>0.9</priority></url>
+  <!-- One entry per look in src/data/looks.ts — keep this list in sync if looks are added/removed/renamed. -->
+  <url><loc>https://www.mrtux.com/collection/j-sebastian-notch</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/j-sebastian-peak</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/j-sebastian-shawl</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/marzotto-tuscany</loc><priority>0.6</priority></url>
   <url><loc>https://www.mrtux.com/collection/ginovia-black-beckett</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-black-dante</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/michael-kors-legacy</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-satin-trim</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-double-breasted</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-hunter</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-rocco</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/mod-austin</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/classic-black-notch</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/classic-black-shawl</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/classic-black-peak</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-black-suit</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/black-velvet-tuxedo</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/alton-black-paisley</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ginovia-jax</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/kenneth-cole-barrow</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/heather-grey-ceremonial</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/david-major-dark-grey</loc><priority>0.6</priority></url>
   <url><loc>https://www.mrtux.com/collection/david-major-platinum</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/mod-starlight</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/marzotto-milano</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-ezra-grey</loc><priority>0.6</priority></url>
   <url><loc>https://www.mrtux.com/collection/ike-behar-blake</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ike-behar-indigo</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/denim-blue-suit</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/denim-blue-tuxedo</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/michael-kors-performance-blue</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ike-behar-sebastian</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/david-major-navy</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/david-major-french-blue</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-steel-blue-dante</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-oxford-blue-dante</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-eric-navy</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-cobalt-dante</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-navy-dante</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/cornflower-blue-brunswick</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/sand-brunswick</loc><priority>0.6</priority></url>
   <url><loc>https://www.mrtux.com/collection/couture-dominic</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/tan-havana</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/mod-camel</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-archer</loc><priority>0.6</priority></url>
   <url><loc>https://www.mrtux.com/collection/ike-behar-white-waverly</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ginovia-milan-white</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ginovia-clayton</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ike-behar-dawson</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ivory-dinner-jacket</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-ivory-aragon</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/couture-white-aragon</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/cobalt-aries-paisley</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/apple-red-aries-paisley</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/granite-aries-paisley</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/black-aries-paisley</loc><priority>0.6</priority></url>
   <url><loc>https://www.mrtux.com/collection/ike-behar-burgundy-marbella</loc><priority>0.7</priority></url>
+  <url><loc>https://www.mrtux.com/collection/sea-glass-suit</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/hunter-green-velvet-tuxedo</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/classic-peak-tail</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/mod-sage</loc><priority>0.6</priority></url>
+  <url><loc>https://www.mrtux.com/collection/ike-behar-hunter-green-luka</loc><priority>0.6</priority></url>
   <url><loc>https://www.mrtux.com/start-your-order</loc><priority>1.0</priority></url>
   <url><loc>https://www.mrtux.com/our-story</loc><priority>0.6</priority></url>
   <url><loc>https://www.mrtux.com/come-see-us</loc><priority>0.7</priority></url>
