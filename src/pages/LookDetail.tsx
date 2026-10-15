@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Check } from "lucide-react";
 import Seo from "@/components/Seo";
-import { Button } from "@/components/ui/button";
-import { accessories, accessoryCategories, looks, Accessory } from "@/data/looks";
-import { useApp } from "@/context/AppContext";
+import { looks } from "@/data/looks";
+import { SITE, mapsDirectionsUrl } from "@/lib/site";
 
+// Every rental includes these on top of the look's own pieces.
+const ALWAYS_INCLUDED = ["Accessories — tie, vest, suspenders and more", "Jewelry — studs & cufflinks"];
+
+// Appointment-first MVP: no online ordering yet, so there's no Add to Bag, size
+// box or accessories picker here. The data for all of those still exists —
+// bring them back from git history when ordering goes live.
 const LookDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const { addToBag, sizeProfile } = useApp();
   const look = looks.find((l) => l.id === id);
-  const [selected, setSelected] = useState<Accessory[]>([]);
-  const [category, setCategory] = useState<typeof accessoryCategories[number]["key"]>("shoes");
 
   if (!look) {
     return (
@@ -25,14 +25,11 @@ const LookDetail = () => {
     );
   }
 
-  const toggle = (acc: Accessory) =>
-    setSelected((prev) => (prev.find((a) => a.id === acc.id) ? prev.filter((a) => a.id !== acc.id) : [...prev, acc]));
-
   return (
     <>
       <Seo
         title={`${look.name} — ${look.collection} | Mr. Tux`}
-        description={`${look.description} A ${look.rentalDays}-day rental, fitted in-store at pickup. Prices vary — ask us for a quote.`}
+        description={`${look.description} A ${look.rentalDays}-day rental. Prices vary — call or stop by for a quote.`}
       />
 
       <div className="mx-auto max-w-6xl px-5 lg:px-8 py-10 sm:py-14">
@@ -61,7 +58,7 @@ const LookDetail = () => {
             <div className="mt-8 border-t border-border pt-6">
               <p className="eyebrow">What's included</p>
               <ul className="mt-4 space-y-2">
-                {look.items.map((item) => (
+                {[...look.items, ...ALWAYS_INCLUDED].map((item) => (
                   <li key={item} className="flex items-start gap-2.5 text-sm">
                     <Check size={14} className="mt-1 shrink-0 text-highlight" />
                     {item}
@@ -71,71 +68,26 @@ const LookDetail = () => {
             </div>
 
             <div className="mt-8 border border-border bg-surface p-5">
-              <p className="text-sm">
-                Give us your estimated size now — we'll fit you to your exact size in person when you pick up.
-              </p>
-              <Link
-                to="/start-your-order"
-                className="mt-3 inline-block text-[11px] uppercase tracking-[0.2em] link-underline"
-              >
-                {sizeProfile.method ? "Update your sizes" : "Set up your sizes"}
+              <p className="text-sm">Want to try it on? Call us or stop by the shop — we'll take it from there.</p>
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={SITE.phoneHref}
+                  className="inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
+                >
+                  Call {SITE.phone}
+                </a>
+                <a
+                  href={mapsDirectionsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-12 items-center justify-center border border-ink px-8 text-xs uppercase tracking-[0.18em]"
+                >
+                  Get Directions
+                </a>
+              </div>
+              <Link to="/book" className="mt-4 inline-block text-[11px] uppercase tracking-[0.2em] link-underline">
+                Or book an appointment
               </Link>
-            </div>
-
-            <div className="mt-10">
-              <p className="eyebrow">Add accessories</p>
-              <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
-                {accessoryCategories.map((cat) => (
-                  <button
-                    key={cat.key}
-                    onClick={() => setCategory(cat.key)}
-                    className={`whitespace-nowrap border px-3 py-2 text-[11px] uppercase tracking-[0.16em] transition-colors ${
-                      category === cat.key
-                        ? "border-ink bg-ink text-primary-foreground"
-                        : "border-border text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {cat.label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                {accessories
-                  .filter((a) => a.category === category)
-                  .map((acc) => {
-                    const on = selected.some((a) => a.id === acc.id);
-                    return (
-                      <button
-                        key={acc.id}
-                        onClick={() => toggle(acc)}
-                        className={`border p-4 text-left transition-colors ${
-                          on ? "border-highlight bg-surface" : "border-border hover:border-ink/40"
-                        }`}
-                      >
-                        <div className="flex items-start justify-between gap-3">
-                          <p className="text-sm">{acc.name}</p>
-                          {on && <Check size={14} className="mt-0.5 shrink-0 text-highlight" />}
-                        </div>
-                        <p className="mt-1 text-xs text-muted-foreground">{acc.description}</p>
-                      </button>
-                    );
-                  })}
-              </div>
-            </div>
-
-            <div className="sticky bottom-0 mt-10 -mx-5 border-t border-border bg-background/95 px-5 py-4 backdrop-blur lg:static lg:mx-0 lg:border-0 lg:bg-transparent lg:p-0">
-              <Button
-                variant="ink"
-                size="lg"
-                className="h-14 w-full"
-                onClick={() => {
-                  addToBag({ look, accessories: selected });
-                  navigate("/bag");
-                }}
-              >
-                Add to Bag
-              </Button>
             </div>
           </div>
         </div>

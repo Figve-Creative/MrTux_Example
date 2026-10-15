@@ -4,7 +4,7 @@ export const eventsWeSupport = [
   { name: "Proms", note: "First tuxedo, done properly, with room to grow." },
   { name: "Quinces & Sweet Sixteens", note: "Escorts and courts, coordinated head to toe." },
   { name: "Awards & Premieres", note: "White tie and dinner jackets for the front row." },
-  { name: "Cruises & Formal Nights", note: "Packed, pressed and ready before you sail." },
+  { name: "Destination Events & Cruises", note: "Traveling to your event? We'll have you fitted and ready before you go." },
 ];
 
 export const storyChapters = [
@@ -14,7 +14,7 @@ export const storyChapters = [
   },
   {
     title: "Fitted in person",
-    body: "Fit is the whole argument. Start your order online, then come in and we fit you to your exact size ourselves — no guessing, no ten-minute panic in a fitting room before the ceremony.",
+    body: "Fit is the whole argument. Book an appointment, then come in and we fit you to your exact size ourselves — no guessing, no ten-minute panic in a fitting room before the ceremony.",
   },
   {
     title: "Cloth first",

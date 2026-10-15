@@ -18,7 +18,7 @@ const Home = () => (
   <>
     <Seo
       title="Mr. Tux — Tuxedo Rental in Miami | Dressed to be remembered"
-      description="Tuxedo and formal menswear rental in Miami. Start your order online, then pick up your perfect fit in-store. No deposit."
+      description="Tuxedo and formal menswear rental in Miami. Book an appointment and come in for your perfect fit."
     />
 
     {/* Hero */}
@@ -39,14 +39,14 @@ const Home = () => (
               Dressed to be remembered
             </h1>
             <p className="mt-4 max-w-sm text-sm text-foreground/80 sm:text-base">
-              Tuxedos and formal menswear — start your order online, then come in for your perfect fit.
+              Tuxedos and formal menswear — book an appointment and come in for your perfect fit.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
-                to="/start-your-order"
+                to="/book"
                 className="inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground hover:bg-ink/90"
               >
-                Start Your Order
+                Book an Appointment
               </Link>
               <Link
                 to="/collection"
@@ -65,28 +65,28 @@ const Home = () => (
       <div className="mx-auto max-w-6xl px-5 lg:px-8 py-12 grid gap-8 md:grid-cols-2">
         <div className="md:border-r md:border-border md:pr-10">
           <p className="eyebrow">In person</p>
-          <h2 className="mt-3 font-display text-2xl sm:text-3xl">Come in and get fitted</h2>
+          <h2 className="mt-3 font-display text-2xl sm:text-3xl">Come in and meet with us</h2>
           <p className="mt-3 text-sm text-muted-foreground">
-            Twenty minutes with a fitter, a mirror and the full collection in your hands.
+            A wedding consultant, a mirror, and the full collection in your hands.
           </p>
           <Link
-            to="/start-your-order"
+            to="/book"
             className="mt-5 inline-flex h-12 items-center justify-center bg-highlight px-8 text-xs uppercase tracking-[0.18em] text-accent-foreground hover:bg-highlight/90"
           >
-            Start Your Order
+            Book an Appointment
           </Link>
         </div>
         <div>
           <p className="eyebrow">Groups</p>
           <h2 className="mt-3 font-display text-2xl sm:text-3xl">Suit up your wedding party</h2>
           <p className="mt-3 text-sm text-muted-foreground">
-            One look, every man, wherever they live. We coordinate the whole party to pick up together.
+            One look, every man, wherever they live.
           </p>
           <Link
-            to="/start-your-order?for=wedding"
+            to="/book?for=measurements"
             className="mt-5 inline-flex h-12 items-center justify-center border border-ink px-8 text-xs uppercase tracking-[0.18em] text-ink hover:bg-ink hover:text-primary-foreground"
           >
-            Start Your Order
+            Submit Your Measurements
           </Link>
         </div>
       </div>
@@ -188,10 +188,10 @@ const Home = () => (
           Send us the date and the count. We handle sizes, fittings and returns for every man in the party.
         </p>
         <Link
-          to="/start-your-order?for=wedding"
+          to="/book?for=wedding"
           className="mt-6 inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
         >
-          Start Your Order
+          Register Your Wedding
         </Link>
       </div>
     </section>
@@ -221,10 +221,10 @@ const Home = () => (
               Get Directions
             </a>
             <Link
-              to="/start-your-order"
+              to="/book"
               className="inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"
             >
-              Start Your Order
+              Book an Appointment
             </Link>
           </div>
         </div>

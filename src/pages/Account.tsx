@@ -115,8 +115,8 @@ const Account = () => {
           ) : (
             <p className="mt-4 text-sm text-muted-foreground">
               No event yet.{" "}
-              <Link to="/start-your-order" className="link-underline text-foreground">
-                Start your order
+              <Link to="/book" className="link-underline text-foreground">
+                Book an appointment
               </Link>
               .
             </p>

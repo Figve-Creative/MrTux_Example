@@ -103,8 +103,8 @@ const Bag = () => {
             </div>
 
             {!event && (
-              <Link to="/start-your-order" className="mt-4 inline-block text-[11px] uppercase tracking-[0.2em] link-underline">
-                Start your order
+              <Link to="/book" className="mt-4 inline-block text-[11px] uppercase tracking-[0.2em] link-underline">
+                Book an appointment
               </Link>
             )}
 

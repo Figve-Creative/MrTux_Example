@@ -7,8 +7,8 @@ const columns = [
     heading: "Shop",
     links: [
       { to: "/collection", label: "Collection" },
-      { to: "/start-your-order", label: "Start Your Order" },
-      { to: "/start-your-order?for=wedding", label: "Wedding Parties" },
+      { to: "/book", label: "Book an Appointment" },
+      { to: "/book?for=measurements", label: "Submit Your Measurements" },
     ],
   },
   {
@@ -38,9 +38,14 @@ const Footer = () => (
             <img src={logoImg} alt={SITE.name} className="h-8 w-auto" />
           </Link>
           <p className="mt-4 text-sm text-cream/70 max-w-xs">
-            Tuxedo and formal menswear rental. Order online, then pick up your perfect fit in-store.
+            Tuxedo and formal menswear rental. Book an appointment and come in for your perfect fit.
           </p>
           <p className="mt-4 text-sm text-cream/90">{SITE.address.full}</p>
+          <p className="mt-1 text-sm text-cream/90">
+            <a href={SITE.phoneHref} className="hover:text-cream">
+              {SITE.phone}
+            </a>
+          </p>
         </div>
 
         {columns.map((col) => (

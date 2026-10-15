@@ -17,6 +17,35 @@ Internally, `PlacedOrder`/`EventDetails` fields and the Supabase `orders` table 
 but every user-facing label now calls this the "pickup window." See the note in
 `src/lib/dates.ts`.
 
+## MVP direction (Oct 2026) — supersedes anything below about ordering
+
+The site launches as an **appointment-first facelift** of the shop's current offering; online
+ordering is a later phase. What changed:
+
+- `/book` is the single funnel: **Book an Appointment** (register wedding/event → Calendly) and
+  **Submit Your Measurements** (out-of-town guests: about you → sizes → Calendly). Every CTA
+  points here. `/start-your-order`, `/appointment` and `/wedding-parties` redirect to it.
+- Measurements and registrations travel **inside the Calendly booking** as prefilled answers —
+  there is no separate database write. Calendly Invitee Questions, in this exact order:
+  - Appointment (`SITE.calendlyUrlWedding`): Phone, Booking for (Wedding party / Myself),
+    Occasion, Event date, Whose wedding, Party size, Formality, Notes, Height, Weight. (Wedding-only
+    answers are blank for "Myself" bookings; Height/Weight are "Myself"-only and optional.)
+  - Measurements (`SITE.calendlyUrlMeasurements`): Phone, Wedding date, Whose wedding, Height,
+    Weight, Measurements (long text), Notes.
+  Both URLs currently fall back to the same Calendly link; create two event types and swap them
+  in `src/lib/site.ts`. Calendly requires picking a time slot, so measurement submitters book a
+  short call.
+- **Shareable wedding link:** only shown after a *Wedding party* appointment is filled in
+  (details step + again on the closing screen). It's stateless — `/book?for=measurements&wedding=<name>&date=<date>` —
+  so nothing is stored; guests who open it land on Submit Your Measurements with the wedding
+  already filled in. Built in `ShareBox` in `src/pages/Book.tsx`.
+- Hidden, not deleted: header bag icon, Add to Bag / size box / accessories picker on look
+  detail. `/bag`, `/order/:ref` and Account still exist. Restore from git when ordering goes live.
+- Real phone number is in `SITE.phone` (305.595.0709); used on look detail, footer, JSON-LD.
+- Still pending from client feedback: hover photos + filters on /collection (waiting on real
+  photos; best-sellers and event tagging unknown yet), event types linking to the collection,
+  Our Story photo, and the copy audit (run it against this new structure).
+
 ## Live
 
 - Full site: Home, Collection, Look detail, Start Your Order (the single funnel — see below),
@@ -76,6 +105,32 @@ but every user-facing label now calls this the "pickup window." See the note in
   way (guest orders carry `guest_name`/`guest_email` for staff follow-up).
 - **Analytics** — no Google Analytics / measurement ID wired in yet.
 - **Legal review** — Terms & Privacy pages haven't had a legal pass.
+
+## Client feedback (Oct 2026 — "Mr. Tux Website Feedback.pdf", 7 annotated screenshots)
+
+**Not yet applied — pending decisions below. Do the copy audit AFTER the structure changes.**
+
+1. **Core change:** the shop can't take orders yet. "Start Your Order" (header, hero, bands, funnel
+   page) should become two actions: **Book an Appointment** and **Submit Your Measurements**
+   (for out-of-town wedding guests). Priority = wedding appointment submission + guest
+   measurements.
+2. **Start Your Order page:** same split. Appointment path keeps the current questions and the
+   Calendly embed. Wanted: register the wedding (no fee) and book the appointment in one go.
+3. **Home, "In person" band** → appointment feature for groom/wedding party's first visit.
+   Suggested copy: "Come In and Meet With Us" / "A Wedding Consultant, a Mirror, and the full
+   collection in your hands."
+4. **Home, "Groups" band** → button "Submit Your Measurements"; copy "One Look, every man,
+   wherever they Live."
+5. **Home, collection teaser:** keep the 4 colors; rotate in new/popular items by season.
+6. **Events we dress:** link each event type to the collection (filterable). Reword "Cruises &
+   Formal Nights" to say we serve clients traveling to their events.
+7. **Our Story photo:** owner is looking for an older photo of his dad; otherwise we generate one.
+8. **Collection page:** keep the flat-lay look but swap to a stock/real photo on hover. Add
+   filters: color, suit vs tux, best sellers.
+9. **Look detail:** "What's included" = jacket, pants, shirt, accessories (tie, vest,
+   suspenders, etc.), jewelry (studs & cufflinks). Remove the "set up your sizes" box — replace
+   with a call / get-directions CTA ("still trying to get customers in the door"). Remove the
+   accessories picker for now.
 
 ## Open decisions
 

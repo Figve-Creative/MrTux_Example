@@ -1,19 +1,17 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, ShoppingBag, User, X, MapPin } from "lucide-react";
+import { Menu, User, X, MapPin } from "lucide-react";
 import logoImg from "@/assets/mr-tux-logo-horizontal-dark.png";
-import { useApp } from "@/context/AppContext";
 import { SITE } from "@/lib/site";
 
 const nav = [
   { to: "/collection", label: "Collection" },
-  { to: "/start-your-order?for=wedding", label: "Wedding Parties" },
+  { to: "/book?for=wedding", label: "Wedding Parties" },
   { to: "/our-story", label: "Our Story" },
 ];
 
 const Header = () => {
   const [open, setOpen] = useState(false);
-  const { bag } = useApp();
   const location = useLocation();
 
   return (
@@ -56,10 +54,10 @@ const Header = () => {
 
           <div className="flex items-center justify-end gap-5">
             <Link
-              to="/start-your-order"
+              to="/book"
               className="hidden lg:inline text-[11px] uppercase tracking-[0.2em] text-foreground border-b border-foreground pb-0.5"
             >
-              Start Your Order
+              Book an Appointment
             </Link>
             <Link to="/come-see-us" className="text-muted-foreground hover:text-foreground" aria-label="Find us">
               <MapPin size={18} />
@@ -67,14 +65,8 @@ const Header = () => {
             <Link to="/account" className="text-muted-foreground hover:text-foreground" aria-label="Account">
               <User size={18} />
             </Link>
-            <Link to="/bag" className="relative text-muted-foreground hover:text-foreground" aria-label="Bag">
-              <ShoppingBag size={18} />
-              {bag.length > 0 && (
-                <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-highlight text-[9px] text-accent-foreground">
-                  {bag.length}
-                </span>
-              )}
-            </Link>
+            {/* Bag icon hidden for the appointment-first MVP (no online orders yet).
+                /bag still exists — restore the icon here when ordering goes live. */}
           </div>
         </div>
       </div>
@@ -95,11 +87,11 @@ const Header = () => {
               </Link>
             ))}
             <Link
-              to="/start-your-order"
+              to="/book"
               onClick={() => setOpen(false)}
               className="mt-2 inline-flex h-12 items-center justify-center bg-ink text-primary-foreground text-xs uppercase tracking-[0.18em]"
             >
-              Start Your Order
+              Book an Appointment
             </Link>
           </nav>
         </div>

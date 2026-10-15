@@ -9,6 +9,7 @@ import Layout from "@/components/layout/Layout";
 import Home from "./pages/Home";
 import Collection from "./pages/Collection";
 import LookDetail from "./pages/LookDetail";
+import Book from "./pages/Book";
 import StartOrder from "./pages/StartOrder";
 import Appointment from "./pages/Appointment";
 import OurStory from "./pages/OurStory";
@@ -39,6 +40,7 @@ const App = () => (
                 <Route path="/" element={<Home />} />
                 <Route path="/collection" element={<Collection />} />
                 <Route path="/collection/:id" element={<LookDetail />} />
+                <Route path="/book" element={<Book />} />
                 <Route path="/start-your-order" element={<StartOrder />} />
                 <Route path="/appointment" element={<Appointment />} />
                 <Route path="/our-story" element={<OurStory />} />
