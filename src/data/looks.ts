@@ -2,6 +2,12 @@ import lookMidnight from "@/assets/look-midnight-peak.jpg";
 import lookIvory from "@/assets/look-ivory-dinner.jpg";
 import lookNavy from "@/assets/look-navy-velvet.jpg";
 import lookWhiteTie from "@/assets/look-white-tie.jpg";
+// Real product photos, shown when a card is hovered. Add `hoverImage` to any look
+// (import its photo here) and the Collection and homepage cards pick it up.
+import hoverBeckett from "@/assets/hover-black-beckett.jpg";
+import hoverBlake from "@/assets/hover-ike-behar-blake.jpg";
+import hoverDominic from "@/assets/hover-couture-dominic.jpg";
+import hoverWaverly from "@/assets/hover-ike-behar-waverly.jpg";
 
 export interface Accessory {
   id: string;
@@ -18,6 +24,8 @@ export interface Look {
   price: number;
   rentalDays: number;
   image: string;
+  /** Optional real photo that fades in over `image` on hover. */
+  hoverImage?: string;
   description: string;
   items: string[];
 }
@@ -93,6 +101,7 @@ export const looks: Look[] = [
     price: 189,
     rentalDays: 4,
     image: lookMidnight,
+    hoverImage: hoverBeckett,
     description: "Style 848C. Black two-button notch tuxedo with a framed lapel in tropical wool. Side vented, besom pockets.",
     items: ["Notch Lapel Jacket", "Flat-Front Trousers", "Dress Shirt", "Bowtie"],
   },
@@ -317,6 +326,7 @@ export const looks: Look[] = [
     price: 189,
     rentalDays: 4,
     image: lookNavy,
+    hoverImage: hoverBlake,
     description: "Style 1015C. Navy tuxedo with a one-button black satin peak lapel in super 120 wool. Side vented, besom pockets.",
     items: ["Peak Lapel Jacket", "Flat-Front Trousers", "Dress Shirt", "Bowtie"],
   },
@@ -469,6 +479,7 @@ export const looks: Look[] = [
     price: 189,
     rentalDays: 4,
     image: lookWhiteTie,
+    hoverImage: hoverDominic,
     description: "Style 4547C. Light tan two-button notch lapel suit in stretch poly wool. Side vented, flap pockets.",
     items: ["Notch Lapel Jacket", "Flat-Front Trousers", "Dress Shirt", "Tie"],
   },
@@ -511,6 +522,7 @@ export const looks: Look[] = [
     price: 189,
     rentalDays: 4,
     image: lookMidnight,
+    hoverImage: hoverWaverly,
     description: "Style WGATSBY. White self shawl lapel dinner jacket with black self piping. One button, center vented.",
     items: ["Shawl Lapel Dinner Jacket", "Black Trousers", "Dress Shirt", "Black Bowtie"],
   },

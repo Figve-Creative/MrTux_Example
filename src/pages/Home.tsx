@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Seo from "@/components/Seo";
+import LookCardImage from "@/components/LookCardImage";
 import { looks } from "@/data/looks";
 import { eventsWeSupport, storyChapters } from "@/data/content";
 import { SITE, mapsEmbedUrl, mapsDirectionsUrl } from "@/lib/site";
@@ -9,7 +10,7 @@ import weddingImg from "@/assets/wedding-party.jpg";
 
 // The collection now runs to dozens of styles, but this homepage teaser only has
 // room for four — one from a spread of color families. See it all at /collection.
-const FEATURED_LOOK_IDS = ["ginovia-black-beckett", "ike-behar-blake", "couture-dominic", "ike-behar-burgundy-marbella"];
+const FEATURED_LOOK_IDS = ["ginovia-black-beckett", "ike-behar-blake", "couture-dominic", "ike-behar-white-waverly"];
 const featuredLooks = FEATURED_LOOK_IDS.map((id) => looks.find((l) => l.id === id)).filter(
   (l): l is (typeof looks)[number] => Boolean(l),
 );
@@ -107,16 +108,7 @@ const Home = () => (
       <div className="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
         {featuredLooks.map((look) => (
           <Link key={look.id} to={`/collection/${look.id}`} className="group">
-            <div className="overflow-hidden bg-surface">
-              <img
-                src={look.image}
-                alt={look.name}
-                loading="lazy"
-                width={1200}
-                height={1504}
-                className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              />
-            </div>
+            <LookCardImage look={look} />
             <p className="mt-4 eyebrow">{look.collection}</p>
             <h3 className="mt-1.5 font-display text-xl">{look.name}</h3>
             <p className="mt-1 text-sm text-muted-foreground">

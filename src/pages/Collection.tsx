@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Seo from "@/components/Seo";
+import LookCardImage from "@/components/LookCardImage";
 import { looks } from "@/data/looks";
 
 const Collection = () => (
@@ -19,16 +20,7 @@ const Collection = () => (
       <div className="mt-12 grid gap-x-8 gap-y-14 sm:grid-cols-2">
         {looks.map((look) => (
           <Link key={look.id} to={`/collection/${look.id}`} className="group">
-            <div className="overflow-hidden bg-surface">
-              <img
-                src={look.image}
-                alt={look.name}
-                loading="lazy"
-                width={1200}
-                height={1504}
-                className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              />
-            </div>
+            <LookCardImage look={look} />
             <p className="mt-4 eyebrow">{look.collection}</p>
             <h2 className="mt-1.5 font-display text-2xl">{look.name}</h2>
             <p className="mt-2 text-sm text-muted-foreground">{look.description}</p>

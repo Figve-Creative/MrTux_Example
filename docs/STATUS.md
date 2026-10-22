@@ -39,6 +39,11 @@ ordering is a later phase. What changed:
   (details step + again on the closing screen). It's stateless — `/book?for=measurements&wedding=<name>&date=<date>` —
   so nothing is stored; guests who open it land on Submit Your Measurements with the wedding
   already filled in. Built in `ShareBox` in `src/pages/Book.tsx`.
+- **Hover photos:** a look can carry an optional `hoverImage` (`src/data/looks.ts`); its card on
+  the homepage teaser and `/collection` fades to it on hover (`LookCardImage`). Done so far:
+  GiNovia Becket, Ike Behar Blake, Couture Dominic, Ike Behar Waverly. The homepage teaser's 4th
+  slot was switched from Marbella (burgundy) to Waverly (white) because the only 4th photo was a
+  white shawl dinner jacket. Swap back once there's a burgundy Marbella photo.
 - Hidden, not deleted: header bag icon, Add to Bag / size box / accessories picker on look
   detail. `/bag`, `/order/:ref` and Account still exist. Restore from git when ordering goes live.
 - Real phone number is in `SITE.phone` (305.595.0709); used on look detail, footer, JSON-LD.
