@@ -7,7 +7,7 @@ import { countdown, formatDate } from "@/lib/dates";
 const returnSteps = [
   "Bring it back to the shop in the bag provided, or",
   "Seal the bag with the prepaid label already inside and drop it at any UPS or FedEx location.",
-  "Either way, make sure it's back with us by your return date.",
+  "Either way, it's due back the day after your event. Late returns are $50 per day, plus any additional rental charges.",
 ];
 
 const OrderConfirmation = () => {

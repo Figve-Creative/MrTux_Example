@@ -64,7 +64,7 @@ const Bag = () => {
                       <div>
                         <p className="eyebrow">{item.look.collection}</p>
                         <h2 className="mt-1 font-display text-xl">{item.look.name}</h2>
-                        <p className="mt-1 text-sm text-muted-foreground">{item.look.rentalDays}-day rental</p>
+                        <p className="mt-1 text-sm text-muted-foreground">Prices vary</p>
                       </div>
                       <button
                         onClick={() => removeFromBag(item.id)}
@@ -91,7 +91,7 @@ const Bag = () => {
             <div className="mt-8 border border-border bg-surface p-5 text-sm">
               <p>We'll fit you to your exact size when you pick up in-store.</p>
               <p className="mt-2 text-muted-foreground">
-                No deposit. Return it to the shop or mail it back with a prepaid label — your choice.
+                No deposit online. Return it to the shop or mail it back with a prepaid label by the day after your event — late returns are $50 per day.
               </p>
               <p className="mt-2 text-muted-foreground">
                 Ready for pickup {dates.deliveryFrom} – {dates.deliveryTo}

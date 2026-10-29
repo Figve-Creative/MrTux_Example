@@ -1,6 +1,6 @@
 import { useEffect, useState, ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Check, Lock } from "lucide-react";
+import { Check, Lock, X } from "lucide-react";
 import Seo from "@/components/Seo";
 import SizeProfileForm from "@/components/SizeProfileForm";
 import CalendlyEmbed from "@/components/CalendlyEmbed";
@@ -10,18 +10,37 @@ import { SITE } from "@/lib/site";
 
 // MVP launch funnel. The shop can't take orders online yet, so every CTA on the
 // site lands here and picks one of two actions:
-//   1. Make your appointment — either for a wedding party or for yourself, then Calendly.
-//      A wedding-party booking also produces a shareable link (see ShareBox) that
-//      out-of-town groomsmen use to submit measurements for that wedding.
+//   1. Make your appointment — for a wedding party or for yourself, then Calendly.
+//      A wedding-party booking also builds a shareable link (see ShareBox) so
+//      out-of-town guests can submit measurements for that wedding.
 //   2. Submit your measurements — for out-of-town guests; measurements ride along
 //      inside the Calendly booking so they land on the shop's calendar invite.
-// The old order flow (bag / order confirmation) is hidden, not deleted.
+// Design rule: ask only what the shop can't fill in itself. Anything the staff
+// capture in store (address, styles, prices, payment) is deliberately NOT asked
+// here — the legacy in-store order sheet is the reference. The old order flow
+// (bag / order confirmation) is hidden, not deleted.
 
 type Path = "appointment" | "measurements";
 type Who = "wedding" | "myself";
+type PartyMember = { role: string; name: string };
 
 const EVENT_TYPES = ["Gala or benefit", "Prom", "Quinceañera", "Awards or premiere", "Wedding guest", "Other"];
 const FORMALITY_OPTIONS = ["Not sure yet", "Black tie", "Black tie optional", "Semi-formal", "Casual / beach"];
+// Roles mirror the shop's in-store "Wedding Party Info" sheet.
+const PARTY_ROLES = [
+  "Groom",
+  "Best Man",
+  "Groomsman",
+  "Jr. Groomsman",
+  "Father of the Bride",
+  "Father of the Groom",
+  "Grandfather",
+  "Ring Bearer",
+  "Usher",
+  "Other",
+];
+const HEARD_OPTIONS = ["", "Instagram", "Facebook", "Google", "Friend or family", "Drove by", "Other"];
+const MAX_PARTY = 25;
 
 const fieldClass =
   "w-full border border-input bg-card px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-highlight";
@@ -79,20 +98,43 @@ const parseEntry = (value: string | null): { path: Path | null; who: Who } => {
   return { path: null, who: "wedding" };
 };
 
-// Shareable link for a wedding party. Stateless on purpose: the wedding's name
-// and date live in the URL, so there's nothing to store or look up. Opening it
-// lands a guest on the measurements path with the wedding already filled in.
-const buildShareUrl = (weddingOf: string, date: string) => {
+// "|" and "~" delimit the party in the share link, so keep them out of names.
+const clean = (s: string) => s.replace(/[|~]/g, " ").trim();
+
+const encodeParty = (party: PartyMember[]) =>
+  party
+    .filter((m) => m.name.trim())
+    .slice(0, MAX_PARTY)
+    .map((m) => `${clean(m.role)}~${clean(m.name)}`)
+    .join("|");
+
+const decodeParty = (raw: string | null): PartyMember[] =>
+  (raw ?? "")
+    .split("|")
+    .slice(0, MAX_PARTY)
+    .map((chunk) => {
+      const [role, ...rest] = chunk.split("~");
+      return { role: role?.trim() ?? "", name: rest.join("~").trim() };
+    })
+    .filter((m) => m.name);
+
+// Shareable link for a wedding party. Stateless on purpose: the wedding's name,
+// date and party list live in the URL, so there's nothing to store or look up.
+// Opening it lands a guest on the measurements path with the wedding filled in
+// and a dropdown of the party to pick their name from.
+const buildShareUrl = (weddingLabel: string, date: string, party: PartyMember[]) => {
   const url = new URL("/book", window.location.origin);
   url.searchParams.set("for", "measurements");
-  if (weddingOf.trim()) url.searchParams.set("wedding", weddingOf.trim());
+  if (weddingLabel.trim()) url.searchParams.set("wedding", weddingLabel.trim());
   if (date) url.searchParams.set("date", date);
+  const encoded = encodeParty(party);
+  if (encoded) url.searchParams.set("party", encoded);
   return url.toString();
 };
 
-const ShareBox = ({ weddingOf, date }: { weddingOf: string; date: string }) => {
+const ShareBox = ({ weddingLabel, date, party }: { weddingLabel: string; date: string; party: PartyMember[] }) => {
   const [copied, setCopied] = useState(false);
-  const url = buildShareUrl(weddingOf, date);
+  const url = buildShareUrl(weddingLabel, date, party);
   const canShare = typeof navigator !== "undefined" && typeof navigator.share === "function";
 
   const copy = async () => {
@@ -111,8 +153,8 @@ const ShareBox = ({ weddingOf, date }: { weddingOf: string; date: string }) => {
     <div className="mt-6 border border-ink p-5">
       <p className="eyebrow">Share with your wedding party</p>
       <p className="mt-2 text-sm text-muted-foreground">
-        Send this link to out-of-town groomsmen. It opens a short form for them to submit their measurements for your
-        wedding.
+        Send this link to out-of-town guests. It opens a short form for them to submit their measurements for your
+        wedding{party.some((m) => m.name.trim()) ? ", with your party list ready to pick their name from" : ""}.
       </p>
       <input
         readOnly
@@ -162,21 +204,43 @@ const Book = () => {
     // A shared link's date always wins over whatever was saved locally.
     ...(searchParams.get("date") ? { eventDate: searchParams.get("date") as string } : {}),
   }));
-  // Wedding name: used by the wedding-party appointment and by guests submitting
-  // measurements. Prefilled from a shared link.
+
+  // Wedding-party appointment: who is getting married, plus the optional extras
+  // from the in-store sheet.
+  const [groomName, setGroomName] = useState("");
+  const [brideName, setBrideName] = useState("");
+  const [weddingLocation, setWeddingLocation] = useState("");
+  const [howHeard, setHowHeard] = useState("");
+  const [firstStore, setFirstStore] = useState("");
+  const [party, setParty] = useState<PartyMember[]>([{ role: "Best Man", name: "" }]);
+
+  // Measurements path: the wedding comes from a shared link (or is typed), and the
+  // guest can pick their own name from the party list the groom entered.
   const [weddingOf, setWeddingOf] = useState(searchParams.get("wedding") ?? "");
+  const [role, setRole] = useState("Groomsman");
+  const sharedParty = decodeParty(searchParams.get("party"));
   const cameFromShareLink = path === "measurements" && !!searchParams.get("wedding");
+
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [openStep, setOpenStep] = useState(1);
   const [maxUnlocked, setMaxUnlocked] = useState(1);
   const [showValidation, setShowValidation] = useState(false);
 
-  // Appointment = details -> Calendly (2 steps). Measurements = about you -> sizes -> Calendly (3).
-  const TOTAL_STEPS = path === "measurements" ? 3 : 2;
   const isWeddingParty = path === "appointment" && who === "wedding";
+  // wedding appointment = details -> party -> Calendly (3); myself = details -> Calendly (2);
+  // measurements = about you -> sizes -> Calendly (3).
+  const TOTAL_STEPS = path === "appointment" && who === "myself" ? 2 : 3;
+  const weddingLabel = [groomName.trim(), brideName.trim()].filter(Boolean).join(" & ");
 
   const selectPath = (p: Path | null) => {
     setPathState(p);
+    setOpenStep(1);
+    setMaxUnlocked(1);
+    setShowValidation(false);
+  };
+
+  const changeWho = (w: Who) => {
+    setWho(w);
     setOpenStep(1);
     setMaxUnlocked(1);
     setShowValidation(false);
@@ -188,7 +252,7 @@ const Book = () => {
       ? baseFilled && weddingOf.trim() !== "" && form.height.trim() !== "" && form.weight.trim() !== ""
       : baseFilled &&
         form.eventDate.trim() !== "" &&
-        (who === "wedding" ? form.partySize.trim() !== "" && weddingOf.trim() !== "" : true);
+        (who === "wedding" ? form.partySize.trim() !== "" && groomName.trim() !== "" : true);
 
   const goToStep = (n: number) => {
     if (n <= maxUnlocked) setOpenStep(n);
@@ -220,15 +284,17 @@ const Book = () => {
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openStep, path]);
+  }, [openStep, path, who]);
 
   // One-line summary of whatever the guest saved in the size form, so it can
-  // travel inside a single Calendly answer.
+  // travel inside a single Calendly answer. Coat length and shoe width are stored
+  // alongside the measurements but aren't inches.
+  const UNITLESS = new Set(["coatLength", "shoeWidth"]);
   const measurementsSummary = (() => {
     const parts: string[] = [];
     if (sizeProfile.method === "measurements" && sizeProfile.measurements) {
       const m = Object.entries(sizeProfile.measurements)
-        .filter(([, v]) => v && v.trim() !== "")
+        .filter(([k, v]) => !UNITLESS.has(k) && v && v.trim() !== "")
         .map(([k, v]) => `${k} ${v}"`);
       if (m.length) parts.push(m.join(", "));
     }
@@ -238,25 +304,43 @@ const Book = () => {
       );
       if (b.length) parts.push(b.join("; "));
     }
+    if (sizeProfile.measurements?.coatLength) parts.push(`coat length ${sizeProfile.measurements.coatLength}`);
     if (sizeProfile.shoeSize) parts.push(`shoe ${sizeProfile.shoeSize}`);
+    if (sizeProfile.measurements?.shoeWidth) parts.push(`shoe width ${sizeProfile.measurements.shoeWidth}`);
     if (sizeProfile.beltSize) parts.push(`belt ${sizeProfile.beltSize}`);
     return parts.join(" | ");
   })();
+
+  // Wedding-party details that don't have their own Calendly question ride along
+  // in the Notes answer (Calendly allows 10 questions in total).
+  const partyText = party
+    .filter((m) => m.name.trim())
+    .map((m) => `${m.role}: ${m.name.trim()}`)
+    .join("; ");
+  const weddingNotes = [
+    form.notes.trim(),
+    weddingLocation.trim() && `Location: ${weddingLocation.trim()}`,
+    howHeard && `Heard via: ${howHeard}`,
+    firstStore && `First store visited: ${firstStore}`,
+    partyText && `Party: ${partyText}`,
+  ]
+    .filter(Boolean)
+    .join(" | ");
 
   // Calendly "Invitee Questions" fill from a1, a2, a3... in the exact order they
   // are listed on the Calendly event type. See docs/STATUS.md.
   const calendlyAnswers =
     path === "measurements"
-      ? [form.phone, form.eventDate, weddingOf, form.height, form.weight, measurementsSummary, form.notes]
+      ? [form.phone, form.eventDate, weddingOf, role, form.height, form.weight, measurementsSummary, form.notes]
       : [
           form.phone,
           who === "wedding" ? "Wedding party" : "Myself",
           who === "wedding" ? "Wedding" : form.eventType,
           form.eventDate,
-          who === "wedding" ? weddingOf : "",
+          who === "wedding" ? weddingLabel : "",
           who === "wedding" ? form.partySize : "",
           who === "wedding" ? form.formality : "",
-          form.notes,
+          who === "wedding" ? weddingNotes : form.notes,
           who === "myself" ? form.height : "",
           who === "myself" ? form.weight : "",
         ];
@@ -286,7 +370,7 @@ const Book = () => {
   const nameEmailPhone = (
     <>
       <label className="block">
-        <span className="eyebrow">Name *</span>
+        <span className="eyebrow">Your name *</span>
         <input
           required
           value={form.name}
@@ -317,6 +401,8 @@ const Book = () => {
     </>
   );
 
+  const progressLabel = TOTAL_STEPS === 2 ? "Two quick steps" : "Three quick steps";
+
   return (
     <>
       <Seo
@@ -328,7 +414,8 @@ const Book = () => {
         <p className="eyebrow">Mr. Tux</p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl">How can we help?</h1>
         <p className="mt-4 text-sm text-muted-foreground">
-          Registering a wedding is free. Pricing is confirmed by our team in person.
+          Registering a wedding is free, with no deposit online — a first payment is taken in store when you reserve.
+          Pricing is confirmed by our team in person.
         </p>
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
@@ -364,7 +451,7 @@ const Book = () => {
         {path && (
           <>
             <div className="mt-14 flex items-center justify-between border-t border-border pt-6">
-              <p className="eyebrow">{path === "measurements" ? "Three quick steps" : "Two quick steps"}</p>
+              <p className="eyebrow">{progressLabel}</p>
               <button
                 type="button"
                 onClick={() => selectPath(null)}
@@ -381,7 +468,7 @@ const Book = () => {
                     key={w}
                     type="button"
                     aria-pressed={who === w}
-                    onClick={() => setWho(w)}
+                    onClick={() => changeWho(w)}
                     className={`flex-1 py-3 text-[11px] uppercase tracking-[0.18em] transition-colors ${
                       who === w ? "bg-ink text-primary-foreground" : "text-muted-foreground hover:text-foreground"
                     }`}
@@ -456,13 +543,21 @@ const Book = () => {
                   )}
                   {who === "wedding" && (
                     <>
-                      <label className="block sm:col-span-2">
-                        <span className="eyebrow">Whose wedding? (groom or party name) *</span>
+                      <label className="block">
+                        <span className="eyebrow">Groom's name *</span>
                         <input
                           required
-                          value={weddingOf}
-                          onChange={(e) => setWeddingOf(e.target.value)}
-                          className={`${fieldClass} mt-2 ${err(!weddingOf.trim())}`}
+                          value={groomName}
+                          onChange={(e) => setGroomName(e.target.value)}
+                          className={`${fieldClass} mt-2 ${err(!groomName.trim())}`}
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="eyebrow">Bride's name</span>
+                        <input
+                          value={brideName}
+                          onChange={(e) => setBrideName(e.target.value)}
+                          className={`${fieldClass} mt-2`}
                         />
                       </label>
                       <label className="block">
@@ -505,18 +600,62 @@ const Book = () => {
                   </label>
                 </div>
 
+                {who === "wedding" && (
+                  <details className="mt-6 border border-border p-4">
+                    <summary className="cursor-pointer text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                      A little more (optional)
+                    </summary>
+                    <div className="mt-4 grid gap-5 sm:grid-cols-2">
+                      <label className="block sm:col-span-2">
+                        <span className="eyebrow">Wedding location</span>
+                        <input
+                          value={weddingLocation}
+                          onChange={(e) => setWeddingLocation(e.target.value)}
+                          className={`${fieldClass} mt-2`}
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="eyebrow">How did you hear about us?</span>
+                        <select
+                          value={howHeard}
+                          onChange={(e) => setHowHeard(e.target.value)}
+                          className={`${fieldClass} mt-2`}
+                        >
+                          {HEARD_OPTIONS.map((h) => (
+                            <option key={h} value={h}>
+                              {h || "Select"}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label className="block">
+                        <span className="eyebrow">Are we the first store you've visited?</span>
+                        <select
+                          value={firstStore}
+                          onChange={(e) => setFirstStore(e.target.value)}
+                          className={`${fieldClass} mt-2`}
+                        >
+                          <option value="">Select</option>
+                          <option>Yes</option>
+                          <option>No</option>
+                        </select>
+                      </label>
+                    </div>
+                  </details>
+                )}
+
                 {termsCheckbox}
 
                 {showValidation && !requiredFilled && (
                   <p className="mt-4 text-sm text-destructive">
                     {who === "wedding"
-                      ? "Wedding date, whose wedding, party size, name, email, phone and agreeing to the Terms & Conditions are required to continue."
+                      ? "Wedding date, groom's name, party size, your name, email, phone and agreeing to the Terms & Conditions are required to continue."
                       : "Event date, name, email, phone and agreeing to the Terms & Conditions are required to continue."}
                   </p>
                 )}
 
                 <Button variant="ink" size="lg" className="mt-6 h-12 px-8" onClick={continueFromContact}>
-                  Continue to Booking
+                  {who === "wedding" ? "Continue to Your Party" : "Continue to Booking"}
                 </Button>
               </Step>
             ) : (
@@ -534,7 +673,37 @@ const Book = () => {
                 onHeaderClick={() => goToStep(1)}
               >
                 <div className="grid gap-5 sm:grid-cols-2">
+                  {sharedParty.length > 0 && (
+                    <label className="block sm:col-span-2">
+                      <span className="eyebrow">Find your name in the party</span>
+                      <select
+                        defaultValue=""
+                        onChange={(e) => {
+                          const m = sharedParty[Number(e.target.value)];
+                          if (!m) return;
+                          setForm((f) => ({ ...f, name: m.name }));
+                          if (PARTY_ROLES.includes(m.role)) setRole(m.role);
+                        }}
+                        className={`${fieldClass} mt-2`}
+                      >
+                        <option value="">I'm not listed</option>
+                        {sharedParty.map((m, i) => (
+                          <option key={`${m.name}-${i}`} value={i}>
+                            {m.name} — {m.role}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  )}
                   {nameEmailPhone}
+                  <label className="block">
+                    <span className="eyebrow">Your role *</span>
+                    <select value={role} onChange={(e) => setRole(e.target.value)} className={`${fieldClass} mt-2`}>
+                      {PARTY_ROLES.map((r) => (
+                        <option key={r}>{r}</option>
+                      ))}
+                    </select>
+                  </label>
                   <label className="block">
                     <span className="eyebrow">Wedding date</span>
                     <input
@@ -544,8 +713,8 @@ const Book = () => {
                       className={`${fieldClass} mt-2`}
                     />
                   </label>
-                  <label className="block">
-                    <span className="eyebrow">Whose wedding? (groom or party name) *</span>
+                  <label className="block sm:col-span-2">
+                    <span className="eyebrow">Whose wedding? (groom &amp; bride) *</span>
                     <input
                       required
                       value={weddingOf}
@@ -599,6 +768,74 @@ const Book = () => {
               </Step>
             )}
 
+            {/* Step 2 — wedding party roster (wedding-party appointment only) */}
+            {isWeddingParty && (
+              <Step
+                index={2}
+                title="Your wedding party"
+                description="Optional, but it saves time at your fitting: add who's in the party and we'll have their names ready. Your out-of-town guests can then pick their name from this list."
+                isOpen={openStep === 2}
+                isComplete={maxUnlocked > 2}
+                isLocked={maxUnlocked < 2}
+                onHeaderClick={() => goToStep(2)}
+              >
+                <div className="space-y-3">
+                  {party.map((m, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <select
+                        aria-label={`Role for person ${i + 1}`}
+                        value={m.role}
+                        onChange={(e) => setParty(party.map((p, j) => (j === i ? { ...p, role: e.target.value } : p)))}
+                        className={`${fieldClass} w-40 shrink-0`}
+                      >
+                        {PARTY_ROLES.filter((r) => r !== "Groom").map((r) => (
+                          <option key={r}>{r}</option>
+                        ))}
+                      </select>
+                      <input
+                        aria-label={`Name for person ${i + 1}`}
+                        placeholder="Full name"
+                        value={m.name}
+                        onChange={(e) => setParty(party.map((p, j) => (j === i ? { ...p, name: e.target.value } : p)))}
+                        className={`${fieldClass} min-w-0 flex-1`}
+                      />
+                      {party.length > 1 && (
+                        <button
+                          type="button"
+                          aria-label={`Remove person ${i + 1}`}
+                          onClick={() => setParty(party.filter((_, j) => j !== i))}
+                          className="mt-2.5 text-muted-foreground hover:text-foreground"
+                        >
+                          <X size={16} />
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {party.length < MAX_PARTY && (
+                  <button
+                    type="button"
+                    onClick={() => setParty([...party, { role: "Groomsman", name: "" }])}
+                    className="mt-4 text-[11px] uppercase tracking-[0.2em] link-underline"
+                  >
+                    + Add another
+                  </button>
+                )}
+                <div className="mt-6 flex flex-wrap items-center gap-5">
+                  <Button variant="ink" size="lg" className="h-12 px-8" onClick={() => completeStep(2)}>
+                    Continue to Booking
+                  </Button>
+                  <button
+                    type="button"
+                    onClick={() => completeStep(2)}
+                    className="text-[11px] uppercase tracking-[0.2em] link-underline text-muted-foreground"
+                  >
+                    Skip for now
+                  </button>
+                </div>
+              </Step>
+            )}
+
             {/* Step 2 — measurements path only */}
             {path === "measurements" && (
               <Step
@@ -632,7 +869,7 @@ const Book = () => {
                 calendlyUrl={calendlyUrl}
                 prefill={{ name: form.name, email: form.email, answers: calendlyAnswers }}
               />
-              {isWeddingParty && <ShareBox weddingOf={weddingOf} date={form.eventDate} />}
+              {isWeddingParty && <ShareBox weddingLabel={weddingLabel} date={form.eventDate} party={party} />}
               <div className="mt-6 flex flex-wrap items-center gap-5">
                 <Button variant="ink" size="lg" className="h-12 px-8" onClick={() => completeStep(TOTAL_STEPS)}>
                   I've Booked My Time
@@ -655,7 +892,7 @@ const Book = () => {
                     ? "We have your measurements. Our team will be in touch if we need anything else."
                     : "We have your details. Our team will see you at your appointment — or call us any time."}
                 </p>
-                {isWeddingParty && <ShareBox weddingOf={weddingOf} date={form.eventDate} />}
+                {isWeddingParty && <ShareBox weddingLabel={weddingLabel} date={form.eventDate} party={party} />}
                 <a
                   href={SITE.phoneHref}
                   className="mt-6 inline-flex h-12 items-center justify-center bg-ink px-8 text-xs uppercase tracking-[0.18em] text-primary-foreground"

@@ -7,7 +7,7 @@ const Collection = () => (
   <>
     <Seo
       title="The Collection — Tuxedos & Dinner Jackets | Mr. Tux"
-      description="Browse the Mr. Tux collection: black, grey, blue, tan, white and more — one look per color family. Four-day rentals, fitted in-store at pickup."
+      description="Browse the Mr. Tux collection: black, grey, blue, tan, white and more — one look per color family. Fitted in-store at pickup."
     />
 
     <div className="mx-auto max-w-6xl px-5 lg:px-8 py-14 sm:py-20">
@@ -25,7 +25,7 @@ const Collection = () => (
             <h2 className="mt-1.5 font-display text-2xl">{look.name}</h2>
             <p className="mt-2 text-sm text-muted-foreground">{look.description}</p>
             <p className="mt-3 text-sm text-muted-foreground">
-              {look.rentalDays}-day rental · Prices vary
+              Prices vary
             </p>
           </Link>
         ))}

@@ -32,6 +32,7 @@ const MeasureDiagram = ({ kind }: { kind: string }) => (
       {kind === "waist" && <path d="M33 76 L67 76" />}
       {kind === "hips" && <path d="M32 94 L68 94" />}
       {kind === "inseam" && <path d="M51 106 L51 150" />}
+      {kind === "outseam" && <path d="M33 78 L36 150" />}
       {kind === "neck" && <ellipse cx="50" cy="27" rx="9" ry="3.5" />}
       {kind === "sleeve" && <path d="M50 29 L30 37 L21 92" />}
       {kind === "shoulder" && <path d="M30 36 Q50 29 70 36" />}

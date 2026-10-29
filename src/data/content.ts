@@ -33,15 +33,15 @@ export const faqs = [
   },
   {
     q: "Is there a deposit?",
-    a: "No deposit. Pricing varies by look and accessories, and we confirm your total before your order is accepted.",
+    a: "No deposit is taken online. When you reserve your order in the store, a first payment is required — $50 for a wedding party, $100 for an individual rental — and it is non-refundable if the order is cancelled. Pricing varies by look and accessories, and we confirm your total before your order is accepted.",
   },
   {
     q: "When can I pick up my rental?",
-    a: "Your look is ready for pickup two to three days before your event date, and yours for a four-day window from pickup.",
+    a: "Pickup is Wednesday and Thursday after 2:00 pm, and Friday after 1:00 pm. A final try-on is required for our fit guarantee, so plan to try everything on when you pick up. Event on a different day? Call us and we'll sort out the timing.",
   },
   {
     q: "How do I return it?",
-    a: "Bring it back to the shop, or mail it back with the prepaid label already in the bag — whichever's easier for you.",
+    a: "Bring it back to the shop, or mail it back with the prepaid label already in the bag — whichever's easier for you. Returns are due the day after your event. Late returns are charged $50 per day, plus any additional rental charges.",
   },
   {
     q: "Can you dress a whole wedding party?",
@@ -53,7 +53,7 @@ export const faqs = [
   },
   {
     q: "What if my event date moves?",
-    a: "Write to us or start a visit and we'll move the rental window at no charge, subject to availability.",
+    a: "Write to us or start a visit and we'll move the rental window, subject to availability. For weddings, changes made at least one month before the date avoid change-order charges.",
   },
 ];
 

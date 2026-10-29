@@ -29,7 +29,7 @@ const LookDetail = () => {
     <>
       <Seo
         title={`${look.name} — ${look.collection} | Mr. Tux`}
-        description={`${look.description} A ${look.rentalDays}-day rental. Prices vary — call or stop by for a quote.`}
+        description={`${look.description} Prices vary — call or stop by for a quote.`}
       />
 
       <div className="mx-auto max-w-6xl px-5 lg:px-8 py-10 sm:py-14">
@@ -52,7 +52,7 @@ const LookDetail = () => {
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{look.description}</p>
             <p className="mt-6 font-display text-2xl">Prices vary</p>
             <p className="text-sm text-muted-foreground">
-              {look.rentalDays}-day rental · no deposit · final pricing confirmed with our team
+              No deposit online · final pricing confirmed with our team
             </p>
 
             <div className="mt-8 border-t border-border pt-6">

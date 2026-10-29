@@ -28,10 +28,12 @@ ordering is a later phase. What changed:
 - Measurements and registrations travel **inside the Calendly booking** as prefilled answers —
   there is no separate database write. Calendly Invitee Questions, in this exact order:
   - Appointment (`SITE.calendlyUrlWedding`): Phone, Booking for (Wedding party / Myself),
-    Occasion, Event date, Whose wedding, Party size, Formality, Notes, Height, Weight. (Wedding-only
-    answers are blank for "Myself" bookings; Height/Weight are "Myself"-only and optional.)
-  - Measurements (`SITE.calendlyUrlMeasurements`): Phone, Wedding date, Whose wedding, Height,
-    Weight, Measurements (long text), Notes.
+    Occasion, Event date, Groom & bride, Party size, Formality, Notes (long text), Height, Weight.
+    (Wedding-only answers are blank for "Myself" bookings; Height/Weight are "Myself"-only. For a
+    wedding party, Notes also carries the wedding location, how they heard, first-store-visited
+    and the party roster — Calendly allows 10 questions max.)
+  - Measurements (`SITE.calendlyUrlMeasurements`): Phone, Wedding date, Groom & bride, Role,
+    Height, Weight, Measurements (long text), Notes.
   Both URLs currently fall back to the same Calendly link; create two event types and swap them
   in `src/lib/site.ts`. Calendly requires picking a time slot, so measurement submitters book a
   short call.
@@ -39,6 +41,28 @@ ordering is a later phase. What changed:
   (details step + again on the closing screen). It's stateless — `/book?for=measurements&wedding=<name>&date=<date>` —
   so nothing is stored; guests who open it land on Submit Your Measurements with the wedding
   already filled in. Built in `ShareBox` in `src/pages/Book.tsx`.
+- **Harmonized with the in-store paperwork (Oct 2026).** Rule: only ask what staff can't fill in
+  themselves. Wedding party: date, groom (bride optional), party size, contact, then an optional
+  party roster (roles from the in-store "Wedding Party Info" sheet) that rides in the share link
+  as `party=Role~Name|Role~Name` so out-of-town guests pick their name from a dropdown. Optional
+  extras (location, how heard, first store) are tucked into a collapsed section. Not asked online
+  on purpose: address, styles/prices, driver's license, card/payment. Measurements form adds
+  outseam, coat length and shoe width (the legacy site form's fields). Names in the share link
+  are visible in the URL — fine for a wedding party, revisit if the shop adds accounts.
+- **RESOLVED (Oct 2026):** web copy stays "no deposit online"; Terms/FAQs now say a **first
+  payment** is taken in store: **$50 wedding party / $100 individual** (non-refundable if
+  cancelled — confirm the wedding $50 is non-refundable too). Hours follow the contract (Tue–Fri 12–6, Sat 11–5; Sun–Mon "Closed" is
+  an assumption — confirm). Returns are due the day after the event, $50/day late fee; pickup
+  Wed/Thu after 2pm, Fri after 1pm. "4-day rental" labels removed. Original contradictions
+  for reference:
+  1. Site says "no deposit" in many places; the rental contract says a **$100 non-refundable
+     first payment** is required (the in-store order sheet says $50, the old web form says $100).
+  2. Hours: site says Mon–Fri 10–7, Sat 10–5, Sun by appt; the contract prints Tue–Fri 12–6,
+     Sat 11–5.
+  3. Terms: contract has a **$50/day late fee**, return the day after the use date, final try-on
+     required, damage waiver, pickup Wed/Thu after 2pm, Fri after 1pm. Site copy says "4-day
+     rental / return by". Entire party must be fitted within 30 days of reservation; changes
+     due one month before the wedding.
 - **Hover photos:** a look can carry an optional `hoverImage` (`src/data/looks.ts`); its card on
   the homepage teaser and `/collection` fades to it on hover (`LookCardImage`). Done so far:
   GiNovia Becket, Ike Behar Blake, Couture Dominic, Ike Behar Waverly. The homepage teaser's 4th

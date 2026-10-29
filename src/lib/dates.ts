@@ -7,11 +7,14 @@ export const formatDate = fmt;
 // delivery_from/delivery_to columns don't need a migration), but nothing ships —
 // every UI label calls this a "pickup window" now. Customers come to the shop,
 // get fitted to their exact size, and pick up their order. See docs/STATUS.md.
-export const rentalWindow = (eventDate?: string, rentalDays = 4) => {
+// Returns are due the day AFTER the event (the contract's "Use Date"); $50/day late
+// fee after that. The pickup window is still a placeholder estimate — real pickup
+// times are Wed/Thu after 2pm and Fri after 1pm (see Terms and FAQs).
+export const rentalWindow = (eventDate?: string) => {
   const base = eventDate ? new Date(`${eventDate}T12:00:00`) : new Date(Date.now() + 14 * 864e5);
   const from = new Date(base.getTime() - 3 * 864e5);
   const to = new Date(base.getTime() - 2 * 864e5);
-  const returnBy = new Date(from.getTime() + rentalDays * 864e5);
+  const returnBy = new Date(base.getTime() + 1 * 864e5);
   return {
     deliveryFrom: fmt(from),
     deliveryTo: fmt(to),

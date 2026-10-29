@@ -23,9 +23,9 @@ export const SITE = {
     },
   },
   hours: [
-    { days: "Monday – Friday", time: "10:00 – 7:00" },
-    { days: "Saturday", time: "10:00 – 5:00" },
-    { days: "Sunday", time: "By appointment" },
+    { days: "Tuesday – Friday", time: "12pm – 6pm" },
+    { days: "Saturday", time: "11am – 5pm" },
+    { days: "Sunday – Monday", time: "Closed" },
   ],
   socials: [
     { label: "Instagram", href: "https://instagram.com" },

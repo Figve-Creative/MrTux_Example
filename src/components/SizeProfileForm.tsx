@@ -8,6 +8,7 @@ const MEASUREMENTS = [
   { key: "waist", label: "Waist", hint: "At the natural waist, over a shirt." },
   { key: "hips", label: "Hips", hint: "Around the seat at its fullest." },
   { key: "inseam", label: "Inseam", hint: "Crotch to top of the shoe." },
+  { key: "outseam", label: "Outseam", hint: "Waist down the outside of the leg to the shoe." },
   { key: "neck", label: "Neck", hint: "Where the collar sits, plus a finger." },
   { key: "sleeve", label: "Sleeve", hint: "Centre back neck to wrist bone." },
   { key: "shoulder", label: "Shoulder", hint: "Seam to seam across the back." },
@@ -18,7 +19,9 @@ const JACKETS = ["36S", "36R", "38S", "38R", "40R", "40L", "42R", "42L", "44R", 
 const TROUSERS = ["28", "30", "32", "34", "36", "38", "40", "42"];
 const SHIRTS = ["14.5", "15", "15.5", "16", "16.5", "17", "17.5", "18"];
 const SHOES = ["7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", "11", "11.5", "12", "13", "14"];
-const BELTS = ["28", "30", "32", "34", "36", "38", "40", "42", "44"];
+const COAT_LENGTHS = ["Short", "Regular", "Long", "Extra long"];
+const SHOE_WIDTHS = ["Narrow", "Regular", "Wide"];
+const BELTS =["28", "30", "32", "34", "36", "38", "40", "42", "44"];
 
 const fieldClass =
   "w-full border border-input bg-card px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-highlight";
@@ -138,6 +141,34 @@ const SizeProfileForm = ({ onSaved }: { onSaved?: () => void }) => {
           <select value={beltSize} onChange={(e) => setBeltSize(e.target.value)} className={`${fieldClass} mt-2`}>
             <option value="">Select</option>
             {BELTS.map((s) => (
+              <option key={s}>{s}</option>
+            ))}
+          </select>
+        </label>
+        {/* Coat length and shoe width live inside `measurements` (as unitless
+            entries) so they sync without a database change. */}
+        <label className="block">
+          <span className="eyebrow">Coat length</span>
+          <select
+            value={measurements.coatLength ?? ""}
+            onChange={(e) => setMeasurements({ ...measurements, coatLength: e.target.value })}
+            className={`${fieldClass} mt-2`}
+          >
+            <option value="">Select</option>
+            {COAT_LENGTHS.map((s) => (
+              <option key={s}>{s}</option>
+            ))}
+          </select>
+        </label>
+        <label className="block">
+          <span className="eyebrow">Shoe width</span>
+          <select
+            value={measurements.shoeWidth ?? ""}
+            onChange={(e) => setMeasurements({ ...measurements, shoeWidth: e.target.value })}
+            className={`${fieldClass} mt-2`}
+          >
+            <option value="">Select</option>
+            {SHOE_WIDTHS.map((s) => (
               <option key={s}>{s}</option>
             ))}
           </select>
