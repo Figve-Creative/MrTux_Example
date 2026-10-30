@@ -1,16 +1,19 @@
-// Small line-art figure with the part being measured highlighted, shown next to
-// each field in the size form. Drawn as inline SVG so it needs no image files,
-// scales cleanly and picks up the site colors. Decorative: the hint text beside
-// it carries the same instruction for screen readers.
+import { useState } from "react";
+import { Info } from "lucide-react";
 
-export type MeasureKind = "chest" | "waist" | "hips" | "inseam" | "neck" | "sleeve" | "shoulder";
+// Line-art figure with the part being measured marked in red. Drawn as inline SVG
+// so it needs no image files, scales cleanly and costs nothing to load.
+// Decorative: the hint text under the field carries the same instruction for
+// screen readers.
 
-const MeasureDiagram = ({ kind }: { kind: string }) => (
+export type MeasureKind = "chest" | "waist" | "hips" | "inseam" | "outseam" | "neck" | "sleeve" | "shoulder";
+
+export const MeasureDiagram = ({ kind, className = "h-36 w-24" }: { kind: string; className?: string }) => (
   <svg
     viewBox="0 0 100 160"
     aria-hidden="true"
     focusable="false"
-    className="h-24 w-16 shrink-0 border border-border bg-surface"
+    className={`shrink-0 ${className}`}
     fill="none"
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -27,7 +30,7 @@ const MeasureDiagram = ({ kind }: { kind: string }) => (
     </g>
 
     {/* The measurement */}
-    <g className="text-highlight" stroke="currentColor" strokeWidth="2.4" strokeDasharray="4 3">
+    <g className="text-red-600" stroke="currentColor" strokeWidth="2.6" strokeDasharray="4 3">
       {kind === "chest" && <path d="M28 52 L72 52" />}
       {kind === "waist" && <path d="M33 76 L67 76" />}
       {kind === "hips" && <path d="M32 94 L68 94" />}
@@ -40,4 +43,37 @@ const MeasureDiagram = ({ kind }: { kind: string }) => (
   </svg>
 );
 
-export default MeasureDiagram;
+// Small (i) button next to a field label. The diagram pops up on hover or keyboard
+// focus; tapping the button toggles it on touch screens.
+const MeasureHelp = ({ kind, label }: { kind: string; label: string }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <span className="group relative inline-flex">
+      <button
+        type="button"
+        aria-label={`How to measure: ${label}`}
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        onBlur={() => setOpen(false)}
+        onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
+        className="text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground"
+      >
+        <Info size={15} />
+      </button>
+      <span
+        role="tooltip"
+        className={`pointer-events-none absolute left-0 top-full z-30 mt-2 w-32 border border-border bg-card p-2 shadow-md ${
+          open ? "block" : "hidden"
+        } group-hover:block group-focus-within:block`}
+      >
+        <MeasureDiagram kind={kind} className="mx-auto h-36 w-24" />
+        <span className="mt-1 block text-center text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+          {label}
+        </span>
+      </span>
+    </span>
+  );
+};
+
+export default MeasureHelp;

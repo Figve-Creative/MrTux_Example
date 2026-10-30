@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SizeProfile, useApp } from "@/context/AppContext";
-import MeasureDiagram from "@/components/MeasureDiagram";
+import MeasureHelp from "@/components/MeasureDiagram";
 
 const MEASUREMENTS = [
   { key: "chest", label: "Chest", hint: "Around the fullest part, arms down." },
@@ -67,22 +67,25 @@ const SizeProfileForm = ({ onSaved }: { onSaved?: () => void }) => {
       {method === "measurements" ? (
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
           {MEASUREMENTS.map((f) => (
-            <label key={f.key} className="block">
-              <span className="eyebrow">{f.label}</span>
-              <div className="mt-2 flex items-start gap-3">
-                <div className="min-w-0 flex-1">
-                  <input
-                    inputMode="decimal"
-                    placeholder="inches"
-                    value={measurements[f.key] ?? ""}
-                    onChange={(e) => setMeasurements({ ...measurements, [f.key]: e.target.value })}
-                    className={fieldClass}
-                  />
-                  <span className="mt-1.5 block text-[11px] text-muted-foreground">{f.hint}</span>
-                </div>
-                <MeasureDiagram kind={f.key} />
+            // A div + htmlFor (not a wrapping <label>) so the help button next to the
+            // label doesn't become the label's "control" instead of the input.
+            <div key={f.key} className="block">
+              <div className="flex items-center gap-2">
+                <label htmlFor={`measure-${f.key}`} className="eyebrow">
+                  {f.label}
+                </label>
+                <MeasureHelp kind={f.key} label={f.label} />
               </div>
-            </label>
+              <input
+                id={`measure-${f.key}`}
+                inputMode="decimal"
+                placeholder="inches"
+                value={measurements[f.key] ?? ""}
+                onChange={(e) => setMeasurements({ ...measurements, [f.key]: e.target.value })}
+                className={`${fieldClass} mt-2`}
+              />
+              <span className="mt-1.5 block text-[11px] text-muted-foreground">{f.hint}</span>
+            </div>
           ))}
         </div>
       ) : (
