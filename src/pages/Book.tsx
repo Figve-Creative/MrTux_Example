@@ -42,6 +42,45 @@ const PARTY_ROLES = [
 const HEARD_OPTIONS = ["", "Instagram", "Facebook", "Google", "Friend or family", "Drove by", "Other"];
 const MAX_PARTY = 25;
 
+// Height 4'6" to 7'0" in 1" steps; weight in 5 lb steps. Staff re-measure at the
+// fitting, so these only need to be close.
+const HEIGHT_OPTIONS = [
+  ...Array.from({ length: 31 }, (_, i) => {
+    const total = 4 * 12 + 6 + i;
+    return `${Math.floor(total / 12)}'${total % 12}"`;
+  }),
+  `7'1" or taller`,
+];
+const WEIGHT_OPTIONS = [
+  "Under 100 lbs",
+  ...Array.from({ length: 51 }, (_, i) => `${100 + i * 5} lbs`),
+  "Over 350 lbs",
+];
+
+// A <select> that also keeps a value typed or saved earlier (e.g. "5'10 or 178cm"
+// from an older version of the form) instead of silently dropping it.
+const OptionSelect = ({
+  value,
+  options,
+  onChange,
+  className,
+  required,
+}: {
+  value: string;
+  options: string[];
+  onChange: (v: string) => void;
+  className?: string;
+  required?: boolean;
+}) => (
+  <select required={required} value={value} onChange={(e) => onChange(e.target.value)} className={className}>
+    <option value="">Select</option>
+    {value && !options.includes(value) && <option value={value}>{value}</option>}
+    {options.map((o) => (
+      <option key={o}>{o}</option>
+    ))}
+  </select>
+);
+
 const fieldClass =
   "w-full border border-input bg-card px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-highlight";
 
@@ -523,19 +562,19 @@ const Book = () => {
                     <>
                       <label className="block">
                         <span className="eyebrow">Height (optional)</span>
-                        <input
-                          placeholder="e.g. 5'10 or 178cm"
+                        <OptionSelect
                           value={form.height}
-                          onChange={(e) => setForm({ ...form, height: e.target.value })}
+                          options={HEIGHT_OPTIONS}
+                          onChange={(v) => setForm({ ...form, height: v })}
                           className={`${fieldClass} mt-2`}
                         />
                       </label>
                       <label className="block">
                         <span className="eyebrow">Weight (optional)</span>
-                        <input
-                          placeholder="e.g. 180 lbs"
+                        <OptionSelect
                           value={form.weight}
-                          onChange={(e) => setForm({ ...form, weight: e.target.value })}
+                          options={WEIGHT_OPTIONS}
+                          onChange={(v) => setForm({ ...form, weight: v })}
                           className={`${fieldClass} mt-2`}
                         />
                       </label>
@@ -724,21 +763,21 @@ const Book = () => {
                   </label>
                   <label className="block">
                     <span className="eyebrow">Height *</span>
-                    <input
+                    <OptionSelect
                       required
-                      placeholder="e.g. 5'10 or 178cm"
                       value={form.height}
-                      onChange={(e) => setForm({ ...form, height: e.target.value })}
+                      options={HEIGHT_OPTIONS}
+                      onChange={(v) => setForm({ ...form, height: v })}
                       className={`${fieldClass} mt-2 ${err(!form.height.trim())}`}
                     />
                   </label>
                   <label className="block">
                     <span className="eyebrow">Weight *</span>
-                    <input
+                    <OptionSelect
                       required
-                      placeholder="e.g. 180 lbs"
                       value={form.weight}
-                      onChange={(e) => setForm({ ...form, weight: e.target.value })}
+                      options={WEIGHT_OPTIONS}
+                      onChange={(v) => setForm({ ...form, weight: v })}
                       className={`${fieldClass} mt-2 ${err(!form.weight.trim())}`}
                     />
                   </label>
