@@ -25,18 +25,18 @@ ordering is a later phase. What changed:
 - `/book` is the single funnel: **Book an Appointment** (register wedding/event → Calendly) and
   **Submit Your Measurements** (out-of-town guests: about you → sizes → Calendly). Every CTA
   points here. `/start-your-order`, `/appointment` and `/wedding-parties` redirect to it.
-- Measurements and registrations travel **inside the Calendly booking** as prefilled answers —
-  there is no separate database write. Calendly Invitee Questions, in this exact order:
-  - Appointment (`SITE.calendlyUrlWedding`): Phone, Booking for (Wedding party / Myself),
+- **Appointments** travel inside the Calendly booking as prefilled answers — no database write.
+  **Submitted measurements do NOT use Calendly:** step 3 is a review + "Send My Measurements"
+  button that POSTs to Web3Forms (free, 250/mo), which emails `SITE.salesEmail`. Setup: go to
+  web3forms.com, enter sales@mrtuxstyles.com, copy the emailed access key into
+  `SITE.web3formsKey` in `src/lib/site.ts`. Until set, the button opens the visitor's email app
+  with the details filled in (fallback). Calendly: ONE event type (`SITE.calendlyUrl`) with
+  Invitee Questions in this exact order:
+  - Appointment: Phone, Booking for (Wedding party / Myself),
     Occasion, Event date, Groom & bride, Party size, Formality, Notes (long text), Height, Weight.
     (Wedding-only answers are blank for "Myself" bookings; Height/Weight are "Myself"-only. For a
     wedding party, Notes also carries the wedding location, how they heard, first-store-visited
     and the party roster — Calendly allows 10 questions max.)
-  - Measurements (`SITE.calendlyUrlMeasurements`): Phone, Wedding date, Groom & bride, Role,
-    Height, Weight, Measurements (long text), Notes.
-  Both URLs currently fall back to the same Calendly link; create two event types and swap them
-  in `src/lib/site.ts`. Calendly requires picking a time slot, so measurement submitters book a
-  short call.
 - **Shareable wedding link:** only shown after a *Wedding party* appointment is filled in
   (details step + again on the closing screen). It's stateless — `/book?for=measurements&wedding=<name>&date=<date>` —
   so nothing is stored; guests who open it land on Submit Your Measurements with the wedding

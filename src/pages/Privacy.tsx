@@ -11,7 +11,7 @@ const sections = [
   },
   {
     title: "Who can see it",
-    body: "Our staff, and the scheduling and return-shipping services required to fulfil your order. We do not sell or rent your information to anyone.",
+    body: "Our staff, and the scheduling, form-delivery (for submitted measurements) and return-shipping services required to fulfil your order. We do not sell or rent your information to anyone.",
   },
   {
     title: "How long we keep it",

@@ -368,23 +368,74 @@ const Book = () => {
 
   // Calendly "Invitee Questions" fill from a1, a2, a3... in the exact order they
   // are listed on the Calendly event type. See docs/STATUS.md.
-  const calendlyAnswers =
-    path === "measurements"
-      ? [form.phone, form.eventDate, weddingOf, role, form.height, form.weight, measurementsSummary, form.notes]
-      : [
-          form.phone,
-          who === "wedding" ? "Wedding party" : "Myself",
-          who === "wedding" ? "Wedding" : form.eventType,
-          form.eventDate,
-          who === "wedding" ? weddingLabel : "",
-          who === "wedding" ? form.partySize : "",
-          who === "wedding" ? form.formality : "",
-          who === "wedding" ? weddingNotes : form.notes,
-          who === "myself" ? form.height : "",
-          who === "myself" ? form.weight : "",
-        ];
+  const calendlyAnswers = [
+    form.phone,
+    who === "wedding" ? "Wedding party" : "Myself",
+    who === "wedding" ? "Wedding" : form.eventType,
+    form.eventDate,
+    who === "wedding" ? weddingLabel : "",
+    who === "wedding" ? form.partySize : "",
+    who === "wedding" ? form.formality : "",
+    who === "wedding" ? weddingNotes : form.notes,
+    who === "myself" ? form.height : "",
+    who === "myself" ? form.weight : "",
+  ];
 
-  const calendlyUrl = path === "measurements" ? SITE.calendlyUrlMeasurements : SITE.calendlyUrlWedding;
+  // Out-of-town measurements are NOT a Calendly booking (there's no appointment to
+  // make). They're emailed to the shop through Web3Forms (https://web3forms.com),
+  // a free form-to-email service: the access key in SITE.web3formsKey is public by
+  // design and is tied to the shop's inbox. Until that key is set, this falls back
+  // to opening the visitor's own email app with the details filled in.
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "sending" | "error">("idle");
+
+  const measurementFields = {
+    wedding: weddingOf,
+    wedding_date: form.eventDate,
+    role,
+    name: form.name,
+    email: form.email,
+    phone: form.phone,
+    height: form.height,
+    weight: form.weight,
+    measurements: measurementsSummary,
+    notes: form.notes.trim(),
+  };
+
+  const submitMeasurements = async () => {
+    setSubmitStatus("sending");
+    const subject = `Measurements — ${weddingOf} — ${form.name} (${role})`;
+
+    if (!SITE.web3formsKey) {
+      const body = Object.entries(measurementFields)
+        .filter(([, v]) => v)
+        .map(([k, v]) => `${k.replace("_", " ")}: ${v}`)
+        .join("\n");
+      window.location.href = `mailto:${SITE.salesEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setSubmitStatus("idle");
+      completeStep(TOTAL_STEPS);
+      return;
+    }
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: SITE.web3formsKey,
+          subject,
+          from_name: "Mr. Tux website",
+          botcheck: "",
+          ...measurementFields,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message || "Submission failed");
+      setSubmitStatus("idle");
+      completeStep(TOTAL_STEPS);
+    } catch {
+      setSubmitStatus("error");
+    }
+  };
 
   const termsCheckbox = (
     <label className="mt-6 flex items-start gap-2.5 text-sm">
@@ -890,13 +941,13 @@ const Book = () => {
               </Step>
             )}
 
-            {/* Final step — Calendly */}
+            {/* Final step — Calendly for appointments, a send button for measurements */}
             <Step
               index={TOTAL_STEPS}
               title={path === "measurements" ? "Send it in" : "Book your appointment"}
               description={
                 path === "measurements"
-                  ? "Pick any open time for a quick call with our team — your measurements are attached to the booking, so nothing else to send."
+                  ? "Review and send. Our team receives your measurements by email — no appointment needed."
                   : "Pick a time to come in — your details are attached to the booking. Already have a time booked? You can skip this."
               }
               isOpen={openStep === TOTAL_STEPS}
@@ -904,22 +955,58 @@ const Book = () => {
               isLocked={maxUnlocked < TOTAL_STEPS}
               onHeaderClick={() => goToStep(TOTAL_STEPS)}
             >
-              <CalendlyEmbed
-                calendlyUrl={calendlyUrl}
-                prefill={{ name: form.name, email: form.email, answers: calendlyAnswers }}
-              />
-              {isWeddingParty && <ShareBox weddingLabel={weddingLabel} date={form.eventDate} party={party} />}
-              <div className="mt-6 flex flex-wrap items-center gap-5">
-                <Button variant="ink" size="lg" className="h-12 px-8" onClick={() => completeStep(TOTAL_STEPS)}>
-                  I've Booked My Time
-                </Button>
-                <button
-                  onClick={() => completeStep(TOTAL_STEPS)}
-                  className="text-[11px] uppercase tracking-[0.2em] link-underline text-muted-foreground"
-                >
-                  Skip for now
-                </button>
-              </div>
+              {path === "measurements" ? (
+                <>
+                  <dl className="grid gap-x-6 gap-y-2 border border-border bg-surface p-5 text-sm sm:grid-cols-2">
+                    {(
+                      [
+                        ["Wedding", weddingOf],
+                        ["Role", role],
+                        ["Name", form.name],
+                        ["Email", form.email],
+                        ["Phone", form.phone],
+                        ["Height / weight", [form.height, form.weight].filter(Boolean).join(" / ")],
+                        ["Sizes", measurementsSummary || "None saved"],
+                      ] as const
+                    ).map(([k, v]) => (
+                      <div key={k} className={k === "Sizes" ? "sm:col-span-2" : ""}>
+                        <dt className="eyebrow">{k}</dt>
+                        <dd className="mt-0.5 break-words text-muted-foreground">{v || "—"}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  {submitStatus === "error" && (
+                    <p className="mt-4 text-sm text-destructive">
+                      That didn't go through. Please try again, or call us at {SITE.phone}.
+                    </p>
+                  )}
+                  <Button
+                    variant="ink"
+                    size="lg"
+                    className="mt-6 h-12 px-8"
+                    disabled={submitStatus === "sending"}
+                    onClick={submitMeasurements}
+                  >
+                    {submitStatus === "sending" ? "Sending…" : "Send My Measurements"}
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <CalendlyEmbed prefill={{ name: form.name, email: form.email, answers: calendlyAnswers }} />
+                  {isWeddingParty && <ShareBox weddingLabel={weddingLabel} date={form.eventDate} party={party} />}
+                  <div className="mt-6 flex flex-wrap items-center gap-5">
+                    <Button variant="ink" size="lg" className="h-12 px-8" onClick={() => completeStep(TOTAL_STEPS)}>
+                      I've Booked My Time
+                    </Button>
+                    <button
+                      onClick={() => completeStep(TOTAL_STEPS)}
+                      className="text-[11px] uppercase tracking-[0.2em] link-underline text-muted-foreground"
+                    >
+                      Skip for now
+                    </button>
+                  </div>
+                </>
+              )}
             </Step>
 
             {maxUnlocked > TOTAL_STEPS && (
