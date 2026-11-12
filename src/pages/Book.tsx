@@ -328,7 +328,7 @@ const Book = () => {
   // One-line summary of whatever the guest saved in the size form, so it can
   // travel inside a single Calendly answer. Coat length and shoe width are stored
   // alongside the measurements but aren't inches.
-  const UNITLESS = new Set(["coatLength", "shoeWidth"]);
+  const UNITLESS = new Set(["coatLength", "shoeWidth", "jeans", "dressShirt", "jacket"]);
   const measurementsSummary = (() => {
     const parts: string[] = [];
     if (sizeProfile.method === "measurements" && sizeProfile.measurements) {
@@ -344,6 +344,14 @@ const Book = () => {
       if (b.length) parts.push(b.join("; "));
     }
     if (sizeProfile.measurements?.coatLength) parts.push(`coat length ${sizeProfile.measurements.coatLength}`);
+    const everyday = [
+      ["jeans", sizeProfile.measurements?.jeans],
+      ["dress shirt", sizeProfile.measurements?.dressShirt],
+      ["jacket", sizeProfile.measurements?.jacket],
+    ]
+      .filter(([, v]) => v && v.trim() !== "")
+      .map(([k, v]) => `${k} ${v}`);
+    if (everyday.length) parts.push(`everyday sizes: ${everyday.join(", ")}`);
     if (sizeProfile.shoeSize) parts.push(`shoe ${sizeProfile.shoeSize}`);
     if (sizeProfile.measurements?.shoeWidth) parts.push(`shoe width ${sizeProfile.measurements.shoeWidth}`);
     if (sizeProfile.beltSize) parts.push(`belt ${sizeProfile.beltSize}`);

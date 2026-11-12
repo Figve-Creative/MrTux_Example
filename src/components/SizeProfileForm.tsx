@@ -14,6 +14,12 @@ const MEASUREMENTS = [
   { key: "shoulder", label: "Shoulder", hint: "Seam to seam across the back." },
 ];
 
+const EVERYDAY = [
+  { key: "jeans", label: "Jeans", placeholder: "e.g. 32 x 32" },
+  { key: "dressShirt", label: "Dress shirt", placeholder: "e.g. 15.5 / 34-35 or M" },
+  { key: "jacket", label: "Jacket / blazer", placeholder: "e.g. 40R" },
+];
+
 const BRANDS = ["Tom Ford", "Brioni", "Hugo Boss", "Ralph Lauren", "Canali", "Ermenegildo Zegna"];
 const JACKETS = ["36S", "36R", "38S", "38R", "40R", "40L", "42R", "42L", "44R", "44L", "46R", "48R"];
 const TROUSERS = ["28", "30", "32", "34", "36", "38", "40", "42"];
@@ -176,6 +182,31 @@ const SizeProfileForm = ({ onSaved }: { onSaved?: () => void }) => {
             ))}
           </select>
         </label>
+      </div>
+
+      {/* Everyday sizes: what he wears off the rack. Helps staff cross-check the
+          measurements. Stored inside `measurements` (unitless) like coat length. */}
+      <div className="mt-8 border-t border-border pt-6">
+        <p className="eyebrow">Your everyday sizes (optional)</p>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          What you normally buy off the rack. It helps us double-check your fit.
+        </p>
+        <div className="mt-4 grid gap-5 sm:grid-cols-3">
+          {EVERYDAY.map((f) => (
+            <div key={f.key} className="block">
+              <label htmlFor={`everyday-${f.key}`} className="eyebrow">
+                {f.label}
+              </label>
+              <input
+                id={`everyday-${f.key}`}
+                placeholder={f.placeholder}
+                value={measurements[f.key] ?? ""}
+                onChange={(e) => setMeasurements({ ...measurements, [f.key]: e.target.value })}
+                className={`${fieldClass} mt-2`}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="mt-8 flex flex-wrap items-center gap-4">
