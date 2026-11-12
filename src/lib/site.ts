@@ -10,7 +10,7 @@ export const SITE = {
   // Web3Forms access key for the measurements form. Public by design (it can only
   // email the shop inbox it was created for). Leave "" until created — the form then
   // falls back to opening the visitor's email app. See docs/STATUS.md.
-  web3formsKey: "",
+  web3formsKey: "bf61744e-1ea0-47cc-bb1c-a3c1c70d7df5",
   phone: "305.595.0709",
   phoneHref: "tel:+13055950709",
   address: {
