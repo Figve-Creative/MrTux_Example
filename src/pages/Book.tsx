@@ -368,8 +368,18 @@ const Book = () => {
 
   // Calendly "Invitee Questions" fill from a1, a2, a3... in the exact order they
   // are listed on the Calendly event type. See docs/STATUS.md.
+  // Calendly's phone field guesses the country when a number has no country code.
+  // Send US numbers as +1XXXXXXXXXX so it always selects United States.
+  const phoneDigits = form.phone.replace(/\D/g, "");
+  const calendlyPhone =
+    phoneDigits.length === 10
+      ? `+1${phoneDigits}`
+      : phoneDigits.length === 11 && phoneDigits.startsWith("1")
+        ? `+${phoneDigits}`
+        : form.phone;
+
   const calendlyAnswers = [
-    form.phone,
+    calendlyPhone,
     who === "wedding" ? "Wedding party" : "Myself",
     who === "wedding" ? "Wedding" : form.eventType,
     form.eventDate,
