@@ -35,7 +35,9 @@ const CalendlyEmbed = ({ height = 700, calendlyUrl, prefill }: CalendlyEmbedProp
       prefill.answers?.forEach((answer, i) => {
         if (answer && answer.trim() !== "") parsed.searchParams.set(`a${i + 1}`, answer);
       });
-      url = parsed.toString();
+      // URLSearchParams writes spaces as "+", which Calendly shows literally
+      // ("Black+tie"). Use %20 instead.
+      url = parsed.toString().replace(/\+/g, "%20");
     } catch {
       // Malformed calendlyUrl would only happen from a bad config edit —
       // fall back to the plain URL rather than breaking the page.
